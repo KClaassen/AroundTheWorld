@@ -5,10 +5,10 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.android.capstoneproject_aroundtheworld.R
 import com.example.android.capstoneproject_aroundtheworld.adapter.CountryAdapter
@@ -52,6 +52,13 @@ class CountriesListFragment : Fragment() {
 
         fetchCountries()
 
+        viewModel.navigateToCountry.observe(viewLifecycleOwner, Observer { country ->
+            country?.let {
+                this.findNavController().navigate(CountriesListFragmentDirections.actionCountriesListFragmentToCountryDetailFragment())
+                viewModel.onCountryNavigated()
+            }
+        })
+
 //        val adapter = CountryAdapter(CountryAdapter.CountryListener {
 //            Country -> Toast.makeText(context, "${Country}", Toast.LENGTH_SHORT).show()
 //        })
@@ -71,7 +78,8 @@ class CountriesListFragment : Fragment() {
 
     private fun processList(it: List<Country>?) {
         val countryAdapter = CountryAdapter(CountryAdapter.CountryListener {
-            Country -> Toast.makeText(context, "${Country}", Toast.LENGTH_SHORT).show()
+            //Country -> Toast.makeText(context, "${Country}", Toast.LENGTH_SHORT).show()
+            Country -> viewModel.onCountryClicked(Country)
         })
         countries_recycler.layoutManager = LinearLayoutManager(requireContext())
         countries_recycler.adapter = countryAdapter

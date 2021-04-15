@@ -38,6 +38,19 @@ class CountriesListViewModel(application: Application) : ViewModel() {
         }
     }
 
+    // To navigate and complete navigation for selected Country onclick
+
+    private val _navigateToCountry = MutableLiveData<Country>()
+    val navigateToCountry
+        get() = _navigateToCountry
+
+    fun onCountryClicked(id: Country){
+        _navigateToCountry.value = id
+    }
+
+    fun onCountryNavigated() {
+        _navigateToCountry.value = null
+    }
 
     // Factory for constructing CountriesListViewModel with parameter
     class Factory(val app: Application) : ViewModelProvider.Factory {
