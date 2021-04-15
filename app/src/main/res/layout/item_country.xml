@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+    
+    <data>
+        <variable
+            name="country"
+            type="com.example.android.capstoneproject_aroundtheworld.models.Country" />
+        <variable
+            name="clickListener"
+            type="com.example.android.capstoneproject_aroundtheworld.adapter.CountryAdapter.CountryListener" />
+    </data>
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="@{() -> clickListener.onClick(country)}">
+
+        <androidx.appcompat.widget.AppCompatRadioButton
+            android:id="@+id/country_select_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/country_list_flag"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:src="@drawable/ic_launcher_background"
+            app:imageUrl="@{country.flag}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/country_select_button"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/country_list_name"
+            android:layout_width="98dp"
+            android:layout_height="15dp"
+            android:text="@{country.name}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/country_list_flag"
+            app:layout_constraintTop_toTopOf="parent"
+            />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "235802162769",
+    "project_id": "aroundtheworld-80cd3",
+    "storage_bucket": "aroundtheworld-80cd3.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:235802162769:android:06c02b27b6a7245dd7aa70",
+        "android_client_info": {
+          "package_name": "com.example.android.capstoneproject_aroundtheworld"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "235802162769-7tsfld7hgur5ufp3edhh3907ve8gs8s2.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDyOHF8esLZXE6DOi97xPRS_8SSCc2GAxU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "235802162769-7tsfld7hgur5ufp3edhh3907ve8gs8s2.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
