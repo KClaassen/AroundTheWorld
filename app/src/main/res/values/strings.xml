@@ -8,4 +8,5 @@
     <string name="country_name">Country Name</string>
     <string name="country_name_label">"Name: "</string>
     <string name="country_capital_label">"Capital: "</string>
+    <string name="newtrip_button">New Trip</string>
 </resources>

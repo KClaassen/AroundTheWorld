@@ -23,9 +23,19 @@ class MainFragment : Fragment() {
         // Inflate the layout for this fragment
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_main, container, false)
 
-        //The complete onClickListener with Navigation
+        // Navigation OnclickListener for Countries Button
         binding.countriesButton.setOnClickListener { view: View ->
             view.findNavController().navigate(R.id.action_mainFragment_to_countriesListFragment)
+        }
+
+        // Navigation OnclickListener for My Trips Button
+        binding.myTripsButton.setOnClickListener { view: View ->
+            view.findNavController().navigate(R.id.action_mainFragment_to_tripsListFragment)
+        }
+
+        // Navigation OnclickListener for New Trip Button
+        binding.newTripButton.setOnClickListener { view: View ->
+            view.findNavController().navigate(R.id.action_mainFragment_to_newTripFragment)
         }
 
         return binding.root
