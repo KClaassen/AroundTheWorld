@@ -44,6 +44,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="32dp"
             android:text="@{country.name}"
+            android:hint="test"
             app:layout_constraintBaseline_toBaselineOf="@+id/country_name_label"
             app:layout_constraintStart_toEndOf="@+id/country_name_label" />
 
@@ -53,6 +54,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="32dp"
             android:text="@{country.capital}"
+            android:hint="test"
             app:layout_constraintBaseline_toBaselineOf="@+id/country_capital_label"
             app:layout_constraintStart_toEndOf="@+id/country_capital_label" />
     </androidx.constraintlayout.widget.ConstraintLayout>

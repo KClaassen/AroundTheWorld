@@ -54,7 +54,8 @@ class CountriesListFragment : Fragment() {
 
         viewModel.navigateToCountry.observe(viewLifecycleOwner, Observer { country ->
             country?.let {
-                this.findNavController().navigate(CountriesListFragmentDirections.actionCountriesListFragmentToCountryDetailFragment())
+                this.findNavController().navigate(CountriesListFragmentDirections
+                        .actionCountriesListFragmentToCountryDetailFragment(country))
                 viewModel.onCountryNavigated()
             }
         })

@@ -24,10 +24,17 @@
         <action
             android:id="@+id/action_countriesListFragment_to_countryDetailFragment"
             app:destination="@id/countryDetailFragment" />
+        <argument
+            android:name="country"
+            app:argType="com.example.android.capstoneproject_aroundtheworld.models.Country" />
     </fragment>
     <fragment
         android:id="@+id/countryDetailFragment"
         android:name="com.example.android.capstoneproject_aroundtheworld.countries.detail.CountryDetailFragment"
         android:label="fragment_country_detail"
-        tools:layout="@layout/fragment_country_detail" />
+        tools:layout="@layout/fragment_country_detail" >
+        <argument
+            android:name="country"
+            app:argType="com.example.android.capstoneproject_aroundtheworld.models.Country" />
+    </fragment>
 </navigation>
