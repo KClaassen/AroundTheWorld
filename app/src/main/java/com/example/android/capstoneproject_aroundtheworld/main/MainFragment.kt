@@ -33,11 +33,6 @@ class MainFragment : Fragment() {
             view.findNavController().navigate(R.id.action_mainFragment_to_tripsListFragment)
         }
 
-        // Navigation OnclickListener for New Trip Button
-        binding.newTripButton.setOnClickListener { view: View ->
-            view.findNavController().navigate(R.id.action_mainFragment_to_newTripFragment)
-        }
-
         return binding.root
     }
 
