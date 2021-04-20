@@ -15,6 +15,29 @@
         android:layout_height="match_parent"
         tools:context=".CountriesListFragment">
 
+        <androidx.cardview.widget.CardView
+            android:id="@+id/new_trip_card_view"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:layout_gravity="center"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="16dp"
+            app:cardBackgroundColor="@color/colorAccent"
+            app:cardCornerRadius="25dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+
+            <Button
+                android:id="@+id/new_trip_button"
+                android:layout_width="wrap_content"
+                android:layout_height="38dp"
+                android:text="Add" />
+
+        </androidx.cardview.widget.CardView>
+
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/trips_recycler"
             android:layout_width="match_parent"

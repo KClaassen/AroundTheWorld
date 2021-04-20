@@ -18,9 +18,6 @@
         <action
             android:id="@+id/action_mainFragment_to_tripsListFragment"
             app:destination="@id/tripsListFragment" />
-        <action
-            android:id="@+id/action_mainFragment_to_newTripFragment"
-            app:destination="@id/newTripFragment" />
     </fragment>
     <fragment
         android:id="@+id/countriesListFragment"
@@ -47,10 +44,22 @@
         android:id="@+id/tripsListFragment"
         android:name="com.example.android.capstoneproject_aroundtheworld.trips.TripsListFragment"
         android:label="fragment_trips_list"
-        tools:layout="@layout/fragment_trips_list" />
+        tools:layout="@layout/fragment_trips_list" >
+        <action
+            android:id="@+id/action_tripsListFragment_to_newTripFragment"
+            app:destination="@id/newTripFragment" />
+        <action
+            android:id="@+id/action_tripsListFragment_to_tripDetailFragment"
+            app:destination="@id/tripDetailFragment" />
+    </fragment>
     <fragment
         android:id="@+id/newTripFragment"
         android:name="com.example.android.capstoneproject_aroundtheworld.trips.NewTripFragment"
         android:label="fragment_new_trip"
         tools:layout="@layout/fragment_new_trip" />
+    <fragment
+        android:id="@+id/tripDetailFragment"
+        android:name="com.example.android.capstoneproject_aroundtheworld.trips.detail.TripDetailFragment"
+        android:label="fragment_trip_detail"
+        tools:layout="@layout/fragment_trip_detail" />
 </navigation>

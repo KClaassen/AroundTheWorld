@@ -5,12 +5,13 @@ import kotlinx.android.parcel.Parcelize
 
 @Parcelize
 data class Country(
-        val capital: String?,
-        val currency: Currency?,
-        val flag: String?,
-        val language: Language?,
         val name: String?,
-        val region: String?
+        val capital: String?,
+        val region: String?,
+        val flag: String?,
+        val currency: List<Currency>?,
+        val language: List<Language>?
+
 ) : Parcelable
 
 @Parcelize
