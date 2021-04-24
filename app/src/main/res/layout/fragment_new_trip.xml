@@ -150,7 +150,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="32dp"
-                android:layout_marginTop="12dp"
+                android:layout_marginTop="24dp"
                 android:text="@string/new_trip_dates_label"
                 android:textSize="24sp"
                 app:layout_constraintStart_toStartOf="parent"
@@ -166,6 +166,31 @@
                 android:textSize="24sp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/new_trip_airline_label" />
+
+            <EditText
+                android:id="@+id/editTextDate"
+                android:layout_width="115dp"
+                android:layout_height="42dp"
+                android:layout_marginStart="32dp"
+                android:layout_marginTop="16dp"
+                android:ems="10"
+                android:hint="@string/pick_from_date"
+                android:inputType="date"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/new_trip_dates_label"
+                android:onClick="showDatePickerDialog"/>
+
+            <EditText
+                android:id="@+id/editTextDate3"
+                android:layout_width="115dp"
+                android:layout_height="42dp"
+                android:layout_marginTop="16dp"
+                android:ems="10"
+                android:hint="@string/pick_to_date"
+                android:inputType="date"
+                app:layout_constraintStart_toEndOf="@+id/editTextDate"
+                app:layout_constraintTop_toBottomOf="@+id/new_trip_dates_label"
+                android:onClick="showDatePickerDialog"/>
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>
