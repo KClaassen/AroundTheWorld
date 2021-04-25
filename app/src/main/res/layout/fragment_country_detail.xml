@@ -17,6 +17,19 @@
         tools:context=".countries.detail.CountryDetailFragment">
 
         <TextView
+            android:id="@+id/country_header"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
+            android:textSize="36sp"
+            android:textStyle="bold"
+            android:hint="test"
+            android:text="@{country.name}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
             android:id="@+id/country_name_label"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -49,7 +62,7 @@
             app:layout_constraintStart_toEndOf="@+id/country_name_label" />
 
         <TextView
-            android:id="@+id/textView3"
+            android:id="@+id/country_capital_text_"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="32dp"
@@ -57,5 +70,7 @@
             android:hint="test"
             app:layout_constraintBaseline_toBaselineOf="@+id/country_capital_label"
             app:layout_constraintStart_toEndOf="@+id/country_capital_label" />
+
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

@@ -23,7 +23,7 @@ class TripsListFragment : Fragment() {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_trips_list, container, false)
 
         // Navigation OnclickListener for My Trips Button
-        binding.newTripButton.setOnClickListener { view: View ->
+        binding.newTripCardView.setOnClickListener { view: View ->
             view.findNavController().navigate(R.id.action_tripsListFragment_to_newTripFragment)
         }
 
