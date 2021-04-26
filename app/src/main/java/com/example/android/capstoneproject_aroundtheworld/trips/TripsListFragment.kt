@@ -6,6 +6,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.Observer
 import androidx.navigation.findNavController
 import com.example.android.capstoneproject_aroundtheworld.R
 import com.example.android.capstoneproject_aroundtheworld.databinding.FragmentTripsListBinding
@@ -13,6 +15,7 @@ import com.example.android.capstoneproject_aroundtheworld.databinding.FragmentTr
 class TripsListFragment : Fragment() {
 
     private lateinit var binding: FragmentTripsListBinding
+    private val viewModel: TripsViewModel by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -26,6 +29,21 @@ class TripsListFragment : Fragment() {
         binding.newTripCardView.setOnClickListener { view: View ->
             view.findNavController().navigate(R.id.action_tripsListFragment_to_newTripFragment)
         }
+
+        // Observing changes in TripsList
+        viewModel.tripList.observe(viewLifecycleOwner, Observer {
+            for (trip in it) {
+                DataBindingUtil.inflate<FragmentTripsListBinding>(
+                        layoutInflater,
+                        R.layout.item_trip,
+                        binding.tripsRecycler,
+                        true
+                ).apply {
+                    this.trip = trip
+
+                }
+            }
+        })
 
         return binding.root
     }

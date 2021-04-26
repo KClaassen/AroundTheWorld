@@ -56,7 +56,11 @@
         android:id="@+id/newTripFragment"
         android:name="com.example.android.capstoneproject_aroundtheworld.trips.NewTripFragment"
         android:label="fragment_new_trip"
-        tools:layout="@layout/fragment_new_trip" />
+        tools:layout="@layout/fragment_new_trip" >
+        <action
+            android:id="@+id/action_newTripFragment_to_tripDetailFragment"
+            app:destination="@id/tripDetailFragment" />
+    </fragment>
     <fragment
         android:id="@+id/tripDetailFragment"
         android:name="com.example.android.capstoneproject_aroundtheworld.trips.detail.TripDetailFragment"

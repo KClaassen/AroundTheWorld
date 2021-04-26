@@ -194,7 +194,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/new_trip_dates_label"
-                android:onClick="@{() -> viewmodel.onSaveClick(trip)}"/>
+                android:onClick="@{(v) -> viewmodel.onSaveClick(v, trip)}"/>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.core.widget.NestedScrollView>

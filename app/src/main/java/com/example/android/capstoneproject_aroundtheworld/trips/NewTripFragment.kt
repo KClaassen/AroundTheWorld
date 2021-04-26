@@ -7,12 +7,14 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.DatePicker
 import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.activityViewModels
 import com.example.android.capstoneproject_aroundtheworld.R
 import com.example.android.capstoneproject_aroundtheworld.databinding.FragmentNewTripBinding
 
 class NewTripFragment : Fragment() {
 
     private lateinit var binding: FragmentNewTripBinding
+    private val viewModel: TripsViewModel by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
