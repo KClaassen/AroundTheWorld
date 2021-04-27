@@ -10,6 +10,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.activityViewModels
 import com.example.android.capstoneproject_aroundtheworld.R
 import com.example.android.capstoneproject_aroundtheworld.databinding.FragmentNewTripBinding
+import com.example.android.capstoneproject_aroundtheworld.models.Trip
 
 class NewTripFragment : Fragment() {
 
@@ -22,6 +23,20 @@ class NewTripFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_new_trip, container, false)
+
+        //Initializing ViewModel
+        binding.lifecycleOwner = this
+        binding.viewmodel = viewModel
+        binding.trip = Trip(
+                "",
+                "",
+                "",
+                "",
+                "",
+                0,
+                0
+        )
+
 
         return binding.root
     }

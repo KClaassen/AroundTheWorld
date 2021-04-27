@@ -15,14 +15,14 @@ class TripsViewModel: ViewModel() {
     val tripList: LiveData<ArrayList<Trip>>
         get() = _tripList
 
-    init {
-        _tripList.value = ArrayList()
-    }
-
     fun onSaveClick(v: View, trip: Trip){
         Log.i("savebutton", "save button called")
         _tripList.value?.add(trip)
         v.findNavController().navigate(NewTripFragmentDirections.actionNewTripFragmentToTripDetailFragment())
 
+    }
+
+    init {
+        _tripList.value = ArrayList()
     }
 }
