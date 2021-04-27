@@ -19,7 +19,6 @@ class TripsViewModel: ViewModel() {
         Log.i("savebutton", "save button called")
         _tripList.value?.add(trip)
         v.findNavController().navigate(NewTripFragmentDirections.actionNewTripFragmentToTripDetailFragment())
-
     }
 
     init {

@@ -8,10 +8,13 @@
         <variable
             name="trip"
             type="com.example.android.capstoneproject_aroundtheworld.models.Trip" />
+        <variable
+            name="viewmodel"
+            type="com.example.android.capstoneproject_aroundtheworld.trips.TripsViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/country_capital_text"
+        android:id="@+id/trip_detail_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".countries.detail.CountryDetailFragment">
@@ -74,7 +77,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="32dp"
-                    android:text="@{trip.description}"
+                    android:text="@{trip.name}"
                     app:layout_constraintBaseline_toBaselineOf="@+id/country_name_label"
                     app:layout_constraintStart_toEndOf="@+id/country_name_label" />
 
