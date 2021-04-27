@@ -17,4 +17,7 @@
     <string name="new_trip_dates_label">Dates*: </string>
     <string name="pick_from_date">From</string>
     <string name="pick_to_date">To</string>
+    <string name="country_region_label">Region: </string>
+    <string name="country_language_label">Language: </string>
+    <string name="country_currency_label">Currency: </string>
 </resources>

@@ -8,6 +8,12 @@
         <variable
             name="country"
             type="com.example.android.capstoneproject_aroundtheworld.models.Country" />
+        <variable
+            name="language"
+            type="com.example.android.capstoneproject_aroundtheworld.models.Language" />
+        <variable
+            name="currency"
+            type="com.example.android.capstoneproject_aroundtheworld.models.Currency" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -35,7 +41,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="64dp"
             android:layout_marginTop="150dp"
-            android:text="@string/country_name_label"
+            android:text="@string/country_region_label"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -56,7 +62,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="32dp"
-            android:text="@{country.name}"
+            android:text="@{country.region}"
             android:hint="test"
             app:layout_constraintBaseline_toBaselineOf="@+id/country_name_label"
             app:layout_constraintStart_toEndOf="@+id/country_name_label" />
@@ -70,6 +76,48 @@
             android:hint="test"
             app:layout_constraintBaseline_toBaselineOf="@+id/country_capital_label"
             app:layout_constraintStart_toEndOf="@+id/country_capital_label" />
+
+        <TextView
+            android:id="@+id/country_language_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="64dp"
+            android:layout_marginTop="16dp"
+            android:text="@string/country_language_label"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/country_capital_label" />
+
+        <TextView
+            android:id="@+id/country_currency_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="64dp"
+            android:layout_marginTop="16dp"
+            android:text="@string/country_currency_label"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/country_language_label" />
+
+        <TextView
+            android:id="@+id/country_language_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:text="@{language.name}"
+            android:hint="text"
+            app:layout_constraintBaseline_toBaselineOf="@+id/country_language_label"
+            app:layout_constraintStart_toEndOf="@+id/country_language_label" />
+
+        <TextView
+            android:id="@+id/country_currency_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:text="@{currency.name}"
+            android:hint="text"
+            app:layout_constraintBaseline_toBaselineOf="@+id/country_currency_label"
+            app:layout_constraintStart_toEndOf="@+id/country_currency_label" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

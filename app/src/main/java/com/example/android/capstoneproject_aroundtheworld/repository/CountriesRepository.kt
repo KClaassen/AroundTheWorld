@@ -3,7 +3,7 @@ package com.example.android.capstoneproject_aroundtheworld.repository
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Transformations
-import com.example.android.capstoneproject_aroundtheworld.data.CountryDatabase
+//import com.example.android.capstoneproject_aroundtheworld.data.CountryDatabase
 import com.example.android.capstoneproject_aroundtheworld.models.Country
 import com.example.android.capstoneproject_aroundtheworld.models.Currency
 import com.example.android.capstoneproject_aroundtheworld.models.Language
@@ -19,7 +19,9 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class CountriesRepository(private val database: CountryDatabase) {
+class CountriesRepository(
+        //private val database: CountryDatabase
+        ) {
 
 
 
@@ -64,7 +66,7 @@ class CountriesRepository(private val database: CountryDatabase) {
 //    }
 
     // Caching list of countries
-    val countriesSaved: LiveData<List<Country>> = database.countryDao.getCountries()
+    //val countriesSaved: LiveData<List<Country>> = database.countryDao.getCountries()
 
     suspend fun getAllCountries(): List<Country>? {
         val countries = CountryApi.retrofitService.getCountries()
@@ -77,7 +79,7 @@ class CountriesRepository(private val database: CountryDatabase) {
         Log.i("Repository", "${listOfCountries}")
 //        listOfCountries = ArrayList<Country>()
 //        listOfCountries.add(Country("Capital", Currency("currency"), "flag", Language("spanish"),"the name","he region"))
-        database.countryDao.insertAll()
+        //database.countryDao.insertAll()
         return listOfCountries
     }
 }
