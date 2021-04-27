@@ -3,6 +3,8 @@ package com.example.android.capstoneproject_aroundtheworld.countries
 import android.app.Application
 import android.util.Log
 import androidx.lifecycle.*
+import com.example.android.capstoneproject_aroundtheworld.data.CountryDatabase
+import com.example.android.capstoneproject_aroundtheworld.data.CountryDatabase.Companion.getDatabase
 import com.example.android.capstoneproject_aroundtheworld.models.Country
 import com.example.android.capstoneproject_aroundtheworld.repository.CountriesRepository
 import kotlinx.coroutines.CoroutineScope
@@ -11,8 +13,8 @@ import kotlinx.coroutines.launch
 
 class CountriesListViewModel(application: Application) : ViewModel() {
 
-//    private val database = CountryDatabase.getDatabase(application)
-    private val repository = CountriesRepository()
+    private val database = getDatabase(application)
+    private val repository = CountriesRepository(database)
 
     var countryListLiveData: MutableLiveData<List<Country>> = MutableLiveData()
     val errorStateLiveData: MutableLiveData<String> = MutableLiveData()

@@ -1,16 +1,20 @@
 package com.example.android.capstoneproject_aroundtheworld.models
 
 import android.os.Parcelable
+import androidx.room.Entity
+import androidx.room.PrimaryKey
 import com.squareup.moshi.Json
 import kotlinx.android.parcel.Parcelize
 
 // use this class as a return type of your api call
 // suspend fun getCountries():List<MainObject>
 @Parcelize
+@Entity()
 data class Country(
         val currencies: List<Currency>,
         val languages: List<Language>,
         val flag: String,
+        @PrimaryKey
         val name: String,
         val capital: String,
         val region: String
