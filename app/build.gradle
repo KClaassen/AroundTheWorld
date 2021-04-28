@@ -59,6 +59,9 @@ dependencies {
     implementation 'com.caverock:androidsvg:1.2.1'
     implementation 'org.jetbrains.anko:anko-design:0.10.5'
 
+    // For converting the List in data class to GSON and converting them back to List
+    implementation 'com.google.code.gson:gson:2.8.6'
+
 
     // Room
     kapt 'androidx.room:room-compiler:2.2.6'

@@ -1,31 +1,34 @@
 package com.example.android.capstoneproject_aroundtheworld.data
 
 import androidx.room.TypeConverter
-import com.example.android.capstoneproject_aroundtheworld.models.Currency
-import com.example.android.capstoneproject_aroundtheworld.models.Language
+import com.example.android.capstoneproject_aroundtheworld.models.Country
+import com.google.gson.Gson
+import com.google.gson.reflect.TypeToken
+import java.lang.reflect.Type
 
 class Converters {
 
-    companion object {
+    @TypeConverter
+    fun fromCurrencytoJson(value: String): List<Country.Currency>? {
+        val listType: Type =
+                object : TypeToken<List<Country.Currency>>() {}.type
+        return Gson().fromJson<List<Country.Currency>>(value, listType)
+    }
+    @TypeConverter
+    fun JsontoListCurrency(value: List<Country.Currency>): String? {
+        val gson = Gson()
+        return gson.toJson(value)
+    }
 
-        @TypeConverter
-        fun fromCurrency(currency: Currency): String? {
-            return currency.name
-        }
-
-        @TypeConverter
-        fun toCurrency(name: String): Currency {
-            return Currency(name)
-        }
-
-        @TypeConverter
-        fun fromLanguage(language: Language): String? {
-            return language.name
-        }
-
-        @TypeConverter
-        fun toLanguage(name: String): Language {
-            return Language(name)
-        }
+    @TypeConverter
+    fun fromLanguagetoJson(value: String): List<Country.Language>? {
+        val listType: Type =
+                object : TypeToken<List<Country.Language>>() {}.type
+        return Gson().fromJson<List<Country.Language>>(value, listType)
+    }
+    @TypeConverter
+    fun JsontoListLanguage(value: List<Country.Language>): String? {
+        val gson = Gson()
+        return gson.toJson(value)
     }
 }

@@ -6,8 +6,6 @@ import androidx.lifecycle.Transformations
 import com.example.android.capstoneproject_aroundtheworld.data.CountryDatabase
 //import com.example.android.capstoneproject_aroundtheworld.data.CountryDatabase
 import com.example.android.capstoneproject_aroundtheworld.models.Country
-import com.example.android.capstoneproject_aroundtheworld.models.Currency
-import com.example.android.capstoneproject_aroundtheworld.models.Language
 import com.example.android.capstoneproject_aroundtheworld.network.CountryApi
 import com.example.android.capstoneproject_aroundtheworld.network.CountryApiService
 import com.example.android.capstoneproject_aroundtheworld.network.retrofitRESTClient

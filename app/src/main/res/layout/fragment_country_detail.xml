@@ -10,10 +10,10 @@
             type="com.example.android.capstoneproject_aroundtheworld.models.Country" />
         <variable
             name="language"
-            type="com.example.android.capstoneproject_aroundtheworld.models.Language" />
+            type="com.example.android.capstoneproject_aroundtheworld.models.Country.Language" />
         <variable
             name="currency"
-            type="com.example.android.capstoneproject_aroundtheworld.models.Currency" />
+            type="com.example.android.capstoneproject_aroundtheworld.models.Country.Currency" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
