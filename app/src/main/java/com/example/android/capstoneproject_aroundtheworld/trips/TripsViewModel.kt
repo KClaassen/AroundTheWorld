@@ -16,7 +16,7 @@ class TripsViewModel: ViewModel() {
         get() = _tripList
 
     fun onSaveClick(v: View, trip: Trip){
-        Log.i("savebutton", "save button called")
+        Log.i("savebutton", "${trip}")
         _tripList.value?.add(trip)
         v.findNavController().navigate(NewTripFragmentDirections.actionNewTripFragmentToTripDetailFragment())
     }

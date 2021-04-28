@@ -20,4 +20,5 @@
     <string name="country_region_label">Region: </string>
     <string name="country_language_label">Language: </string>
     <string name="country_currency_label">Currency: </string>
+    <string name="trip_name_label">"Name: "</string>
 </resources>
