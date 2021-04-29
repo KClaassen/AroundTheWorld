@@ -170,10 +170,10 @@
                 android:layout_marginTop="16dp"
                 android:ems="10"
                 android:hint="@string/pick_from_date"
+                android:text="@={trip.dateFrom}"
                 android:inputType="date"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/new_trip_dates_label"
-                android:onClick="showDatePickerDialog"/>
+                app:layout_constraintTop_toBottomOf="@+id/new_trip_dates_label" />
 
             <EditText
                 android:id="@+id/editTextDate3"
@@ -182,10 +182,10 @@
                 android:layout_marginTop="16dp"
                 android:ems="10"
                 android:hint="@string/pick_to_date"
+                android:text="@={trip.dateTo}"
                 android:inputType="date"
                 app:layout_constraintStart_toEndOf="@+id/editTextDate"
-                app:layout_constraintTop_toBottomOf="@+id/new_trip_dates_label"
-                android:onClick="showDatePickerDialog"/>
+                app:layout_constraintTop_toBottomOf="@+id/new_trip_dates_label" />
 
             <Button
                 android:id="@+id/save_button"

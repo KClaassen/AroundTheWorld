@@ -8,5 +8,5 @@ data class Trip(
         var airline: String,
         var bookingNr: String,
         var accomodation: String,
-        var dateFrom: Int,
-        var dateTo: Int) : BaseObservable()
+        var dateFrom: String,
+        var dateTo: String) : BaseObservable()

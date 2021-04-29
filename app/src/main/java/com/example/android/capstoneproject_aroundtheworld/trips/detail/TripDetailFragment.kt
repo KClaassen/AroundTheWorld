@@ -33,15 +33,7 @@ class TripDetailFragment : Fragment() {
         // Observing changes in TripsList
         viewModel.tripList.observe(viewLifecycleOwner, Observer {
             for (trip in it) {
-                DataBindingUtil.inflate<FragmentTripDetailBinding>(
-                        layoutInflater,
-                        R.layout.fragment_trip_detail,
-                        binding.tripDetailLayout,
-                        true
-                ).apply {
-                    this.trip = trip
-
-                }
+                binding.trip = trip
             }
         })
 

@@ -33,8 +33,8 @@ class NewTripFragment : Fragment() {
                 "",
                 "",
                 "",
-                0,
-                0
+                "",
+                ""
         )
 
 
