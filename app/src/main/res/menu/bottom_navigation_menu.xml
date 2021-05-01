@@ -2,12 +2,12 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-        android:id="@+id/bottom_menu_countries"
+        android:id="@+id/countriesListFragment"
         android:icon="@drawable/outline_travel_explore_24"
         android:title="@string/bottom_menu_countries"/>
 
     <item
-        android:id="@+id/bottom_menu_trips"
+        android:id="@+id/tripsListFragment"
         android:icon="@drawable/outline_card_travel_24"
         android:title="@string/bottom_menu_trips"/>
 
