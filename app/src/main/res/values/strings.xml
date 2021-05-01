@@ -21,4 +21,6 @@
     <string name="country_language_label">Language: </string>
     <string name="country_currency_label">Currency: </string>
     <string name="trip_name_label">"Name: "</string>
+    <string name="bottom_menu_countries">Countries</string>
+    <string name="bottom_menu_trips">Trips</string>
 </resources>

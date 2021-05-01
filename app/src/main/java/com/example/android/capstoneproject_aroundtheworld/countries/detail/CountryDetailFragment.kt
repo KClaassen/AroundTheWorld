@@ -21,6 +21,8 @@ class CountryDetailFragment : Fragment() {
 
         val arguments = CountryDetailFragmentArgs.fromBundle(requireArguments()).country
         binding.country = arguments
+        binding.currency = arguments.currencies[0]
+        binding.language = arguments.languages[0]
 
 
         return binding.root
