@@ -61,67 +61,67 @@ abstract class CountryDatabase: RoomDatabase() {
 
 }
 
-////
-/////**
-//// *  Trips
-//// */
-////
-////@Dao
-////interface TripDao {
-////    // Loads all trips and returns them as List
-////    @Query("SELECT * FROM trip ORDER BY dateFrom DESC")
-////    suspend fun getAllTrips(): ArrayList<Trip>
-////
-////    // Insert a reminder in the database. If the reminder already exists, replace it.
-////    @Insert(onConflict = OnConflictStrategy.REPLACE)
-////    suspend fun saveTrip(trip: Trip)
-////
-////    @Query("SELECT * FROM trip WHERE name = :tripName")
-////    suspend fun getTripByName(tripName: String): Trip
-////
-////    //Store values in cache
-////    @Insert(onConflict = OnConflictStrategy.REPLACE)
-////    suspend fun insertAllTrips(vararg trip: Trip)
-////
-////    // Delete all reminders
-////    @Query("DELETE FROM trip")
-////    suspend fun deleteAllTrips()
-////}
-////
-////
-////
-////@Database(entities = [Trip::class], version = 1, exportSchema = false)
-////abstract class TripDatabase: RoomDatabase() {
-////
-////    abstract val tripDao: TripDao
-////
-////    //companion object allows clients to access the methods for creating or getting the database without instantiating the class
-////    companion object{
-////
-////        //@Volatile annotation means value of variable is always up to date and same to all execution threads
-////        //Value of a volatile variable will never be cached and all writes and reads will be done to and from the main memory
-////        //It means changes made by one thread to INSTANCE are visible to all other threads immediately.
-////
-////        @Volatile
-////        private var INSTANCE: TripDatabase? = null
-////
-////        fun getDatabase(context: Context): TripDatabase {
-////            synchronized(this){
-////                var instance = INSTANCE
-////
-////                if(instance == null){
-////                    instance = Room.databaseBuilder(
-////                            context.applicationContext,
-////                            TripDatabase::class.java,
-////                            "trip_database")
-////                            .fallbackToDestructiveMigration()
-////                            .build()
-////                    INSTANCE =instance
-////                }
-////
-////                return instance
-////            }
-////        }
-////    }
-////
-//}
+
+/**
+ *  Trips
+ */
+
+@Dao
+interface TripDao {
+    // Loads all trips and returns them as List
+    @Query("SELECT * FROM trip ORDER BY dateFrom DESC")
+    suspend fun getAllTrips(): ArrayList<Trip>
+
+    // Insert a reminder in the database. If the reminder already exists, replace it.
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun saveTrip(trip: Trip)
+
+    @Query("SELECT * FROM trip WHERE name = :tripName")
+    suspend fun getTripByName(tripName: String): Trip
+
+    //Store values in cache
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun insertAllTrips(vararg trip: Trip)
+
+    // Delete all reminders
+    @Query("DELETE FROM trip")
+    suspend fun deleteAllTrips()
+}
+
+
+
+@Database(entities = [Trip::class], version = 1, exportSchema = false)
+abstract class TripDatabase: RoomDatabase() {
+
+    abstract val tripDao: TripDao
+
+    //companion object allows clients to access the methods for creating or getting the database without instantiating the class
+    companion object{
+
+        //@Volatile annotation means value of variable is always up to date and same to all execution threads
+        //Value of a volatile variable will never be cached and all writes and reads will be done to and from the main memory
+        //It means changes made by one thread to INSTANCE are visible to all other threads immediately.
+
+        @Volatile
+        private var INSTANCE: TripDatabase? = null
+
+        fun getDatabase(context: Context): TripDatabase {
+            synchronized(this){
+                var instance = INSTANCE
+
+                if(instance == null){
+                    instance = Room.databaseBuilder(
+                            context.applicationContext,
+                            TripDatabase::class.java,
+                            "trip_database")
+                            .fallbackToDestructiveMigration()
+                            .build()
+                    INSTANCE =instance
+                }
+
+                return instance
+            }
+        }
+    }
+
+}

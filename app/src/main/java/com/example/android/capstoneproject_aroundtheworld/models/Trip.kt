@@ -4,9 +4,9 @@ import androidx.databinding.BaseObservable
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
-//@Entity()
+@Entity()
 data class Trip(
-        //@PrimaryKey
+        @PrimaryKey
         var name: String,
         var description: String,
         var airline: String,
