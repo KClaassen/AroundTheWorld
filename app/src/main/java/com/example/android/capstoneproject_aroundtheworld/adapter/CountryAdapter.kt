@@ -54,4 +54,6 @@ class CountryAdapter(val clicklistener: CountryListener,
     class CountryListener(val clickListener: (Country) -> Unit) {
         fun onClick(country: Country) = clickListener(country)
     }
+
+    //override fun getSelectionKey(): String? =
 }

@@ -11,10 +11,12 @@ import com.example.android.capstoneproject_aroundtheworld.data.CountryDatabase
 import com.example.android.capstoneproject_aroundtheworld.models.Trip
 import com.example.android.capstoneproject_aroundtheworld.repository.CountriesRepository
 
-class TripsViewModel(application: Application): ViewModel() {
+class TripsViewModel(
+    //application: Application
+): ViewModel() {
 
-    private val database = CountryDatabase.getDatabase(application)
-    private val repository = CountriesRepository(database)
+//    private val database = CountryDatabase.getDatabase(application)
+//    private val repository = CountriesRepository(database)
 
     //Create Live Data Object
     private var _tripList = MutableLiveData<ArrayList<Trip>>()

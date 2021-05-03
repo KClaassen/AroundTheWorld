@@ -1,7 +1,13 @@
 package com.example.android.capstoneproject_aroundtheworld.repository
 
-import com.example.android.capstoneproject_aroundtheworld.data.TripDatabase
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.Transformations
+import com.example.android.capstoneproject_aroundtheworld.models.Trip
 
-class TripsRepository (private val database: TripDatabase) {
+class TripsRepository (
+    //private val database: TripDatabase
+    ) {
+
+    //val tripsSaved: ArrayList<Trip> = database.tripDao.getAllTrips()
     
 }
