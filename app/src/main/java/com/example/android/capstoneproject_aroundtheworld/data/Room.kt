@@ -72,7 +72,7 @@ interface TripDao {
     @Query("SELECT * FROM trip ORDER BY dateFrom DESC")
     suspend fun getAllTrips(): ArrayList<Trip>
 
-    // Insert a reminder in the database. If the reminder already exists, replace it.
+    // Insert a Trip in the database. If the trip already exists, replace it.
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun saveTrip(trip: Trip)
 
@@ -83,7 +83,7 @@ interface TripDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertAllTrips(vararg trip: Trip)
 
-    // Delete all reminders
+    // Delete all Trips
     @Query("DELETE FROM trip")
     suspend fun deleteAllTrips()
 }
