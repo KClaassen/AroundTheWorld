@@ -13,6 +13,6 @@ class TripsRepository (
 
     suspend fun deleteTrip(trip: Trip) = database.tripDao.deleteTrip(trip)
 
-    suspend fun getAllTrips() = database.tripDao.getAllTrips()
+    fun getAllTrips() = database.tripDao.getAllTrips()
     
 }

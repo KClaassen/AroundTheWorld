@@ -39,9 +39,10 @@ class TripsListFragment : Fragment() {
         adapter = TripAdapter()
         trips_recycler.layoutManager = LinearLayoutManager(requireContext())
         trips_recycler.adapter = adapter
-
+        
         viewModel.getAllTrips().observe(viewLifecycleOwner, Observer {
-            
+            adapter.trips = it
+            adapter.notifyDataSetChanged()
         })
 
         // Observing changes in TripsList

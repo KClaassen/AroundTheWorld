@@ -69,8 +69,9 @@ abstract class CountryDatabase: RoomDatabase() {
 @Dao
 interface TripDao {
     // Loads all trips and returns them as List
+    // Not suspend as it's LiveData
     @Query("SELECT * FROM trip ORDER BY dateFrom DESC")
-    suspend fun getAllTrips(): LiveData<ArrayList<Trip>>
+    fun getAllTrips(): LiveData<MutableList<Trip>>
 
     // Insert a Trip in the database. If the trip already exists, replace it.
     @Insert(onConflict = OnConflictStrategy.REPLACE)

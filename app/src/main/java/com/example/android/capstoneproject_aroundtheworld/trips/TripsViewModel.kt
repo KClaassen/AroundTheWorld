@@ -9,9 +9,7 @@ import com.example.android.capstoneproject_aroundtheworld.data.CountryDatabase
 import com.example.android.capstoneproject_aroundtheworld.data.TripDatabase
 import com.example.android.capstoneproject_aroundtheworld.models.Trip
 import com.example.android.capstoneproject_aroundtheworld.repository.TripsRepository
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
+import kotlinx.coroutines.*
 
 class TripsViewModel(
     application: Application
@@ -21,22 +19,12 @@ class TripsViewModel(
     private val repository = TripsRepository(database)
 
     //Create Live Data Object
-    private var _tripList = MutableLiveData<ArrayList<Trip>>()
-    val tripList: LiveData<ArrayList<Trip>>
+    private var _tripList = MutableLiveData<MutableList<Trip>>()
+    val tripList: LiveData<MutableList<Trip>>
         get() = _tripList
 
-//    init {
-//        viewModelScope.launch {
-//            try {
-//                repository.saveTrip()
-//            } catch (e: java.lang.Exception) {
-//                Log.e("CountriesListViewModel", e.message!!)
-//            }
-//        }
-//    }
-
-    suspend fun onSaveClick(v: View, trip: Trip){
-        withContext(Dispatchers.IO) {
+    fun onSaveClick(v: View, trip: Trip){
+        CoroutineScope(Dispatchers.IO).launch {
             Log.i("savebutton", "${trip}")
             _tripList.value?.add(trip)
             v.findNavController().navigate(NewTripFragmentDirections.actionNewTripFragmentToTripDetailFragment())
@@ -50,7 +38,7 @@ class TripsViewModel(
         }
     }
 
-    suspend fun getAllTrips() = repository.getAllTrips()
+    fun getAllTrips() = repository.getAllTrips()
 
     init {
         _tripList.value = ArrayList()

@@ -9,7 +9,7 @@ import com.example.android.capstoneproject_aroundtheworld.models.Trip
 
 class TripAdapter(): RecyclerView.Adapter<TripAdapter.ViewHolder>() {
 
-    private var trips: List<Trip> = listOf()
+    var trips: List<Trip> = listOf()
 
     override fun onCreateViewHolder(
             parent: ViewGroup,
