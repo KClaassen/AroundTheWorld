@@ -37,6 +37,7 @@ class CountryAdapter(val clicklistener: CountryListener,
             binding.countrySelectButton.setOnCheckedChangeListener { buttonView, isChecked ->
                 country.isSelected = isChecked
             }
+
         }
     }
 
@@ -58,5 +59,8 @@ class CountryAdapter(val clicklistener: CountryListener,
         fun onClick(country: Country) = clickListener(country)
     }
 
-    //override fun getSelectionKey(): String? =
+
+    fun selectedCountriesCount() {
+        countries.filter { it.isSelected }.size
+    }
 }

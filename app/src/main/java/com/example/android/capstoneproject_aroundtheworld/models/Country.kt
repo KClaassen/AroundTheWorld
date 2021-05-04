@@ -13,8 +13,6 @@ import kotlinx.android.parcel.Parcelize
 @Parcelize
 @Entity()
 data class Country(
-        @Ignore
-        var isSelected: Boolean = false,
         @SerializedName("Currency")
         val currencies: List<Currency>,
         @SerializedName("Language")
@@ -25,6 +23,8 @@ data class Country(
         val capital: String,
         val region: String
 ):Parcelable {
+        @Ignore
+        var isSelected: Boolean = false
         // all the properties default set to null because for some of the object they don't exist.
         @Parcelize
         data class Currency(

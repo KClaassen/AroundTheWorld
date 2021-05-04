@@ -14,8 +14,8 @@ import kotlinx.coroutines.launch
 
 class CountriesListViewModel(application: Application) : ViewModel() {
 
-   private val database = getDatabase(application)
-   private val repository = CountriesRepository(database)
+    private val database = getDatabase(application)
+    private val repository = CountriesRepository(database)
 
     var countryListLiveData: MutableLiveData<List<Country>> = MutableLiveData()
     val errorStateLiveData: MutableLiveData<String> = MutableLiveData()
