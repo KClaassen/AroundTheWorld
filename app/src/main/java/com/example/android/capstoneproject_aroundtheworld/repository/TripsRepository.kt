@@ -2,12 +2,17 @@ package com.example.android.capstoneproject_aroundtheworld.repository
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Transformations
+import com.example.android.capstoneproject_aroundtheworld.data.TripDatabase
 import com.example.android.capstoneproject_aroundtheworld.models.Trip
 
 class TripsRepository (
-    //private val database: TripDatabase
+    private val database: TripDatabase
     ) {
 
-    //val tripsSaved: ArrayList<Trip> = database.tripDao.getAllTrips()
+    suspend fun saveTrip(trip: Trip) = database.tripDao.saveTrip(trip)
+
+    suspend fun deleteTrip(trip: Trip) = database.tripDao.deleteTrip(trip)
+
+    suspend fun getAllTrips() = database.tripDao.getAllTrips()
     
 }

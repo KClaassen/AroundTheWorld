@@ -11,6 +11,7 @@ import androidx.lifecycle.Observer
 import androidx.navigation.findNavController
 import com.example.android.capstoneproject_aroundtheworld.R
 import com.example.android.capstoneproject_aroundtheworld.databinding.FragmentTripsListBinding
+import com.example.android.capstoneproject_aroundtheworld.repository.TripsRepository
 
 class TripsListFragment : Fragment() {
 
