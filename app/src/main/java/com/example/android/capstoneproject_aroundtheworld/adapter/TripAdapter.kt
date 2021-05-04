@@ -4,19 +4,20 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.example.android.capstoneproject_aroundtheworld.databinding.ItemCountryBinding
 import com.example.android.capstoneproject_aroundtheworld.databinding.ItemTripBinding
 import com.example.android.capstoneproject_aroundtheworld.models.Trip
 
-class TripsAdapter(var trips: ArrayList<Trip>): RecyclerView.Adapter<TripsAdapter.ViewHolder>() {
+class TripAdapter(): RecyclerView.Adapter<TripAdapter.ViewHolder>() {
+
+    private var trips: List<Trip> = listOf()
 
     override fun onCreateViewHolder(
             parent: ViewGroup,
             viewType: Int
-    ): TripsAdapter.ViewHolder {
+    ): TripAdapter.ViewHolder {
         val inflater = LayoutInflater.from(parent.context)
         val itemTripBinding = ItemTripBinding.inflate(inflater, parent, false)
-        return TripsAdapter.ViewHolder(
+        return TripAdapter.ViewHolder(
                 itemTripBinding)
     }
 

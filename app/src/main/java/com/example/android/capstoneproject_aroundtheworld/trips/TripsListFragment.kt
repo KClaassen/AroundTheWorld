@@ -9,14 +9,19 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.android.capstoneproject_aroundtheworld.R
+import com.example.android.capstoneproject_aroundtheworld.adapter.TripAdapter
 import com.example.android.capstoneproject_aroundtheworld.databinding.FragmentTripsListBinding
+import com.example.android.capstoneproject_aroundtheworld.models.Trip
 import com.example.android.capstoneproject_aroundtheworld.repository.TripsRepository
+import kotlinx.android.synthetic.main.fragment_trips_list.*
 
 class TripsListFragment : Fragment() {
 
     private lateinit var binding: FragmentTripsListBinding
     private val viewModel: TripsViewModel by activityViewModels()
+    private lateinit var adapter: TripAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -30,6 +35,14 @@ class TripsListFragment : Fragment() {
         binding.newTripCardView.setOnClickListener { view: View ->
             view.findNavController().navigate(R.id.action_tripsListFragment_to_newTripFragment)
         }
+
+        adapter = TripAdapter()
+        trips_recycler.layoutManager = LinearLayoutManager(requireContext())
+        trips_recycler.adapter = adapter
+
+        viewModel.getAllTrips().observe(viewLifecycleOwner, Observer {
+            
+        })
 
         // Observing changes in TripsList
         viewModel.tripList.observe(viewLifecycleOwner, Observer {

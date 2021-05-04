@@ -3,16 +3,14 @@ package com.example.android.capstoneproject_aroundtheworld.trips
 import android.app.Application
 import android.util.Log
 import android.view.View
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.*
 import androidx.navigation.findNavController
 import com.example.android.capstoneproject_aroundtheworld.data.CountryDatabase
 import com.example.android.capstoneproject_aroundtheworld.data.TripDatabase
 import com.example.android.capstoneproject_aroundtheworld.models.Trip
 import com.example.android.capstoneproject_aroundtheworld.repository.TripsRepository
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
 class TripsViewModel(
@@ -26,6 +24,16 @@ class TripsViewModel(
     private var _tripList = MutableLiveData<ArrayList<Trip>>()
     val tripList: LiveData<ArrayList<Trip>>
         get() = _tripList
+
+//    init {
+//        viewModelScope.launch {
+//            try {
+//                repository.saveTrip()
+//            } catch (e: java.lang.Exception) {
+//                Log.e("CountriesListViewModel", e.message!!)
+//            }
+//        }
+//    }
 
     suspend fun onSaveClick(v: View, trip: Trip){
         withContext(Dispatchers.IO) {
