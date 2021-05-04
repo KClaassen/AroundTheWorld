@@ -19,13 +19,14 @@
         android:layout_height="wrap_content"
         android:onClick="@{() -> clickListener.onClick(country)}">
 
-        <androidx.appcompat.widget.AppCompatRadioButton
+        <androidx.appcompat.widget.AppCompatCheckBox
             android:id="@+id/country_select_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            android:checked="@{country.isSelected}"/>
 
         <ImageView
             android:id="@+id/country_list_flag"

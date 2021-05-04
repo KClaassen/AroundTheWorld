@@ -34,6 +34,9 @@ class CountryAdapter(val clicklistener: CountryListener,
             binding.clickListener = clicklistener
             binding.countryListName.text = country.name
             binding.country = country
+            binding.countrySelectButton.setOnCheckedChangeListener { buttonView, isChecked ->
+                country.isSelected = isChecked
+            }
         }
     }
 
