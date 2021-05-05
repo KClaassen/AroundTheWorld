@@ -27,7 +27,7 @@ class TripsViewModel(
         CoroutineScope(Dispatchers.IO).launch {
             Log.i("savebutton", "${trip}")
             _tripList.value?.add(trip)
-            v.findNavController().navigate(NewTripFragmentDirections.actionNewTripFragmentToTripDetailFragment())
+            v.findNavController().navigate(NewTripFragmentDirections.actionNewTripFragmentToTripsListFragment())
             repository.saveTrip(trip)
         }
     }
