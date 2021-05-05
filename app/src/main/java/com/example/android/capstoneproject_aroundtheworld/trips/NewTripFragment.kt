@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import android.widget.DatePicker
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.ViewModelProvider
 import com.example.android.capstoneproject_aroundtheworld.R
 import com.example.android.capstoneproject_aroundtheworld.databinding.FragmentNewTripBinding
 import com.example.android.capstoneproject_aroundtheworld.models.Trip
@@ -15,7 +16,18 @@ import com.example.android.capstoneproject_aroundtheworld.models.Trip
 class NewTripFragment : Fragment() {
 
     private lateinit var binding: FragmentNewTripBinding
-    private val viewModel: TripsViewModel by activityViewModels()
+    //private val viewModel: TripsViewModel by activityViewModels()
+
+    /**
+     * Lazily initialize our [TripsViewModel].
+     */
+    private val viewModel: TripsViewModel by lazy {
+        val activity = requireNotNull(this.activity) {
+        }
+        ViewModelProvider(this, TripsViewModel.Factory(activity.application)).get(
+                TripsViewModel::class.java
+        )
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

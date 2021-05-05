@@ -39,6 +39,9 @@
         <argument
             android:name="country"
             app:argType="com.example.android.capstoneproject_aroundtheworld.models.Country" />
+        <action
+            android:id="@+id/action_countryDetailFragment_to_countriesListFragment"
+            app:destination="@id/countriesListFragment" />
     </fragment>
     <fragment
         android:id="@+id/tripsListFragment"
@@ -68,5 +71,10 @@
         android:id="@+id/tripDetailFragment"
         android:name="com.example.android.capstoneproject_aroundtheworld.trips.detail.TripDetailFragment"
         android:label="fragment_trip_detail"
-        tools:layout="@layout/fragment_trip_detail" />
+        tools:layout="@layout/fragment_trip_detail" >
+        <action
+            android:id="@+id/action_tripDetailFragment_to_tripsListFragment"
+            app:destination="@id/tripsListFragment" />
+    </fragment>
+
 </navigation>

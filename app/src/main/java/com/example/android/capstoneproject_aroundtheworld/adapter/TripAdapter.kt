@@ -5,6 +5,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.android.capstoneproject_aroundtheworld.databinding.ItemTripBinding
+import com.example.android.capstoneproject_aroundtheworld.models.Country
 import com.example.android.capstoneproject_aroundtheworld.models.Trip
 
 class TripAdapter(): RecyclerView.Adapter<TripAdapter.ViewHolder>() {
@@ -37,4 +38,8 @@ class TripAdapter(): RecyclerView.Adapter<TripAdapter.ViewHolder>() {
     override fun getItemCount(): Int {
         return trips.size
     }
+
+//    class TripListener(val clickListener: (Trip) -> Unit) {
+//        fun onClick(trip: Trip) = clickListener(trip)
+//    }
 }

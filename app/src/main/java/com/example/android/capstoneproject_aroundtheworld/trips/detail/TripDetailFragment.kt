@@ -9,6 +9,8 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import com.example.android.capstoneproject_aroundtheworld.R
+import com.example.android.capstoneproject_aroundtheworld.countries.detail.CountryDetailFragmentArgs
+import com.example.android.capstoneproject_aroundtheworld.databinding.FragmentCountryDetailBinding
 import com.example.android.capstoneproject_aroundtheworld.databinding.FragmentTripDetailBinding
 import com.example.android.capstoneproject_aroundtheworld.databinding.FragmentTripsListBinding
 import com.example.android.capstoneproject_aroundtheworld.models.Trip
@@ -24,18 +26,23 @@ class TripDetailFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_trip_detail, container, false)
+        // Get a reference to the binding object and inflate the fragment views.
+        val binding: FragmentTripDetailBinding = DataBindingUtil.inflate(
+                inflater, R.layout.fragment_trip_detail, container, false)
 
         //Initializing ViewModel
         binding.lifecycleOwner = this
         binding.viewmodel = viewModel
 
+//        val arguments = TripDetailFragmentArgs.fromBundle(requireArguments()).trip
+//        binding.trip = arguments
+
         // Observing changes in TripsList
-        viewModel.tripList.observe(viewLifecycleOwner, Observer {
-            for (trip in it) {
-                binding.trip = trip
-            }
-        })
+//        viewModel.tripList.observe(viewLifecycleOwner, Observer {
+//            for (trip in it) {
+//                binding.trip = trip
+//            }
+//        })
 
         return binding.root
     }

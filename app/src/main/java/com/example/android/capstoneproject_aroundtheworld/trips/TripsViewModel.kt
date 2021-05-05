@@ -24,7 +24,7 @@ class TripsViewModel(
         get() = _tripList
 
     fun onSaveClick(v: View, trip: Trip){
-        CoroutineScope(Dispatchers.IO).launch {
+        CoroutineScope(Dispatchers.Main).launch {
             Log.i("savebutton", "${trip}")
             _tripList.value?.add(trip)
             v.findNavController().navigate(NewTripFragmentDirections.actionNewTripFragmentToTripsListFragment())

@@ -41,7 +41,7 @@
                     android:layout_marginStart="32dp"
                     android:layout_marginTop="8dp"
                     android:hint="date from"
-                    android:text="@{trip.dateFrom}"
+                    android:text="=@{trip.dateFrom}"
                     android:textColor="@color/white"
                     card_view:layout_constraintStart_toStartOf="parent"
                     card_view:layout_constraintTop_toTopOf="parent" />
@@ -52,7 +52,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
                     android:hint="date to"
-                    android:text="@{trip.dateTo}"
+                    android:text="=@{trip.dateTo}"
                     android:textColor="@color/white"
                     card_view:layout_constraintBaseline_toBaselineOf="@+id/trip_list_date_from_text"
                     card_view:layout_constraintStart_toEndOf="@+id/trip_list_date_from_text" />
@@ -74,7 +74,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="24dp"
                     android:hint="text"
-                    android:text="@{trip.name}"
+                    android:text="=@{trip.name}"
                     android:textColor="@color/white"
                     card_view:layout_constraintBaseline_toBaselineOf="@+id/trip_list_name_label"
                     card_view:layout_constraintStart_toEndOf="@+id/trip_list_name_label" />
@@ -96,7 +96,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="32dp"
                     android:layout_marginTop="8dp"
-                    android:text="@{trip.description}"
+                    android:text="=@{trip.description}"
                     card_view:layout_constraintStart_toStartOf="parent"
                     card_view:layout_constraintTop_toBottomOf="@+id/trip_list_description_label" />
 

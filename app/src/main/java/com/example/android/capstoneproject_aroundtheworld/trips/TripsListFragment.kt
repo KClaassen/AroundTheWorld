@@ -8,10 +8,12 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.android.capstoneproject_aroundtheworld.R
 import com.example.android.capstoneproject_aroundtheworld.adapter.TripAdapter
+import com.example.android.capstoneproject_aroundtheworld.countries.CountriesListViewModel
 import com.example.android.capstoneproject_aroundtheworld.databinding.FragmentTripsListBinding
 import com.example.android.capstoneproject_aroundtheworld.models.Trip
 import com.example.android.capstoneproject_aroundtheworld.repository.TripsRepository
@@ -20,21 +22,27 @@ import kotlinx.android.synthetic.main.fragment_trips_list.*
 class TripsListFragment : Fragment() {
 
     private lateinit var binding: FragmentTripsListBinding
-    private val viewModel: TripsViewModel by activityViewModels()
+    //private val viewModel: TripsViewModel by activityViewModels()
     private lateinit var adapter: TripAdapter
+
+    /**
+     * Lazily initialize our [TripsViewModel].
+     */
+    private val viewModel: TripsViewModel by lazy {
+        val activity = requireNotNull(this.activity) {
+        }
+        ViewModelProvider(this, TripsViewModel.Factory(activity.application)).get(
+                TripsViewModel::class.java
+        )
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        super.onViewCreated(requireView(), savedInstanceState)
         // Inflate the layout for this fragment
         // Data Binding
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_trips_list, container, false)
-        trips_recycler.layoutManager = LinearLayoutManager(requireContext())
-        trips_recycler.adapter = adapter
-
-
 
         // Navigation OnclickListener for My Trips Button
         binding.newTripCardView.setOnClickListener { view: View ->
@@ -58,12 +66,18 @@ class TripsListFragment : Fragment() {
                         true
                 ).apply {
                     this.trip = trip
-
+                    viewModel.getAllTrips()
                 }
             }
         })
 
         return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        trips_recycler.layoutManager = LinearLayoutManager(requireContext())
+        trips_recycler.adapter = adapter
     }
 
 }
