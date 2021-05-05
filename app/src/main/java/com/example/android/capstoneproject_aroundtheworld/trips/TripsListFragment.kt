@@ -27,9 +27,14 @@ class TripsListFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        super.onViewCreated(requireView(), savedInstanceState)
         // Inflate the layout for this fragment
         // Data Binding
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_trips_list, container, false)
+        trips_recycler.layoutManager = LinearLayoutManager(requireContext())
+        trips_recycler.adapter = adapter
+
+
 
         // Navigation OnclickListener for My Trips Button
         binding.newTripCardView.setOnClickListener { view: View ->
@@ -37,8 +42,6 @@ class TripsListFragment : Fragment() {
         }
 
         adapter = TripAdapter()
-        trips_recycler.layoutManager = LinearLayoutManager(requireContext())
-        trips_recycler.adapter = adapter
 
         viewModel.getAllTrips().observe(viewLifecycleOwner, Observer {
             adapter.trips = it
