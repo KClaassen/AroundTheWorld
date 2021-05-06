@@ -8,11 +8,15 @@
         <variable
            name="trip"
             type="com.example.android.capstoneproject_aroundtheworld.models.Trip"/>
+        <variable
+            name="clickListener"
+            type="com.example.android.capstoneproject_aroundtheworld.adapter.TripAdapter.TripListener" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:onClick="@{() -> clickListener.onClick(trip)}">
 
         <androidx.cardview.widget.CardView
             android:id="@+id/card_view"

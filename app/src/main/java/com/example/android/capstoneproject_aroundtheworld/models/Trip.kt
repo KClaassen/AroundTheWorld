@@ -1,8 +1,10 @@
 package com.example.android.capstoneproject_aroundtheworld.models
 
+import android.os.Parcelable
 import androidx.databinding.BaseObservable
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import kotlinx.android.parcel.Parcelize
 
 @Entity()
 data class Trip(
@@ -13,4 +15,5 @@ data class Trip(
         var bookingNr: String?,
         var accomodation: String?,
         var dateFrom: String,
-        var dateTo: String) : BaseObservable()
+        var dateTo: String)
+        : BaseObservable()

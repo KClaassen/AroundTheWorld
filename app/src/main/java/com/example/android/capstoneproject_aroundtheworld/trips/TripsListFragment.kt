@@ -1,18 +1,23 @@
 package com.example.android.capstoneproject_aroundtheworld.trips
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.android.capstoneproject_aroundtheworld.R
+import com.example.android.capstoneproject_aroundtheworld.adapter.CountryAdapter
 import com.example.android.capstoneproject_aroundtheworld.adapter.TripAdapter
+import com.example.android.capstoneproject_aroundtheworld.countries.CountriesListFragmentDirections
 import com.example.android.capstoneproject_aroundtheworld.countries.CountriesListViewModel
 import com.example.android.capstoneproject_aroundtheworld.databinding.FragmentTripsListBinding
 import com.example.android.capstoneproject_aroundtheworld.models.Trip
@@ -22,7 +27,6 @@ import kotlinx.android.synthetic.main.fragment_trips_list.*
 class TripsListFragment : Fragment() {
 
     private lateinit var binding: FragmentTripsListBinding
-    //private val viewModel: TripsViewModel by activityViewModels()
     private lateinit var adapter: TripAdapter
 
     /**
@@ -49,8 +53,6 @@ class TripsListFragment : Fragment() {
             view.findNavController().navigate(R.id.action_tripsListFragment_to_newTripFragment)
         }
 
-        adapter = TripAdapter()
-
         viewModel.getAllTrips().observe(viewLifecycleOwner, Observer {
             adapter.trips = it
             adapter.notifyDataSetChanged()
@@ -71,6 +73,22 @@ class TripsListFragment : Fragment() {
             }
         })
 
+        adapter = TripAdapter(TripAdapter.TripListener {
+            Trip -> Toast.makeText(context, "${Trip}", Toast.LENGTH_SHORT).show()
+//            Trip ->
+//            if (Trip != null) {
+//                viewModel.onTripClicked(Trip)
+//            }
+        })
+
+        viewModel.navigateToTrip.observe(viewLifecycleOwner, Observer { trip ->
+            trip?.let {
+                this.findNavController().navigate(TripsListFragmentDirections
+                        .actionTripsListFragmentToTripDetailFragment())
+                viewModel.onTripNavigated()
+            }
+        })
+
         return binding.root
     }
 
@@ -78,6 +96,11 @@ class TripsListFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         trips_recycler.layoutManager = LinearLayoutManager(requireContext())
         trips_recycler.adapter = adapter
+
+//        adapter = TripAdapter(TripAdapter.TripListener {
+//            Trip -> Toast.makeText(context, "${Trip}", Toast.LENGTH_SHORT).show()
+//            //Country -> viewModel.onTripClicked(Country)
+//        })
     }
 
 }

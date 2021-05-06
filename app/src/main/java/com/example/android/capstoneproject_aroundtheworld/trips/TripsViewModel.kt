@@ -7,6 +7,7 @@ import androidx.lifecycle.*
 import androidx.navigation.findNavController
 import com.example.android.capstoneproject_aroundtheworld.data.CountryDatabase
 import com.example.android.capstoneproject_aroundtheworld.data.TripDatabase
+import com.example.android.capstoneproject_aroundtheworld.models.Country
 import com.example.android.capstoneproject_aroundtheworld.models.Trip
 import com.example.android.capstoneproject_aroundtheworld.repository.TripsRepository
 import kotlinx.coroutines.*
@@ -42,6 +43,21 @@ class TripsViewModel(
 
     init {
         _tripList.value = ArrayList()
+    }
+
+
+    // To navigate and complete navigation for selected Country onclick
+
+    private val _navigateToTrip = MutableLiveData<Trip>()
+    val navigateToTrip
+        get() = _navigateToTrip
+
+    fun onTripClicked(id: Trip){
+        _navigateToTrip.value = id
+    }
+
+    fun onTripNavigated() {
+        _navigateToTrip.value = null
     }
 
 
