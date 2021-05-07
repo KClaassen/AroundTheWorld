@@ -26,6 +26,8 @@ class TripAdapter(val clicklistener: TripListener
     class ViewHolder(val binding: ItemTripBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bindView(trip: Trip,
         clicklistener: TripListener) {
+            // Set the trip property to clicked trip
+            binding.trip = trip
             binding.clickListener = clicklistener
             binding.tripListNameText.text = trip.name
             binding.tripListDescriptionText.text = trip.description
@@ -42,7 +44,7 @@ class TripAdapter(val clicklistener: TripListener
         return trips.size
     }
 
-    class TripListener(val clickListener: (Trip?) -> Unit) {
-        fun onClick(trip: Trip?) = clickListener(trip)
+    class TripListener(val clickListener: (Trip) -> Unit) {
+        fun onClick(trip: Trip) = clickListener(trip)
     }
 }

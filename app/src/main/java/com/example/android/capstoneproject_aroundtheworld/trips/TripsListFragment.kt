@@ -74,11 +74,8 @@ class TripsListFragment : Fragment() {
         })
 
         adapter = TripAdapter(TripAdapter.TripListener {
-            Trip -> Toast.makeText(context, "${Trip}", Toast.LENGTH_SHORT).show()
-//            Trip ->
-//            if (Trip != null) {
-//                viewModel.onTripClicked(Trip)
-//            }
+            //Trip -> Toast.makeText(context, "${Trip}", Toast.LENGTH_SHORT).show()
+            Trip -> viewModel.onTripClicked(Trip)
         })
 
         viewModel.navigateToTrip.observe(viewLifecycleOwner, Observer { trip ->
