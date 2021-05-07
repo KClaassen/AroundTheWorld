@@ -44,7 +44,7 @@ class TripAdapter(val clicklistener: TripListener
         return trips.size
     }
 
-    class TripListener(val clickListener: (Trip) -> Unit) {
-        fun onClick(trip: Trip) = clickListener(trip)
+    class TripListener(val clickListener: (Trip?) -> Unit) {
+        fun onClick(trip: Trip?) = clickListener(trip)
     }
 }
