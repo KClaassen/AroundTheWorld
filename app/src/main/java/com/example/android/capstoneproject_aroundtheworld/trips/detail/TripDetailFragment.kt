@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import com.example.android.capstoneproject_aroundtheworld.R
 import com.example.android.capstoneproject_aroundtheworld.countries.detail.CountryDetailFragmentArgs
 import com.example.android.capstoneproject_aroundtheworld.databinding.FragmentCountryDetailBinding
@@ -19,7 +20,16 @@ import com.example.android.capstoneproject_aroundtheworld.trips.TripsViewModel
 class TripDetailFragment : Fragment() {
 
     private lateinit var binding: FragmentTripDetailBinding
-    private val viewModel: TripsViewModel by activityViewModels()
+    /**
+     * Lazily initialize our [TripsViewModel].
+     */
+    private val viewModel: TripsViewModel by lazy {
+        val activity = requireNotNull(this.activity) {
+        }
+        ViewModelProvider(this, TripsViewModel.Factory(activity.application)).get(
+                TripsViewModel::class.java
+        )
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

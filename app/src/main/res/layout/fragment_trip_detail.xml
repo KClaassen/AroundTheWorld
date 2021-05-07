@@ -76,7 +76,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="32dp"
-                    android:text="@{trip.name}"
+                    android:text="=@{trip.name}"
                     app:layout_constraintBaseline_toBaselineOf="@+id/trip_name_detail_label"
                     app:layout_constraintStart_toEndOf="@+id/trip_name_detail_label" />
 
