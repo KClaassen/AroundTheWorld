@@ -33,8 +33,13 @@ class TripsViewModel(
         }
     }
 
-    suspend fun deleteTrip(trip: Trip) {
-        withContext(Dispatchers.IO) {
+//    suspend fun deleteTrip(trip: Trip) {
+//        (Dispatchers.IO) {
+//            repository.deleteTrip(trip)
+//        }
+//    }
+    fun deleteTrip(trip: Trip){
+        CoroutineScope(Dispatchers.IO).launch {
             repository.deleteTrip(trip)
         }
     }

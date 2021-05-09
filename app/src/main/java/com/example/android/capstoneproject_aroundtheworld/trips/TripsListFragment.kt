@@ -13,9 +13,12 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.android.capstoneproject_aroundtheworld.R
 import com.example.android.capstoneproject_aroundtheworld.adapter.CountryAdapter
+import com.example.android.capstoneproject_aroundtheworld.adapter.SwipeToDelete
 import com.example.android.capstoneproject_aroundtheworld.adapter.TripAdapter
 import com.example.android.capstoneproject_aroundtheworld.countries.CountriesListFragmentDirections
 import com.example.android.capstoneproject_aroundtheworld.countries.CountriesListViewModel
@@ -103,4 +106,10 @@ class TripsListFragment : Fragment() {
 //        })
     }
 
+    val item = object : SwipeToDelete(requireContext(),0, ItemTouchHelper.LEFT){
+        override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
+            viewModel.deleteTrip()
+        }
+    }
+    ItemTouchHelper(item).attachToRecyclerView(recycler)
 }

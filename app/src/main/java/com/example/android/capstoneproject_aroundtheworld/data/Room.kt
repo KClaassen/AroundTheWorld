@@ -86,7 +86,7 @@ interface TripDao {
 
     // Delete a trip
     @Delete()
-    suspend fun deleteTrip(trip: Trip)
+    fun deleteTrip(trip: Trip)
 }
 
 

@@ -47,4 +47,7 @@ class TripAdapter(val clicklistener: TripListener
     class TripListener(val clickListener: (Trip?) -> Unit) {
         fun onClick(trip: Trip?) = clickListener(trip)
     }
+
+    // Swipe to remove item
+
 }
