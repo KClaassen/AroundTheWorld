@@ -48,6 +48,7 @@ class TripAdapter(val clicklistener: TripListener
         fun onClick(trip: Trip?) = clickListener(trip)
     }
 
-    // Swipe to remove item
+    // Get current trip item for swipe to delete
+    fun getTripAt(position: Int) = trips[position]
 
 }

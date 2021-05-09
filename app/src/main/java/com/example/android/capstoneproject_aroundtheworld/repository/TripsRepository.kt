@@ -11,7 +11,7 @@ class TripsRepository (
 
     suspend fun saveTrip(trip: Trip) = database.tripDao.saveTrip(trip)
 
-    suspend fun deleteTrip(trip: Trip) = database.tripDao.deleteTrip(trip)
+    fun deleteTrip(trip: Trip) = database.tripDao.deleteTrip(trip)
 
     fun getAllTrips() = database.tripDao.getAllTrips()
     

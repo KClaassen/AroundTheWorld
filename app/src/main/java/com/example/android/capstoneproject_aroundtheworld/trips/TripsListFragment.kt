@@ -100,16 +100,15 @@ class TripsListFragment : Fragment() {
         trips_recycler.layoutManager = LinearLayoutManager(requireContext())
         trips_recycler.adapter = adapter
 
-//        adapter = TripAdapter(TripAdapter.TripListener {
-//            Trip -> Toast.makeText(context, "${Trip}", Toast.LENGTH_SHORT).show()
-//            //Country -> viewModel.onTripClicked(Country)
-//        })
+        // Swipe to delete item in Trips Recycler
+        val item = object : SwipeToDelete(requireContext(),0, ItemTouchHelper.LEFT){
+            override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
+                Toast.makeText(requireContext(), "Item has been deleted", Toast.LENGTH_LONG ).show()
+                viewModel.deleteTrip(adapter.getTripAt(viewHolder.adapterPosition))
+            }
+        }
+        ItemTouchHelper(item).attachToRecyclerView(trips_recycler)
     }
 
-    val item = object : SwipeToDelete(requireContext(),0, ItemTouchHelper.LEFT){
-        override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
-            viewModel.deleteTrip()
-        }
-    }
-    ItemTouchHelper(item).attachToRecyclerView(recycler)
+
 }
