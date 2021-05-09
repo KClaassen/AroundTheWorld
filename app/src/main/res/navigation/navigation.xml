@@ -75,6 +75,9 @@
         <action
             android:id="@+id/action_tripDetailFragment_to_tripsListFragment"
             app:destination="@id/tripsListFragment" />
+        <argument
+            android:name="trip"
+            app:argType="com.example.android.capstoneproject_aroundtheworld.models.Trip" />
     </fragment>
 
 </navigation>

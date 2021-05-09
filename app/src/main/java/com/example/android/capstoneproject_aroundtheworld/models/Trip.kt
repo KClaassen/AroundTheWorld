@@ -6,6 +6,7 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 import kotlinx.android.parcel.Parcelize
 
+@Parcelize
 @Entity()
 data class Trip(
         @PrimaryKey
@@ -16,4 +17,4 @@ data class Trip(
         var accomodation: String?,
         var dateFrom: String,
         var dateTo: String)
-        : BaseObservable()
+        : Parcelable

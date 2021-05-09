@@ -84,7 +84,7 @@ class TripsListFragment : Fragment() {
         viewModel.navigateToTrip.observe(viewLifecycleOwner, Observer { trip ->
             trip?.let {
                 this.findNavController().navigate(TripsListFragmentDirections
-                        .actionTripsListFragmentToTripDetailFragment())
+                        .actionTripsListFragmentToTripDetailFragment(it))
                 viewModel.onTripNavigated()
             }
         })

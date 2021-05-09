@@ -44,8 +44,8 @@ class TripDetailFragment : Fragment() {
         binding.lifecycleOwner = this
         binding.viewmodel = viewModel
 
-//        val arguments = TripDetailFragmentArgs.fromBundle(requireArguments()).trip
-//        binding.trip = arguments
+        val arguments = TripDetailFragmentArgs.fromBundle(requireArguments()).trip
+        binding.trip = arguments
 
         // Observing changes in TripsList
 //        viewModel.tripList.observe(viewLifecycleOwner, Observer {
