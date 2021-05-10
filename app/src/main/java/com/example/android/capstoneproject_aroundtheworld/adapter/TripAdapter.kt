@@ -30,7 +30,6 @@ class TripAdapter(val clicklistener: TripListener
             binding.trip = trip
             binding.clickListener = clicklistener
             binding.tripListNameText.text = trip.name
-            binding.tripListDescriptionText.text = trip.description
             binding.tripListDateFromText.text = trip.dateFrom
             binding.tripListDateToText.text = trip.dateTo
         }
