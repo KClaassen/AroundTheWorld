@@ -9,7 +9,7 @@ import com.squareup.moshi.Json
 import kotlinx.android.parcel.Parcelize
 
 // use this class as a return type of your api call
-// suspend fun getAllCountries():List<MainObject>
+// suspend fun getCountries():List<MainObject>
 @Parcelize
 @Entity()
 data class Country(

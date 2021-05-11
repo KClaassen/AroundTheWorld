@@ -17,7 +17,7 @@ class CountriesListViewModel(application: Application) : ViewModel() {
     private val database = getDatabase(application)
     private val repository = CountriesRepository(database)
 
-    var countryListLiveData: MutableLiveData<List<Country>> = MutableLiveData()
+    var countryListLiveData: LiveData<List<Country>> = database.countryDao.getCountries()
     val errorStateLiveData: MutableLiveData<String> = MutableLiveData()
 
     init {
