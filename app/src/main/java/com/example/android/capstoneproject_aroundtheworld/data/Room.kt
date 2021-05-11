@@ -19,6 +19,10 @@ interface CountryDao {
     //Store values in cache
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertAll(vararg countries: List<Country>)
+
+    //Update counter
+    @Update(onConflict = OnConflictStrategy.REPLACE)
+    fun updateCounter()
 }
 
 
