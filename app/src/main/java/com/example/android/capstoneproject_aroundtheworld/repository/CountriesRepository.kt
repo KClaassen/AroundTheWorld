@@ -22,9 +22,11 @@ class CountriesRepository(
         private val database: CountryDatabase
         ) {
 
+    //fun updateCountry = database.countryDao.updateCountry()
+
     val countries = database.countryDao.getCountries()
 
-    suspend fun getAllCountries(): List<Country>? {
+    suspend fun getAllCountries() {
         val countries = CountryApi.retrofitService.getCountries()
         var listOfCountries: List<Country>? = ArrayList()
         try {
@@ -37,6 +39,5 @@ class CountriesRepository(
 //        listOfCountries.add(Country("Capital", Currency("currency"), "flag", Language("spanish"),"the name","he region"))
         //database.countryDao.getCountries()
         database.countryDao.insertAll(countries)
-        return countries
     }
 }

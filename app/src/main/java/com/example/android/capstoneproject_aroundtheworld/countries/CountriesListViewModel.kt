@@ -18,12 +18,12 @@ class CountriesListViewModel(application: Application) : ViewModel() {
     private val repository = CountriesRepository(database)
 
     var countryListLiveData: LiveData<List<Country>> = database.countryDao.getCountries()
-    val errorStateLiveData: MutableLiveData<String> = MutableLiveData()
+    //val errorStateLiveData: MutableLiveData<String> = MutableLiveData()
 
     init {
         viewModelScope.launch {
             try {
-                countryListLiveData.postValue(repository.getAllCountries())
+                countryListLiveData = repository.countries
             } catch (e: java.lang.Exception) {
                 Log.e("CountriesListViewModel", e.message!!)
             }
@@ -33,12 +33,15 @@ class CountriesListViewModel(application: Application) : ViewModel() {
     fun getDataFromRepo()  {
         CoroutineScope(Dispatchers.IO).launch {
             try {
-                val list = repository.getAllCountries()
-                countryListLiveData.postValue(list)
+                repository.getAllCountries()
             }catch (e:Exception){
-                errorStateLiveData.postValue("Error occurred, Please try again!!")
+                e.printStackTrace()
             }
         }
+    }
+
+    fun updateCountry() {
+
     }
 
     // To navigate and complete navigation for selected Country onclick

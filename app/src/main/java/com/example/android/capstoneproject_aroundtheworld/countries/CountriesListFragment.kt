@@ -46,9 +46,9 @@ class CountriesListFragment : Fragment() {
         viewModel.countryListLiveData.observe(viewLifecycleOwner, Observer {
             processList(it)
         })
-        viewModel.errorStateLiveData.observe(viewLifecycleOwner, Observer {
-            Snackbar.make(this.requireView(), "Error, please try again", Snackbar.LENGTH_SHORT).show()
-        })
+//        viewModel.errorStateLiveData.observe(viewLifecycleOwner, Observer {
+//            Snackbar.make(this.requireView(), "Error, please try again", Snackbar.LENGTH_SHORT).show()
+//        })
 
         fetchCountries()
 
