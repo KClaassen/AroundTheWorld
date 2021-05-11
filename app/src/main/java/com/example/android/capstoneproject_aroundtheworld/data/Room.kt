@@ -14,7 +14,7 @@ import com.example.android.capstoneproject_aroundtheworld.models.Trip
 interface CountryDao {
     //Loads all countries from databasecountry and returns them as a List
     @Query("SELECT  * FROM country ORDER BY name ASC")
-    fun getCountries() : LiveData<List<Country>>
+    fun getAllCountries() : LiveData<List<Country>>
 
     //Store values in cache
     @Insert(onConflict = OnConflictStrategy.REPLACE)

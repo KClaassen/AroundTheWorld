@@ -65,7 +65,7 @@ class CountriesRepository(
 //    }
 
     // Caching list of countries
-    //val countriesSaved: LiveData<List<Country>> = database.countryDao.getCountries()
+    //val countriesSaved: LiveData<List<Country>> = database.countryDao.getAllCountries()
 
     suspend fun getAllCountries(): List<Country>? {
         val countries = CountryApi.retrofitService.getCountries()
@@ -78,7 +78,7 @@ class CountriesRepository(
         Log.i("Repository", "${listOfCountries}")
 //        listOfCountries = ArrayList<Country>()
 //        listOfCountries.add(Country("Capital", Currency("currency"), "flag", Language("spanish"),"the name","he region"))
-        //database.countryDao.getCountries()
+        //database.countryDao.getAllCountries()
         return listOfCountries
     }
 }

@@ -19,7 +19,6 @@ import com.example.android.capstoneproject_aroundtheworld.trips.TripsViewModel
 
 class TripDetailFragment : Fragment() {
 
-    private lateinit var binding: FragmentTripDetailBinding
     /**
      * Lazily initialize our [TripsViewModel].
      */
@@ -55,6 +54,12 @@ class TripDetailFragment : Fragment() {
 //        })
 
         return binding.root
+    }
+
+
+    companion object {
+        private const val CAMERA_PERMISSION_CODE = 1
+        private const val CAMERA = 2
     }
 
 }
