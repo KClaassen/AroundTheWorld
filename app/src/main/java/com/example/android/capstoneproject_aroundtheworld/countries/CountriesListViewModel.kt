@@ -40,8 +40,9 @@ class CountriesListViewModel(application: Application) : ViewModel() {
         }
     }
 
-    fun updateCountry() {
+    fun updateCountry(country: Country) {
 
+        database.countryDao.updateCountry(country)
     }
 
     // To navigate and complete navigation for selected Country onclick

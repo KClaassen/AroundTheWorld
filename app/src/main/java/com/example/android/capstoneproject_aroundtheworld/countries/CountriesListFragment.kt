@@ -46,6 +46,7 @@ class CountriesListFragment : Fragment() {
         viewModel.countryListLiveData.observe(viewLifecycleOwner, Observer {
             processList(it)
         })
+        
 //        viewModel.errorStateLiveData.observe(viewLifecycleOwner, Observer {
 //            Snackbar.make(this.requireView(), "Error, please try again", Snackbar.LENGTH_SHORT).show()
 //        })
@@ -59,6 +60,7 @@ class CountriesListFragment : Fragment() {
                 viewModel.onCountryNavigated()
             }
         })
+
 
 //        val adapter = CountryAdapter(CountryAdapter.CountryListener {
 //            Country -> Toast.makeText(context, "${Country}", Toast.LENGTH_SHORT).show()
