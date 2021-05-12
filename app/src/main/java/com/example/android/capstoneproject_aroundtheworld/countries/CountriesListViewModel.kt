@@ -16,6 +16,8 @@ class CountriesListViewModel(application: Application) : ViewModel() {
 
     private val database = getDatabase(application)
     private val repository = CountriesRepository(database)
+    private var countries: List<Country> = listOf()
+
 
     var countryListLiveData: LiveData<List<Country>> = database.countryDao.getCountries()
     //val errorStateLiveData: MutableLiveData<String> = MutableLiveData()
@@ -40,10 +42,26 @@ class CountriesListViewModel(application: Application) : ViewModel() {
         }
     }
 
-    fun updateCountry(country: Country) {
+    // Live Data to keep track of Countries count selected
+    private val _selectedCountriesCount = MutableLiveData(0)
+    val selectedCountriesCount: LiveData<Int>
+        get() = _selectedCountriesCount
 
-        database.countryDao.updateCountry(country)
+    fun updateCountry(country: Country) {
+        // Added _selectedCountriesCount.value which connects to the LiveData to keep track of selected countries
+        _selectedCountriesCount.value = countries.filter { it.isSelected }.size
+        CoroutineScope(Dispatchers.IO).launch {
+            database.countryDao.updateCountry(country)
+        }
+
     }
+
+//    fun updateCountry(country: Country) {
+//
+//        CoroutineScope(Dispatchers.IO).launch {
+//            database.countryDao.updateCountry(country)
+//        }
+//    }
 
     // To navigate and complete navigation for selected Country onclick
 

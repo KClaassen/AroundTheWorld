@@ -17,7 +17,7 @@ import com.example.android.capstoneproject_aroundtheworld.models.Country
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.fragment_countries_list.*
 
-class CountriesListFragment : Fragment() {
+class CountriesListFragment : Fragment(), CountryAdapter.CountryListener {
 
     private lateinit var binding: FragmentCountriesListBinding
     private lateinit var countryAdapter: CountryAdapter
@@ -80,10 +80,11 @@ class CountriesListFragment : Fragment() {
     }
 
     private fun processList(it: List<Country>?) {
-        val countryAdapter = CountryAdapter(CountryAdapter.CountryListener {
-            //Country -> Toast.makeText(context, "${Country}", Toast.LENGTH_SHORT).show()
-            Country -> viewModel.onCountryClicked(Country)
-        })
+//        val countryAdapter = CountryAdapter(CountryAdapter.CountryListener {
+//            //Country -> Toast.makeText(context, "${Country}", Toast.LENGTH_SHORT).show()
+//            Country -> viewModel.onCountryClicked(Country)
+//        })
+        val countryAdapter = CountryAdapter(this)
         countries_recycler.layoutManager = LinearLayoutManager(requireContext())
         countries_recycler.adapter = countryAdapter
         countryAdapter.setData(it)
@@ -97,6 +98,14 @@ class CountriesListFragment : Fragment() {
 
     companion object {
         const val TAG = "CountriesListFragment"
+    }
+
+    override fun onClick(country: Country) {
+        viewModel.onCountryClicked(country)
+    }
+
+    override fun onChecked(country: Country) {
+        viewModel.updateCountry(country)
     }
 
 }
