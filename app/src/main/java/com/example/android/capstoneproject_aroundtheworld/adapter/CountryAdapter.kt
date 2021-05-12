@@ -70,6 +70,11 @@ class CountryAdapter(val clicklistener: CountryListener,
         fun onChecked(country: Country) = country.isSelected
     }
 
+    interface countryListener {
+        fun onCLick(country: Country) = Unit
+        fun onChecked(country: Country) = Unit
+    }
+
 
 
     fun selectedCountriesCount() {
