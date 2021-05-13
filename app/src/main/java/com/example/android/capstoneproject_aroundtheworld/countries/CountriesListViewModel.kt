@@ -56,15 +56,14 @@ class CountriesListViewModel(application: Application) : ViewModel() {
         countries.filter { it.isSelected }.size
     }
 
-    // Live Data to keep track of Countries count selected
-    private val _selectedCountriesCount = MutableLiveData(0)
-    val selectedCountriesCount: LiveData<Int>
-        get() = _selectedCountriesCount
+//    // Live Data to keep track of Countries count selected
+//    private val _selectedCountriesCount = MutableLiveData(0)
+//    val selectedCountriesCount: LiveData<Int>
+//        get() = _selectedCountriesCount
 
     fun updateCountry(country: Country) {
 //        // Added _selectedCountriesCount.value which connects to the LiveData to keep track of selected countries
         CoroutineScope(Dispatchers.IO).launch {
-            
             database.countryDao.updateCountry(country)
         }
 

@@ -39,6 +39,7 @@ class CountriesListFragment : Fragment(), CountryAdapter.CountryListener {
         // Data Binding
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_countries_list, container, false)
 
+        binding.viewmodel = viewModel
 
         // Allows Data Binding to Observe LiveData with the lifecycle of this Fragment
         binding.lifecycleOwner = this
