@@ -90,10 +90,10 @@ class CountriesListFragment : Fragment(), CountryAdapter.CountryListener {
         countryAdapter.setData(it)
         progress_bar.visibility = View.GONE
 
-        // Country count Observer and translates the size to String
-        countryAdapter.selectedCountriesCount.observe(viewLifecycleOwner) {
-            selectedCountryCount -> binding.countriesBeenCount.text = selectedCountryCount.toString()
-        }
+//        // Country count Observer and translates the size to String
+//        countryAdapter.selectedCountriesCount.observe(viewLifecycleOwner) {
+//            selectedCountryCount -> binding.countriesBeenCount.text = selectedCountryCount.toString()
+//        }
     }
 
     companion object {

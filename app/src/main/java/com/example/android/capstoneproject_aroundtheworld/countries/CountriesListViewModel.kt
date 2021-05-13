@@ -3,6 +3,7 @@ package com.example.android.capstoneproject_aroundtheworld.countries
 import android.app.Application
 import android.util.Log
 import android.view.animation.Transformation
+import androidx.databinding.BindingAdapter
 import androidx.lifecycle.*
 import com.example.android.capstoneproject_aroundtheworld.adapter.CountryAdapter
 import com.example.android.capstoneproject_aroundtheworld.data.CountryDatabase.Companion.getDatabase
@@ -18,7 +19,7 @@ class CountriesListViewModel(application: Application) : ViewModel() {
 
     private val database = getDatabase(application)
     private val repository = CountriesRepository(database)
-   // private var countries: List<Country> = listOf()
+
 
     /**
      *  Countries List
@@ -51,7 +52,9 @@ class CountriesListViewModel(application: Application) : ViewModel() {
      *  Count number of countries checked
      */
 
-    val selectCountriesCount = Transformations.map(LiveData<Country>())
+    fun counter(): LiveData<Int> = Transformations.map(countryListLiveData) { countries ->
+        countries.filter { it.isSelected }.size
+    }
 
     // Live Data to keep track of Countries count selected
     private val _selectedCountriesCount = MutableLiveData(0)
@@ -61,7 +64,7 @@ class CountriesListViewModel(application: Application) : ViewModel() {
     fun updateCountry(country: Country) {
 //        // Added _selectedCountriesCount.value which connects to the LiveData to keep track of selected countries
         CoroutineScope(Dispatchers.IO).launch {
-            _selectedCountriesCount.value = 0
+            
             database.countryDao.updateCountry(country)
         }
 
