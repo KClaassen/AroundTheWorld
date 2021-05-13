@@ -17,11 +17,11 @@ interface CountryDao {
     fun getCountries() : LiveData<List<Country>>
 
     //Store values in cache
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun insertAll(countries: List<Country>)
 
     //Update counter
-    @Update(onConflict = OnConflictStrategy.IGNORE)
+    @Update(onConflict = OnConflictStrategy.REPLACE)
     fun updateCountry(country: Country)
 }
 
