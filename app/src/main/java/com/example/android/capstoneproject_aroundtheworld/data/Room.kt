@@ -21,7 +21,7 @@ interface CountryDao {
     suspend fun insertAll(countries: List<Country>)
 
     //Update counter
-    @Update(onConflict = OnConflictStrategy.REPLACE)
+    @Update(onConflict = OnConflictStrategy.IGNORE)
     fun updateCountry(country: Country)
 }
 

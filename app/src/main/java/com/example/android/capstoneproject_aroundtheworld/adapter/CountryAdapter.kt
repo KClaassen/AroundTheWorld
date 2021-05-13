@@ -15,10 +15,10 @@ class CountryAdapter(val listener: CountryListener,
                      //val fragment: Fragment
                      ): RecyclerView.Adapter<CountryAdapter.ViewHolder>() {
 
-    // Live Data to keep track of Countries count selected
-    private val _selectedCountriesCount = MutableLiveData(0)
-    val selectedCountriesCount: LiveData<Int>
-        get() = _selectedCountriesCount
+//    // Live Data to keep track of Countries count selected
+//    private val _selectedCountriesCount = MutableLiveData(0)
+//    val selectedCountriesCount: LiveData<Int>
+//        get() = _selectedCountriesCount
 
     private var countries: List<Country> = listOf()
 
@@ -53,7 +53,9 @@ class CountryAdapter(val listener: CountryListener,
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         // Added ::selectedCountriesCount which is the function below to get the number of selected countries
-        holder.bindView(countries!![position], listener, ::selectedCountriesCount)
+        holder.bindView(countries!![position], listener,
+                ::selectedCountriesCount
+        )
     }
 
     override fun getItemCount(): Int {
@@ -72,8 +74,8 @@ class CountryAdapter(val listener: CountryListener,
     }
 
 
-    fun selectedCountriesCount() {
-        // Added _selectedCountriesCount.value which connects to the LiveData to keep track of selected countries
-        _selectedCountriesCount.value = countries.filter { it.isSelected }.size
-    }
+//    fun selectedCountriesCount() {
+//        // Added _selectedCountriesCount.value which connects to the LiveData to keep track of selected countries
+//        _selectedCountriesCount.value = countries.filter { it.isSelected }.size
+//    }
 }

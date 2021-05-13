@@ -23,7 +23,7 @@ data class Country(
         val capital: String,
         val region: String
 ):Parcelable {
-        @Ignore
+        //@Ignore
         var isSelected: Boolean = false
         // all the properties default set to null because for some of the object they don't exist.
         @Parcelize
