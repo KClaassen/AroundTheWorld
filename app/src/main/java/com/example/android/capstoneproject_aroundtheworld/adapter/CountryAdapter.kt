@@ -5,6 +5,8 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.android.capstoneproject_aroundtheworld.models.Country
 import com.example.android.capstoneproject_aroundtheworld.countries.CountriesListFragment
@@ -13,12 +15,23 @@ import com.example.android.capstoneproject_aroundtheworld.databinding.ItemCountr
 class CountryAdapter(val listener: CountryListener,
                      //val context: CountriesListFragment,
                      //val fragment: Fragment
-                     ): RecyclerView.Adapter<CountryAdapter.ViewHolder>() {
+                     ): ListAdapter<Country, CountryAdapter.ViewHolder>(DiffCallBack()) {
 
 //    // Live Data to keep track of Countries count selected
 //    private val _selectedCountriesCount = MutableLiveData(0)
 //    val selectedCountriesCount: LiveData<Int>
 //        get() = _selectedCountriesCount
+
+    class DiffCallBack : DiffUtil.ItemCallback<Country>() {
+        override fun areItemsTheSame(oldItem: Country, newItem: Country): Boolean {
+            return oldItem == newItem
+        }
+
+        override fun areContentsTheSame(oldItem: Country, newItem: Country): Boolean {
+            return oldItem == newItem
+        }
+
+    }
 
     private var countries: List<Country> = listOf()
 
@@ -71,8 +84,6 @@ class CountryAdapter(val listener: CountryListener,
         fun onClick(country: Country) = Unit
         fun onChecked(country: Country) = Unit
     }
-
-
 //    fun selectedCountriesCount() {
 //        // Added _selectedCountriesCount.value which connects to the LiveData to keep track of selected countries
 //        _selectedCountriesCount.value = countries.filter { it.isSelected }.size
