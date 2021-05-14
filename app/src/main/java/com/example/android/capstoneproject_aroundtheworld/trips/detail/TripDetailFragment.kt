@@ -5,19 +5,23 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.databinding.DataBindingUtil
-import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.android.capstoneproject_aroundtheworld.R
-import com.example.android.capstoneproject_aroundtheworld.countries.detail.CountryDetailFragmentArgs
-import com.example.android.capstoneproject_aroundtheworld.databinding.FragmentCountryDetailBinding
+import com.example.android.capstoneproject_aroundtheworld.adapter.ImageListAdapter
 import com.example.android.capstoneproject_aroundtheworld.databinding.FragmentTripDetailBinding
-import com.example.android.capstoneproject_aroundtheworld.databinding.FragmentTripsListBinding
-import com.example.android.capstoneproject_aroundtheworld.models.Trip
+import com.example.android.capstoneproject_aroundtheworld.databinding.ItemTripDetailImageBinding
 import com.example.android.capstoneproject_aroundtheworld.trips.TripsViewModel
+import kotlinx.android.synthetic.main.fragment_trip_detail.*
 
 class TripDetailFragment : Fragment() {
+
+    private lateinit var binding: FragmentTripDetailBinding
+    private lateinit var adapter: ImageListAdapter
 
     /**
      * Lazily initialize our [TripsViewModel].
@@ -36,7 +40,7 @@ class TripDetailFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         // Get a reference to the binding object and inflate the fragment views.
-        val binding: FragmentTripDetailBinding = DataBindingUtil.inflate(
+        binding = DataBindingUtil.inflate(
                 inflater, R.layout.fragment_trip_detail, container, false)
 
         //Initializing ViewModel
@@ -53,9 +57,33 @@ class TripDetailFragment : Fragment() {
 //            }
 //        })
 
+        adapter = ImageListAdapter(ImageListAdapter.ImageListListener {
+            Toast.makeText(context, "test", Toast.LENGTH_SHORT).show()
+        })
+
+        // TODO: Read the list from the database and always add the empty value to show the add button
+        val images = ArrayList<String>()
+        images.add("")
+
+        // Observing changes in TripsList
+        viewModel.imageList.observe(viewLifecycleOwner, Observer {
+            for (image in images) {
+                DataBindingUtil.inflate<ItemTripDetailImageBinding>(
+                        layoutInflater,
+                        R.layout.item_trip_detail_image,
+                        binding.imageListRecycler,
+                        true)
+            }
+        })
+
         return binding.root
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        image_list_recycler.layoutManager = GridLayoutManager(requireContext(), 2, RecyclerView.VERTICAL, false)
+        image_list_recycler.adapter = adapter
+    }
 
     companion object {
         private const val CAMERA_PERMISSION_CODE = 1

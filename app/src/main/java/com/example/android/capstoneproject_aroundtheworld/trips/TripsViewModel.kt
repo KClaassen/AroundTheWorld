@@ -1,6 +1,7 @@
 package com.example.android.capstoneproject_aroundtheworld.trips
 
 import android.app.Application
+import android.media.Image
 import android.util.Log
 import android.view.View
 import androidx.lifecycle.*
@@ -18,6 +19,10 @@ class TripsViewModel(
 
     private val database = TripDatabase.getDatabase(application)
     private val repository = TripsRepository(database)
+
+    /**
+     *  Trip List
+     */
 
     //Create Live Data Object
     private var _tripList = MutableLiveData<MutableList<Trip>>()
@@ -51,6 +56,9 @@ class TripsViewModel(
     }
 
 
+    /**
+     *  Navigate to Detail Screen
+     */
     // To navigate and complete navigation for selected Country onclick
 
     private val _navigateToTrip = MutableLiveData<Trip>()
@@ -65,7 +73,14 @@ class TripsViewModel(
         _navigateToTrip.value = null
     }
 
+    /**
+     *  Image List
+     */
 
+    //Create Live Data Object
+    private var _imageList = MutableLiveData<MutableList<Image>>()
+    val imageList: LiveData<MutableList<Image>>
+        get() = _imageList
 
     // Factory for constructing TripsListViewModel with parameter
     class Factory(val app: Application) : ViewModelProvider.Factory {
