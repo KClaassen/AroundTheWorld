@@ -30,6 +30,9 @@
         <argument
             android:name="country"
             app:argType="com.example.android.capstoneproject_aroundtheworld.models.Country" />
+        <action
+            android:id="@+id/action_countriesListFragment_to_authenticationActivity"
+            app:destination="@id/authenticationActivity" />
     </fragment>
     <fragment
         android:id="@+id/countryDetailFragment"
@@ -79,5 +82,10 @@
             android:name="trip"
             app:argType="com.example.android.capstoneproject_aroundtheworld.models.Trip" />
     </fragment>
+    <activity
+        android:id="@+id/authenticationActivity"
+        android:name="com.example.android.capstoneproject_aroundtheworld.authentication.AuthenticationActivity"
+        android:label="activity_authentication"
+        tools:layout="@layout/activity_authentication" />
 
 </navigation>

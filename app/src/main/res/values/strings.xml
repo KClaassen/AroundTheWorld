@@ -27,4 +27,5 @@
     <string name="upload_your_favorite_pictures">Upload your favorite pictures</string>
     <string name="date_from">From: </string>
     <string name="date_to">To: </string>
+    <string name="logout_menu">Logout</string>
 </resources>

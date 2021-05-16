@@ -12,6 +12,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.android.capstoneproject_aroundtheworld.R
+import com.example.android.capstoneproject_aroundtheworld.adapter.ImageListAdapter
 import com.example.android.capstoneproject_aroundtheworld.databinding.FragmentTripDetailBinding
 import com.example.android.capstoneproject_aroundtheworld.trips.TripsViewModel
 import kotlinx.android.synthetic.main.fragment_trip_detail.*
