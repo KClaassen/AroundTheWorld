@@ -1,5 +1,8 @@
 package com.example.android.capstoneproject_aroundtheworld.adapter
 
+import android.animation.LayoutTransition
+import android.content.Context
+import android.text.Layout
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -7,10 +10,12 @@ import android.widget.ImageView
 import androidx.core.net.toUri
 import androidx.recyclerview.widget.RecyclerView
 import com.example.android.capstoneproject_aroundtheworld.R
-import com.example.android.capstoneproject_aroundtheworld.databinding.ItemTripDetailImageBinding
+import com.example.android.capstoneproject_aroundtheworld.databinding.ItemTripAddImageBinding
+import com.example.android.capstoneproject_aroundtheworld.databinding.ItemTripViewImageBinding
+import com.example.android.capstoneproject_aroundtheworld.models.TripImage
 
-class ImageListAdapter(val clicklistener: ImageListListener
-): RecyclerView.Adapter<ImageListAdapter.ViewHolder>() {
+class ImageListAdapter(val context: Context, val clicklistener: ImageListListener
+): RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     companion object {
         private const val IMAGE_ADD = 0
@@ -19,44 +24,45 @@ class ImageListAdapter(val clicklistener: ImageListListener
 
     var images: List<String> = listOf()
 
-    override fun onCreateViewHolder(
-            parent: ViewGroup,
-            viewType: Int
-    ): ViewHolder {
 
-        val inflater = LayoutInflater.from(parent.context)
-        val itemTripDetailImageBinding = ItemTripDetailImageBinding.inflate(inflater, parent, false)
-        return ViewHolder(
-                itemTripDetailImageBinding)
-    }
+    private inner class ImageAddViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
-    class ViewHolder(val binding: ItemTripDetailImageBinding) : RecyclerView.ViewHolder(binding.root) {
+        fun bindView(position: Int) {
 
-        fun bindView(image: String,
-                     clickListener: ImageListListener) {
-
-            class ImageAddViewHolder(itemView: View) : ViewHolder(binding) {
-                override fun bind(item: DataModel) {
-                    //Do your view assignment here from the data model
-                    binding.tripDetailImage.setImageResource(R.drawable.outline_add_24)
-                    binding.listener = clickListener
-                }
-            }
-
-            class ImageViewHolder(itemView: View) : ViewHolder(binding) {
-                override fun bind(item: DataModel) {
-                    //Do your view assignment here from the data model
-                    binding.tripDetailImage.setImageURI(image.toUri())
-                }
-            }
-
-//            // If image is empty, then we should render an add photo button
-//            // otherwise just render the photo
         }
     }
 
-    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.bindView(images!![position], clicklistener)
+    private inner class ImageViewViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+
+        fun bindView(position: Int) {
+
+        }
+    }
+
+    override fun onCreateViewHolder(
+            parent: ViewGroup,
+            viewType: Int
+    ): RecyclerView.ViewHolder {
+        return when (viewType) {
+            IMAGE_ADD -> {
+                val view = LayoutInflater.from(context).inflate(R.layout.item_trip_add_image, parent, false)
+                ImageAddViewHolder(view)
+            }
+            IMAGE_VIEW -> {
+                val view = LayoutInflater.from(context).inflate(R.layout.item_trip_view_image, parent, false)
+                ImageAddViewHolder(view)
+            }
+            else -> throw IllegalArgumentException("Invalid view type")
+        }
+    }
+
+    override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
+        if (images[position].viewType === VIEW_TYPE_ONE) {
+            (holder as ImageAddViewHolder).bind(position)
+        } else {
+            (holder as ImageViewViewHolder).bind(position)
+        }
+
     }
 
     override fun getItemCount(): Int {

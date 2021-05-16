@@ -12,9 +12,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.android.capstoneproject_aroundtheworld.R
-import com.example.android.capstoneproject_aroundtheworld.adapter.ImageListAdapter
 import com.example.android.capstoneproject_aroundtheworld.databinding.FragmentTripDetailBinding
-import com.example.android.capstoneproject_aroundtheworld.databinding.ItemTripDetailImageBinding
 import com.example.android.capstoneproject_aroundtheworld.trips.TripsViewModel
 import kotlinx.android.synthetic.main.fragment_trip_detail.*
 
@@ -70,7 +68,7 @@ class TripDetailFragment : Fragment() {
             for (image in images) {
                 DataBindingUtil.inflate<ItemTripDetailImageBinding>(
                         layoutInflater,
-                        R.layout.item_trip_detail_image,
+                        R.layout.item_trip_add_image,
                         binding.imageListRecycler,
                         true)
             }
@@ -81,8 +79,8 @@ class TripDetailFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        image_list_recycler.layoutManager = GridLayoutManager(requireContext(), 2, RecyclerView.VERTICAL, false)
-        image_list_recycler.adapter = adapter
+//        image_list_recycler.layoutManager = GridLayoutManager(requireContext(), 2, RecyclerView.VERTICAL, false)
+//        image_list_recycler.adapter = adapter
     }
 
     companion object {
