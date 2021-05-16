@@ -49,22 +49,22 @@ class MainActivity : AppCompatActivity() {
     }
 
 
-//    override fun onCreateOptionsMenu(menu: Menu): Boolean {
-//        val inflater: MenuInflater = menuInflater
-//        inflater.inflate(R.menu.overflow_menu, menu)
-//        return true
-//    }
-//
-//
-//    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-//
-//        if (item.itemId == R.id.LoginFragment) {
-//            logout()
-//        }
-//        return super.onOptionsItemSelected(item)
-//    }
-//
-//    private fun logout() {
-//        findNavController().navigate(R.id.action_countriesListFragment_to_authenticationActivity)
-//    }
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+        val inflater: MenuInflater = menuInflater
+        inflater.inflate(R.menu.overflow_menu, menu)
+        return true
+    }
+
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+
+        if (item.itemId == R.id.LoginFragment) {
+            logout()
+        }
+        return super.onOptionsItemSelected(item)
+    }
+
+    private fun logout() {
+        findNavController().navigate(R.id.action_countriesListFragment_to_authenticationActivity)
+    }
 }
