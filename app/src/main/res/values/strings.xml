@@ -28,4 +28,5 @@
     <string name="date_from">From: </string>
     <string name="date_to">To: </string>
     <string name="logout_menu">Logout</string>
+    <string name="error_failed_to_log_out">Failed to Logout</string>
 </resources>
