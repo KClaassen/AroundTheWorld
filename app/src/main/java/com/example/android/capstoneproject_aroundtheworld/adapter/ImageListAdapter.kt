@@ -57,11 +57,11 @@ class ImageListAdapter(val context: Context, val clicklistener: ImageListListene
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-//        if (images[position].viewType === VIEW_TYPE_ONE) {
-//            (holder as ImageAddViewHolder).bind(position)
-//        } else {
-//            (holder as ImageViewViewHolder).bind(position)
-//        }
+        if (images[position].viewType === VIEW_TYPE_ONE) {
+            (holder as ImageAddViewHolder).bind(position)
+        } else {
+            (holder as ImageViewViewHolder).bind(position)
+        }
 
     }
 

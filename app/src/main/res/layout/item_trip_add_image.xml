@@ -4,11 +4,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     xmlns:card_view="http://schemas.android.com/apk/res-auto">
 
-<!--    <data>-->
-<!--        <variable-->
-<!--            name="listener"-->
-<!--            type="com.example.android.capstoneproject_aroundtheworld.adapter.ImageListAdapter.ImageListListener" />-->
-<!--    </data>-->
+    <data>
+        <variable
+            name="listener"
+            type="com.example.android.capstoneproject_aroundtheworld.adapter.ImageListAdapter.ImageListListener" />
+    </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"

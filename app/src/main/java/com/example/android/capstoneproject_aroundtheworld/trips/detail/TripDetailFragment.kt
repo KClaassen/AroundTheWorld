@@ -64,24 +64,24 @@ class TripDetailFragment : Fragment() {
         val images = ArrayList<String>()
         images.add("")
 
-//        // Observing changes in TripsList
-//        viewModel.imageList.observe(viewLifecycleOwner, Observer {
-//            for (image in images) {
-//                DataBindingUtil.inflate<ItemTripDetailImageBinding>(
-//                        layoutInflater,
-//                        R.layout.item_trip_add_image,
-//                        binding.imageListRecycler,
-//                        true)
-//            }
-//        })
+        // Observing changes in TripsList
+        viewModel.imageList.observe(viewLifecycleOwner, Observer {
+            for (image in images) {
+                DataBindingUtil.inflate<ItemTripDetailImageBinding>(
+                        layoutInflater,
+                        R.layout.item_trip_add_image,
+                        binding.imageListRecycler,
+                        true)
+            }
+        })
 
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-//        image_list_recycler.layoutManager = GridLayoutManager(requireContext(), 2, RecyclerView.VERTICAL, false)
-//        image_list_recycler.adapter = adapter
+        image_list_recycler.layoutManager = GridLayoutManager(requireContext(), 2, RecyclerView.VERTICAL, false)
+        image_list_recycler.adapter = adapter
     }
 
     companion object {
