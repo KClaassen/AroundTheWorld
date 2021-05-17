@@ -20,8 +20,8 @@ class ImageListAdapter(val context: Context, val clicklistener: ImageListListene
 ): RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     companion object {
-        private const val IMAGE_ADD = 0
-        private const val IMAGE_VIEW = 1
+        private const val IMAGE_ADD = 1
+        private const val IMAGE_VIEW = 2
     }
 
     var images: List<String> = listOf()
@@ -30,18 +30,18 @@ class ImageListAdapter(val context: Context, val clicklistener: ImageListListene
             parent: ViewGroup,
             viewType: Int
     ): RecyclerView.ViewHolder {
-        return when (viewType) {
-            IMAGE_ADD -> {
-                val view = LayoutInflater.from(context).inflate(R.layout.item_trip_add_image, parent, false)
-                ImageAddViewHolder(view)
+        if (viewType == IMAGE_ADD) {
+             return ImageAddViewHolder(
+                     LayoutInflater.from(context).inflate(
+                             R.layout.item_trip_add_image,
+                             parent, false))
+        } else {
+             return ImageViewViewHolder(
+                     LayoutInflater.from(context).inflate(
+                             R.layout.item_trip_view_image,
+                             parent, false))
             }
-            IMAGE_VIEW -> {
-                val view = LayoutInflater.from(context).inflate(R.layout.item_trip_view_image, parent, false)
-                ImageAddViewHolder(view)
-            }
-            else -> throw IllegalArgumentException("Invalid view type")
         }
-    }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         if (holder is ImageAddViewHolder) {
@@ -71,7 +71,7 @@ class ImageListAdapter(val context: Context, val clicklistener: ImageListListene
 //        }
     }
 
-    
+
     override fun getItemCount(): Int {
         return images.size
     }
