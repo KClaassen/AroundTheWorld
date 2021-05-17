@@ -13,8 +13,10 @@ import com.example.android.capstoneproject_aroundtheworld.R
 import com.example.android.capstoneproject_aroundtheworld.databinding.ItemTripAddImageBinding
 import com.example.android.capstoneproject_aroundtheworld.databinding.ItemTripViewImageBinding
 import com.example.android.capstoneproject_aroundtheworld.models.TripImage
+import kotlinx.android.synthetic.main.item_trip_add_image.view.*
+import kotlinx.android.synthetic.main.item_trip_view_image.view.*
 
-class ImageListAdapter(val context: Context, val clicklistener: ImageListListener
+class ImageListAdapter(val context: Context, val clicklistener: ImageListListener, val item: ArrayList<TripImage>
 ): RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     companion object {
@@ -23,21 +25,6 @@ class ImageListAdapter(val context: Context, val clicklistener: ImageListListene
     }
 
     var images: List<String> = listOf()
-
-
-    private inner class ImageAddViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-
-        fun bindView(position: Int) {
-
-        }
-    }
-
-    private inner class ImageViewViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-
-        fun bindView(position: Int) {
-
-        }
-    }
 
     override fun onCreateViewHolder(
             parent: ViewGroup,
@@ -57,25 +44,40 @@ class ImageListAdapter(val context: Context, val clicklistener: ImageListListene
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-        if (images[position].viewType === VIEW_TYPE_ONE) {
-            (holder as ImageAddViewHolder).bind(position)
-        } else {
-            (holder as ImageViewViewHolder).bind(position)
+        if (holder is ImageAddViewHolder) {
+            holder.addItem.setImageResource(R.drawable.outline_add_24)
+        } else if (holder is ImageViewViewHolder) {
+            // Add image from Camera or Gallery
+            //holder.viewItem.setImageResource()
         }
 
     }
 
+    class ImageAddViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+
+        val addItem = itemView.trip_detail_add_image
+
+//        fun bindView(position: Int) {
+//
+//        }
+    }
+
+    class ImageViewViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+
+        val viewItem = itemView.trip_detail_view_image
+
+//        fun bindView(position: Int) {
+//
+//        }
+    }
+
+    
     override fun getItemCount(): Int {
         return images.size
     }
 
     override fun getItemViewType(position: Int): Int {
-        val comparable = images[position]
-        return when (comparable) {
-            is String -> IMAGE_ADD
-            is String -> IMAGE_VIEW
-            else -> throw IllegalArgumentException("Invalid type of data " + position)
-        }
+        return item[position].viewType
     }
 
     class ImageListListener(val clickListener: () -> Unit) {
