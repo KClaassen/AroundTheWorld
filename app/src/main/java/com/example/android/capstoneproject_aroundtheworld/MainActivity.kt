@@ -56,6 +56,10 @@ class MainActivity : AppCompatActivity() {
         val popup = PopupMenu(this, v, Gravity.END)
         val inflater: MenuInflater = popup.menuInflater
         inflater.inflate(R.menu.overflow_menu, popup.menu)
+
+        popup.setOnMenuItemClickListener {
+            handleMenuSelection(it)
+        }
         popup.show()
     }
 
@@ -65,22 +69,26 @@ class MainActivity : AppCompatActivity() {
         return super.onCreateOptionsMenu(menu)
     }
 
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        when(item.itemId) {
+    private fun handleMenuSelection(item: MenuItem): Boolean {
+        return when (item.itemId) {
             R.id.logout -> {
                 AuthUI.getInstance()
-                        .signOut(this)
-                        .addOnCompleteListener {
-                            if (it.isSuccessful) {
-                                Navigator.navigateToAuthenticationActivity(this)
-                            } else {
-                                Toast.makeText(this, R.string.error_failed_to_log_out, Toast.LENGTH_SHORT).show()
-                            }
+                    .signOut(this)
+                    .addOnCompleteListener {
+                        if (it.isSuccessful) {
+                            Navigator.navigateToAuthenticationActivity(this)
+                        } else {
+                            Toast.makeText(
+                                this,
+                                R.string.error_failed_to_log_out,
+                                Toast.LENGTH_SHORT
+                            ).show()
                         }
+                    }
                 return true
             }
+            else -> false
         }
-        return super.onOptionsItemSelected(item)
     }
 
     object Navigator {
