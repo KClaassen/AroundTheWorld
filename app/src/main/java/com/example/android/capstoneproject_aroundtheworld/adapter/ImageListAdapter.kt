@@ -1,22 +1,17 @@
 package com.example.android.capstoneproject_aroundtheworld.adapter
 
-import android.animation.LayoutTransition
 import android.content.Context
-import android.text.Layout
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
-import androidx.core.net.toUri
 import androidx.recyclerview.widget.RecyclerView
 import com.example.android.capstoneproject_aroundtheworld.R
-import com.example.android.capstoneproject_aroundtheworld.databinding.ItemTripAddImageBinding
-import com.example.android.capstoneproject_aroundtheworld.databinding.ItemTripViewImageBinding
-import com.example.android.capstoneproject_aroundtheworld.models.TripImage
+import com.example.android.capstoneproject_aroundtheworld.trips.detail.TripDetailFragment
 import kotlinx.android.synthetic.main.item_trip_add_image.view.*
 import kotlinx.android.synthetic.main.item_trip_view_image.view.*
 
-class ImageListAdapter(val context: Context, val clicklistener: ImageListListener, val item: ArrayList<TripImage>
+class ImageListAdapter(
+    val context: Context, val clicklistener: TripDetailFragment, val item: ArrayList<String>
 ): RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     companion object {
@@ -73,15 +68,19 @@ class ImageListAdapter(val context: Context, val clicklistener: ImageListListene
 
 
     override fun getItemCount(): Int {
-        return images.size
+        return images.size + 1
     }
 
     override fun getItemViewType(position: Int): Int {
-        return item[position].viewType
+        if (position == 0) {
+            return IMAGE_ADD
+        } else {
+            return IMAGE_VIEW
+        }
     }
 
-    class ImageListListener(val clickListener: () -> Unit) {
-        fun onClick() = clickListener()
+    interface ImageListListener {
+        fun onClick(string: String) = Unit
     }
 
 }

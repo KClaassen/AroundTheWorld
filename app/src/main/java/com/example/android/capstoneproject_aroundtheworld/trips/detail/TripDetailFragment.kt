@@ -5,9 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.databinding.DataBindingUtil
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -49,39 +47,19 @@ class TripDetailFragment : Fragment() {
         val arguments = TripDetailFragmentArgs.fromBundle(requireArguments()).trip
         binding.trip = arguments
 
-        // Observing changes in TripsList
-//        viewModel.tripList.observe(viewLifecycleOwner, Observer {
-//            for (trip in it) {
-//                binding.trip = trip
-//            }
-//        })
-
-//        adapter = ImageListAdapter(ImageListAdapter.ImageListListener {
-//            Toast.makeText(context, "test", Toast.LENGTH_SHORT).show()
-//        })
-
-        // TODO: Read the list from the database and always add the empty value to show the add button
-        val images = ArrayList<String>()
-        images.add("")
-
-//        // Observing changes in TripsList
-//        viewModel.imageList.observe(viewLifecycleOwner, Observer {
-//            for (image in images) {
-//                DataBindingUtil.inflate<ItemTripDetailImageBinding>(
-//                        layoutInflater,
-//                        R.layout.item_trip_add_image,
-//                        binding.imageListRecycler,
-//                        true)
-//            }
-//        })
 
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        //image_list_recycler.adapter = adapter
+        val images = ArrayList<String>()
+        images.add("Path to image 1")
+        images.add("Path to image 2")
+        images.add("Path to image 3")
         image_list_recycler.layoutManager = GridLayoutManager(requireContext(), 2, RecyclerView.VERTICAL, false)
+        adapter = ImageListAdapter(requireActivity(), this, images)
+        image_list_recycler.adapter = adapter
     }
 
     companion object {
