@@ -15,7 +15,7 @@ import com.example.android.capstoneproject_aroundtheworld.databinding.FragmentTr
 import com.example.android.capstoneproject_aroundtheworld.trips.TripsViewModel
 import kotlinx.android.synthetic.main.fragment_trip_detail.*
 
-class TripDetailFragment : Fragment() {
+class TripDetailFragment : Fragment(), ImageListAdapter.ImageListListener {
 
     private lateinit var binding: FragmentTripDetailBinding
     private lateinit var adapter: ImageListAdapter
@@ -60,6 +60,10 @@ class TripDetailFragment : Fragment() {
         image_list_recycler.layoutManager = GridLayoutManager(requireContext(), 2, RecyclerView.VERTICAL, false)
         adapter = ImageListAdapter(requireActivity(), this, images)
         image_list_recycler.adapter = adapter
+    }
+
+    override fun onClick(string: String) {
+        TODO("Not yet implemented")
     }
 
     companion object {

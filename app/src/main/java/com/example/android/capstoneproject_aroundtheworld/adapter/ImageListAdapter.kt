@@ -11,15 +11,13 @@ import kotlinx.android.synthetic.main.item_trip_add_image.view.*
 import kotlinx.android.synthetic.main.item_trip_view_image.view.*
 
 class ImageListAdapter(
-    val context: Context, val clicklistener: TripDetailFragment, val item: ArrayList<String>
+    val context: Context, val clicklistener: ImageListListener, val images: ArrayList<String>
 ): RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     companion object {
         private const val IMAGE_ADD = 1
         private const val IMAGE_VIEW = 2
     }
-
-    var images: List<String> = listOf()
 
     override fun onCreateViewHolder(
             parent: ViewGroup,
@@ -80,7 +78,7 @@ class ImageListAdapter(
     }
 
     interface ImageListListener {
-        fun onClick(string: String) = Unit
+        fun onClick(string: String)
     }
 
 }
