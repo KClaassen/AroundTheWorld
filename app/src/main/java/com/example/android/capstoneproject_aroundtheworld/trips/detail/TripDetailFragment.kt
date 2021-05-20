@@ -2,11 +2,15 @@ package com.example.android.capstoneproject_aroundtheworld.trips.detail
 
 import android.Manifest
 import android.app.Activity
+import android.app.AlertDialog
+import android.content.ActivityNotFoundException
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
+import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
+import android.provider.Settings
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -22,9 +26,15 @@ import com.example.android.capstoneproject_aroundtheworld.R
 import com.example.android.capstoneproject_aroundtheworld.adapter.ImageListAdapter
 import com.example.android.capstoneproject_aroundtheworld.databinding.FragmentTripDetailBinding
 import com.example.android.capstoneproject_aroundtheworld.trips.TripsViewModel
+import com.karumi.dexter.Dexter
+import com.karumi.dexter.MultiplePermissionsReport
+import com.karumi.dexter.PermissionToken
+import com.karumi.dexter.listener.PermissionRequest
+import com.karumi.dexter.listener.multi.MultiplePermissionsListener
 import kotlinx.android.synthetic.main.fragment_trip_detail.*
 import kotlinx.android.synthetic.main.item_trip_add_image.*
 import kotlinx.android.synthetic.main.item_trip_view_image.*
+import kotlin.reflect.jvm.internal.impl.metadata.ProtoBuf
 
 class TripDetailFragment : Fragment(), ImageListAdapter.ImageListListener {
 
@@ -58,15 +68,6 @@ class TripDetailFragment : Fragment(), ImageListAdapter.ImageListListener {
         val arguments = TripDetailFragmentArgs.fromBundle(requireArguments()).trip
         binding.trip = arguments
 
-        add_image_card_view.setOnClickListener {
-            if (ContextCompat.checkSelfPermission(requireContext(), Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED) {
-                val intent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
-                startActivityForResult(intent, CAMERA_REQUEST_CODE)
-            } else {
-                ActivityCompat.requestPermissions(requireActivity(), arrayOf(Manifest.permission.CAMERA), CAMERA_PERMISSION_CODE)
-            }
-        }
-
 
         return binding.root
     }
@@ -80,10 +81,64 @@ class TripDetailFragment : Fragment(), ImageListAdapter.ImageListListener {
         image_list_recycler.layoutManager = GridLayoutManager(requireContext(), 2, RecyclerView.VERTICAL, false)
         adapter = ImageListAdapter(requireActivity(), this, images)
         image_list_recycler.adapter = adapter
+
+//        add_image_card_view.setOnClickListener {
+//            if (ContextCompat.checkSelfPermission(requireContext(), Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED) {
+//                val intent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
+//                startActivityForResult(intent, CAMERA_REQUEST_CODE)
+//            } else {
+//                ActivityCompat.requestPermissions(requireActivity(), arrayOf(Manifest.permission.CAMERA), CAMERA_PERMISSION_CODE)
+//            }
+//        }
     }
 
     override fun onClick(string: String) {
-        TODO("Not yet implemented")
+        add_image_card_view.setOnClickListener {
+            if (ContextCompat.checkSelfPermission(requireContext(), Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED) {
+                val intent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
+                startActivityForResult(intent, CAMERA_REQUEST_CODE)
+            } else {
+                ActivityCompat.requestPermissions(requireActivity(), arrayOf(Manifest.permission.CAMERA), CAMERA_PERMISSION_CODE)
+            }
+        }
+    }
+
+    private fun choosePhotoFromGallery() {
+        Dexter.withContext(requireContext()).withPermissions(
+            Manifest.permission.READ_EXTERNAL_STORAGE,
+            Manifest.permission.WRITE_EXTERNAL_STORAGE
+        ).withListener(object : MultiplePermissionsListener {
+            override fun onPermissionsChecked(report: MultiplePermissionsReport) {
+                if(report.areAllPermissionsGranted()) {
+                    Toast.makeText(requireContext(), "READ/WRITE permissions granted", Toast.LENGTH_SHORT).show()
+                }
+            }
+
+            override fun onPermissionRationaleShouldBeShown(
+                permissions: MutableList<PermissionRequest>?,
+                token: PermissionToken?
+            ) {
+                showRationalDialogForPermissions()
+            }
+        }).check()
+    }
+
+    private fun showRationalDialogForPermissions() {
+        AlertDialog.Builder(requireContext()).setMessage(
+                " " + "Permissions required for this feature are turned off, " +
+                        "you can turn these on under Application Settings"
+        ).setPositiveButton("Go to Settings") { _, _ ->
+            try {
+                val intent = Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS)
+                val uri = Uri.fromParts("package", activity?.packageName, null)
+                intent.data = uri
+                startActivity(intent)
+            } catch (e: ActivityNotFoundException) {
+                e.printStackTrace()
+            }
+        }.setNegativeButton("Cancel") { dialog, _ ->
+            dialog.dismiss()
+        }.show()
     }
 
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {

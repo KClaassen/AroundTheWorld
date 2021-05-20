@@ -1,5 +1,6 @@
 package com.example.android.capstoneproject_aroundtheworld.trips
 
+import android.app.AlertDialog
 import android.app.DatePickerDialog
 import android.os.Build
 import android.os.Bundle
@@ -8,6 +9,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.DatePicker
+import android.widget.EditText
 import androidx.annotation.RequiresApi
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.activityViewModels
@@ -26,6 +28,7 @@ class NewTripFragment : Fragment(), View.OnClickListener {
     //For date picker when creating new Trip
     private var cal = Calendar.getInstance()
     private lateinit var datesetListener: DatePickerDialog.OnDateSetListener
+    private var datePickerViewId: Int = -1
 
     /**
      * Lazily initialize our [TripsViewModel].
@@ -63,7 +66,19 @@ class NewTripFragment : Fragment(), View.OnClickListener {
             cal.set(Calendar.YEAR, year)
             cal.set(Calendar.MONTH, month)
             cal.set(Calendar.DAY_OF_MONTH, dayOfMonth)
-            updateDateinView()
+            updateDateinView(
+                    when(datePickerViewId) {
+                        R.id.new_trip_date_from -> {
+                            new_trip_date_from
+                        }
+                        R.id.new_trip_date_to -> {
+                            new_trip_date_to
+                        }
+                        else -> {
+                            null
+                        }
+                    }
+            )
         }
 
         return binding.root
@@ -75,7 +90,7 @@ class NewTripFragment : Fragment(), View.OnClickListener {
         new_trip_date_to.setOnClickListener(this)
     }
 
-    @RequiresApi(Build.VERSION_CODES.N)
+    //@RequiresApi(Build.VERSION_CODES.N)
     override fun onClick(v: View?) {
         when (v!!.id) {
             R.id.new_trip_date_from -> {
@@ -83,21 +98,22 @@ class NewTripFragment : Fragment(), View.OnClickListener {
                         datesetListener, cal.get(Calendar.YEAR),
                         cal.get(Calendar.MONTH),
                         cal.get(Calendar.DAY_OF_MONTH)).show()
+                datePickerViewId = R.id.new_trip_date_from
             }
             R.id.new_trip_date_to -> {
                 DatePickerDialog(requireContext(),
                         datesetListener, cal.get(Calendar.YEAR),
                         cal.get(Calendar.MONTH),
                         cal.get(Calendar.DAY_OF_MONTH)).show()
+                datePickerViewId = R.id.new_trip_date_to
             }
         }
     }
 
-    private fun updateDateinView() {
+    private fun updateDateinView(editText: EditText?) {
         val dateFormat  = "dd.MM.yyyy"
         val simpleDateFormat = SimpleDateFormat(dateFormat, Locale.getDefault())
-        new_trip_date_from.setText(simpleDateFormat.format(cal.time).toString())
-        new_trip_date_to.setText(simpleDateFormat.format(cal.time).toString())
+        editText?.setText(simpleDateFormat.format(cal.time).toString())
     }
 
 }
