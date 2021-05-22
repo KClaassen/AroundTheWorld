@@ -38,7 +38,8 @@ class ImageListAdapter(
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         if (holder is ImageAddViewHolder) {
-            holder.addItem.setImageResource(R.drawable.outline_add_24)
+            //holder.addBindView
+            clicklistener.onClick()
         } else if (holder is ImageViewViewHolder) {
             // Add image from Camera or Gallery
             //holder.viewItem.setImageResource()
@@ -48,7 +49,7 @@ class ImageListAdapter(
 
     class ImageAddViewHolder(val binding: ItemTripAddImageBinding) : RecyclerView.ViewHolder(binding.root) {
 
-        val addItem = binding.tripDetailAddImage
+        //val addItem = binding.tripDetailAddImage
 
         fun addBindView(listener: ImageListListener) {
             binding.listener = listener
