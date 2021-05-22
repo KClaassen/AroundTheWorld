@@ -6,6 +6,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.android.capstoneproject_aroundtheworld.R
+import com.example.android.capstoneproject_aroundtheworld.databinding.ItemTripAddImageBinding
+import com.example.android.capstoneproject_aroundtheworld.databinding.ItemTripViewImageBinding
 import com.example.android.capstoneproject_aroundtheworld.trips.detail.TripDetailFragment
 import kotlinx.android.synthetic.main.item_trip_add_image.view.*
 import kotlinx.android.synthetic.main.item_trip_view_image.view.*
@@ -46,7 +48,7 @@ class ImageListAdapter(
 
     }
 
-    class ImageAddViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    class ImageAddViewHolder(binding: ItemTripAddImageBinding) : RecyclerView.ViewHolder(binding.root) {
 
         val addItem = itemView.trip_detail_add_image
 
@@ -55,7 +57,7 @@ class ImageListAdapter(
 //        }
     }
 
-    class ImageViewViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    class ImageViewViewHolder(binding: ItemTripViewImageBinding) : RecyclerView.ViewHolder(binding.root) {
 
         val viewItem = itemView.trip_detail_view_image
 
