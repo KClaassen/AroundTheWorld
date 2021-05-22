@@ -46,18 +46,19 @@ class ImageListAdapter(
 
     }
 
-    class ImageAddViewHolder(binding: ItemTripAddImageBinding) : RecyclerView.ViewHolder(binding.root) {
+    class ImageAddViewHolder(val binding: ItemTripAddImageBinding) : RecyclerView.ViewHolder(binding.root) {
 
-        val addItem = itemView.trip_detail_add_image
+        val addItem = binding.tripDetailAddImage
 
-//        fun bindView(position: Int) {
-//
-//        }
+        fun addBindView(listener: ImageListListener) {
+            binding.listener = listener
+            listener.onClick()
+        }
     }
 
-    class ImageViewViewHolder(binding: ItemTripViewImageBinding) : RecyclerView.ViewHolder(binding.root) {
+    class ImageViewViewHolder(val binding: ItemTripViewImageBinding) : RecyclerView.ViewHolder(binding.root) {
 
-        val viewItem = itemView.trip_detail_view_image
+        val viewItem = binding.tripDetailViewImage
 
 //        fun bindView(position: Int) {
 //
@@ -78,7 +79,7 @@ class ImageListAdapter(
     }
 
     interface ImageListListener {
-        fun onClick(string: String)
+        fun onClick()
     }
 
 }

@@ -92,15 +92,15 @@ class TripDetailFragment : Fragment(), ImageListAdapter.ImageListListener {
 //        }
     }
 
-    override fun onClick(string: String) {
-        add_image_card_view.setOnClickListener {
+    override fun onClick() {
+        //add_image_card_view.setOnClickListener {
             if (ContextCompat.checkSelfPermission(requireContext(), Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED) {
                 val intent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
                 startActivityForResult(intent, CAMERA)
             } else {
                 ActivityCompat.requestPermissions(requireActivity(), arrayOf(Manifest.permission.CAMERA), CAMERA_PERMISSION_CODE)
             }
-        }
+        //}
     }
 
     private fun choosePhotoFromCameraOrGallery() {
