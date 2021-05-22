@@ -96,21 +96,23 @@ class TripDetailFragment : Fragment(), ImageListAdapter.ImageListListener {
         add_image_card_view.setOnClickListener {
             if (ContextCompat.checkSelfPermission(requireContext(), Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED) {
                 val intent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
-                startActivityForResult(intent, CAMERA_REQUEST_CODE)
+                startActivityForResult(intent, CAMERA)
             } else {
                 ActivityCompat.requestPermissions(requireActivity(), arrayOf(Manifest.permission.CAMERA), CAMERA_PERMISSION_CODE)
             }
         }
     }
 
-    private fun choosePhotoFromGallery() {
+    private fun choosePhotoFromCameraOrGallery() {
         Dexter.withContext(requireContext()).withPermissions(
             Manifest.permission.READ_EXTERNAL_STORAGE,
-            Manifest.permission.WRITE_EXTERNAL_STORAGE
+            Manifest.permission.WRITE_EXTERNAL_STORAGE,
+            Manifest.permission.CAMERA
         ).withListener(object : MultiplePermissionsListener {
             override fun onPermissionsChecked(report: MultiplePermissionsReport) {
                 if(report.areAllPermissionsGranted()) {
-                    Toast.makeText(requireContext(), "READ/WRITE permissions granted", Toast.LENGTH_SHORT).show()
+                    val intent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
+                    startActivityForResult(intent, CAMERA)
                 }
             }
 
@@ -146,7 +148,7 @@ class TripDetailFragment : Fragment(), ImageListAdapter.ImageListListener {
         if (requestCode == CAMERA_PERMISSION_CODE) {
             if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                 val intent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
-                startActivityForResult(intent, CAMERA_REQUEST_CODE)
+                startActivityForResult(intent, CAMERA)
             } else {
                 Toast.makeText(requireContext(), "Permission denied, please check in settings", Toast.LENGTH_SHORT).show()
             }
@@ -156,7 +158,7 @@ class TripDetailFragment : Fragment(), ImageListAdapter.ImageListListener {
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if (resultCode == Activity.RESULT_OK) {
-            if (requestCode == CAMERA_REQUEST_CODE) {
+            if (requestCode == CAMERA) {
                 val thumbnail: Bitmap = data!!.extras!!.get("data") as Bitmap
                 trip_detail_view_image.setImageBitmap(thumbnail)
             }
@@ -165,7 +167,9 @@ class TripDetailFragment : Fragment(), ImageListAdapter.ImageListListener {
 
     companion object {
         private const val CAMERA_PERMISSION_CODE = 1
-        private const val CAMERA_REQUEST_CODE = 2
+        private const val CAMERA = 2
+        private const val GALLERY = 3
+
     }
 
 }

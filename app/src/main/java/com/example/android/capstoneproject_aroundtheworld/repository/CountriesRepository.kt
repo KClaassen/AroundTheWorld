@@ -29,12 +29,14 @@ class CountriesRepository(
     suspend fun getAllCountries() {
         val countries = CountryApi.retrofitService.getCountries()
         var listOfCountries: List<Country>? = ArrayList()
-        try {
-            listOfCountries = countries
-        } catch (e:Exception) {
-            e.printStackTrace()
+        if (listOfCountries == null) {
+            try {
+                listOfCountries = countries
+            } catch (e: Exception) {
+                e.printStackTrace()
+            }
+            Log.i("Repository", "${listOfCountries}")
         }
-        Log.i("Repository", "${listOfCountries}")
 //        listOfCountries = ArrayList<Country>()
 //        listOfCountries.add(Country("Capital", Currency("currency"), "flag", Language("spanish"),"the name","he region"))
         //database.countryDao.getCountries()
