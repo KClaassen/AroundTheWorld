@@ -26,15 +26,13 @@ class ImageListAdapter(
             viewType: Int
     ): RecyclerView.ViewHolder {
         if (viewType == IMAGE_ADD) {
-             return ImageAddViewHolder(
-                     LayoutInflater.from(context).inflate(
-                             R.layout.item_trip_add_image,
-                             parent, false))
+                 val inflater = LayoutInflater.from(parent.context)
+                 val ItemTripAddBinding = ItemTripAddImageBinding.inflate(inflater, parent, false)
+            return ImageAddViewHolder(ItemTripAddBinding)
         } else {
-             return ImageViewViewHolder(
-                     LayoutInflater.from(context).inflate(
-                             R.layout.item_trip_view_image,
-                             parent, false))
+            val inflater = LayoutInflater.from(parent.context)
+            val ItemTripViewBinding = ItemTripViewImageBinding.inflate(inflater, parent, false)
+            return ImageViewViewHolder(ItemTripViewBinding)
             }
         }
 
