@@ -85,15 +85,17 @@ class AuthenticationActivity : AppCompatActivity() {
         // You must provide a custom layout XML resource and configure at least one
         // provider button ID. It's important that that you set the button ID for every provider
         // that you have enabled.
-//        val customLayout = AuthMethodPickerLayout.Builder(R.layout.custom_login_layout)
-//                .setGoogleButtonId(R.id.google_login)
-//                .setEmailButtonId(R.id.email_login) // ...
-//                //.setTosAndPrivacyPolicyId(R.id.baz)
-//                .build()
+        val customLayout = AuthMethodPickerLayout.Builder(R.layout.custom_login_layout)
+                .setGoogleButtonId(R.id.google_login)
+                .setEmailButtonId(R.id.email_login) // ...
+                //.setTosAndPrivacyPolicyId(R.id.baz)
+                .build()
 
         startActivityForResult(
-                AuthUI.getInstance().createSignInIntentBuilder().setAvailableProviders(providers)
-                        //.setAuthMethodPickerLayout(customLayout)
+                AuthUI.getInstance().createSignInIntentBuilder()
+                        .setAvailableProviders(providers)
+                        .setTheme(R.style.AppThemeFirebaseAuth)
+                        .setAuthMethodPickerLayout(customLayout)
                         .setIsSmartLockEnabled(false)
                         .build(), SIGN_IN_RESULT_CODE
         )
