@@ -2,6 +2,7 @@ package com.example.android.capstoneproject_aroundtheworld.trips
 
 import android.app.Application
 import android.media.Image
+import android.text.TextUtils
 import android.util.Log
 import android.view.View
 import androidx.lifecycle.*

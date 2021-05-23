@@ -21,9 +21,43 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            tools:context=".trips.NewTripFragment">
+            tools:context=".trips.NewTripFragment"
+            android:background="@drawable/home_screen_background">
 
-            <EditText
+            <TextView
+                android:id="@+id/new_trip_header"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="32dp"
+                android:text="@string/new_trip_header"
+                android:textSize="32sp"
+                android:textStyle="bold"
+                android:textColor="@color/white"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/new_trip_name_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="32dp"
+                android:layout_marginTop="150dp"
+                android:text="@string/new_trip_name_label"
+                android:ems="10"
+                android:textColor="@color/black"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/new_trip_header" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:boxBackgroundMode="none"
+                app:layout_constraintBaseline_toBaselineOf="@+id/new_trip_name_label"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/new_trip_name_label">
+
+            <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/name_edit_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -34,6 +68,19 @@
                 app:layout_constraintBaseline_toBaselineOf="@+id/new_trip_name_label"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/new_trip_name_label" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <TextView
+                android:id="@+id/new_trip_description_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="32dp"
+                android:layout_marginTop="24dp"
+                android:text="@string/new_trip_description_label"
+                android:textSize="24sp"
+                android:textColor="@color/black"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/new_trip_name_label" />
 
             <EditText
                 android:id="@+id/desciption_edit_text"
@@ -46,9 +93,22 @@
                 android:text="@={trip.description}"
                 android:gravity="start|top"
                 android:inputType="textMultiLine"
+                android:maxLength="100"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/new_trip_description_label" />
+
+            <TextView
+                android:id="@+id/new_trip_airline_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="32dp"
+                android:layout_marginTop="24dp"
+                android:text="@string/new_trip_airline_label"
+                android:textSize="24sp"
+                android:textColor="@color/black"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/desciption_edit_text" />
 
             <EditText
                 android:id="@+id/airline_edit_text"
@@ -61,6 +121,18 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/new_trip_airline_label" />
 
+            <TextView
+                android:id="@+id/new_trip_booking_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="32dp"
+                android:layout_marginTop="32dp"
+                android:text="@string/new_trip_booking_label"
+                android:textSize="24sp"
+                android:textColor="@color/black"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/new_trip_airline_label" />
+
             <EditText
                 android:id="@+id/booking_edit_text"
                 android:layout_width="wrap_content"
@@ -71,6 +143,18 @@
                 app:layout_constraintBaseline_toBaselineOf="@+id/new_trip_booking_label"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/new_trip_booking_label" />
+
+            <TextView
+                android:id="@+id/new_trip_accomodation_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="32dp"
+                android:layout_marginTop="24dp"
+                android:text="@string/new_trip_accomodation_label"
+                android:textSize="24sp"
+                android:textColor="@color/black"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/new_trip_booking_label" />
 
             <EditText
                 android:id="@+id/accomodation_edit_text"
@@ -85,62 +169,6 @@
                 app:layout_constraintStart_toEndOf="@+id/new_trip_accomodation_label" />
 
             <TextView
-                android:id="@+id/new_trip_header"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="32dp"
-                android:text="@string/new_trip_header"
-                android:textSize="32sp"
-                android:textStyle="bold"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <TextView
-                android:id="@+id/new_trip_name_label"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="32dp"
-                android:layout_marginTop="150dp"
-                android:text="@string/new_trip_name_label"
-                android:textSize="24sp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <TextView
-                android:id="@+id/new_trip_description_label"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="32dp"
-                android:layout_marginTop="24dp"
-                android:text="@string/new_trip_description_label"
-                android:textSize="24sp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/new_trip_name_label" />
-
-            <TextView
-                android:id="@+id/new_trip_airline_label"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="32dp"
-                android:layout_marginTop="24dp"
-                android:text="@string/new_trip_airline_label"
-                android:textSize="24sp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/desciption_edit_text" />
-
-            <TextView
-                android:id="@+id/new_trip_accomodation_label"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="32dp"
-                android:layout_marginTop="24dp"
-                android:text="@string/new_trip_accomodation_label"
-                android:textSize="24sp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/new_trip_booking_label" />
-
-            <TextView
                 android:id="@+id/new_trip_dates_label"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -148,19 +176,9 @@
                 android:layout_marginTop="24dp"
                 android:text="@string/new_trip_dates_label"
                 android:textSize="24sp"
+                android:textColor="@color/black"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/new_trip_accomodation_label" />
-
-            <TextView
-                android:id="@+id/new_trip_booking_label"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="32dp"
-                android:layout_marginTop="32dp"
-                android:text="@string/new_trip_booking_label"
-                android:textSize="24sp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/new_trip_airline_label" />
 
             <EditText
                 android:id="@+id/new_trip_date_from"
@@ -200,8 +218,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/new_trip_dates_label"
-                android:onClick="@{(v) -> viewmodel.onSaveClick(v, trip)}"
-                />
+                android:onClick="@{(v) -> viewmodel.onSaveClick(v, trip)}" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.core.widget.NestedScrollView>

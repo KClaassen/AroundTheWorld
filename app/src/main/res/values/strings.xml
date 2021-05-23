@@ -3,13 +3,12 @@
     <string name="get_started">Let\'s get started</string>
     <string name="countries_button">Countries</string>
     <string name="mytrips_button">My Trips</string>
-    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="country_name">Country Name</string>
     <string name="country_name_label">Name: </string>
     <string name="country_capital_label">Capital: </string>
     <string name="newtrip_button">New Trip</string>
     <string name="new_trip_header">New Trip</string>
-    <string name="new_trip_name_label">Name*: </string>
+    <string name="new_trip_name_label">Trip name: </string>
     <string name="new_trip_description_label">Description*: </string>
     <string name="new_trip_airline_label">Airline: </string>
     <string name="new_trip_booking_label">Booking Nr: </string>
