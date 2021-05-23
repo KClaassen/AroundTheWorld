@@ -6,26 +6,39 @@
     android:layout_height="match_parent"
     android:background="@drawable/home_screen_background">
 
-    <com.firebase.ui.auth.util.ui.SupportVectorDrawablesButton
-        android:id="@+id/email_login"
-        style="@style/FirebaseUI.Button.AccountChooser.EmailButton"
+    <TextView
+        android:id="@+id/app_title_login"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/fui_sign_in_with_email"
+        android:layout_marginTop="50dp"
+        android:text="@string/app_title_login"
+        android:textSize="28sp"
+        android:textStyle="bold"
+        android:textColor="@color/white"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/email_login"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="80dp"
+        android:text="@string/signin_with_email"
+        android:background="@drawable/btn_email_rounded_corners"
         app:layout_constraintBottom_toTopOf="@+id/google_login"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        tools:ignore="UnusedIds" />
+        app:layout_constraintStart_toStartOf="parent" />
 
-    <com.firebase.ui.auth.util.ui.SupportVectorDrawablesButton
+    <Button
         android:id="@+id/google_login"
-        style="@style/FirebaseUI.Button.AccountChooser.GoogleButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/fui_sign_in_with_google"
+        android:layout_marginBottom="92dp"
+        android:text="@string/signin_with_google"
+        android:background="@drawable/btn_email_rounded_corners"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        tools:ignore="UnusedIds" />
+        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

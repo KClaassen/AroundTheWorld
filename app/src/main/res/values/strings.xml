@@ -29,4 +29,7 @@
     <string name="logout_menu">Logout</string>
     <string name="error_failed_to_log_out">Failed to Logout</string>
     <string name="create_a_new_trip">Create a new trip</string>
+    <string name="app_title_login">Around The World</string>
+    <string name="signin_with_email">SIGN IN WITH EMAIL</string>
+    <string name="signin_with_google">SIGN IN WITH GOOGLE</string>
 </resources>
