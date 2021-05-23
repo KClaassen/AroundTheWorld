@@ -14,6 +14,7 @@ import com.firebase.ui.auth.IdpResponse
 import com.google.firebase.auth.FirebaseAuth
 import kotlinx.android.synthetic.main.activity_authentication.*
 
+
 //import kotlinx.android.synthetic.main.activity_authentication.*
 
 
@@ -59,9 +60,9 @@ class AuthenticationActivity : AppCompatActivity() {
             if (resultCode == Activity.RESULT_OK) {
                 // Successfully signed in user.
                 Log.i(
-                    TAG,
-                    "Successfully signed in user " +
-                            "${FirebaseAuth.getInstance().currentUser?.displayName}!"
+                        TAG,
+                        "Successfully signed in user " +
+                                "${FirebaseAuth.getInstance().currentUser?.displayName}!"
                 )
                 navigateToReminderActivity()
             } else {
@@ -78,24 +79,23 @@ class AuthenticationActivity : AppCompatActivity() {
         // Give users the option to sign in / register with their email or Google account. If users
         // choose to register with their email, they will need to create a password as well.
         val providers = arrayListOf(
-            AuthUI.IdpConfig.EmailBuilder().build(), AuthUI.IdpConfig.GoogleBuilder().build()
+                AuthUI.IdpConfig.EmailBuilder().build(), AuthUI.IdpConfig.GoogleBuilder().build()
         )
-
 
         // You must provide a custom layout XML resource and configure at least one
         // provider button ID. It's important that that you set the button ID for every provider
         // that you have enabled.
-//        val customLayout = AuthMethodPickerLayout.Builder(R.layout.your_custom_layout_xml)
-//            .setGoogleButtonId(R.id.bar)
-//            .setEmailButtonId(R.id.foo) // ...
-//            .setTosAndPrivacyPolicyId(R.id.baz)
-//            .build()
+//        val customLayout = AuthMethodPickerLayout.Builder(R.layout.custom_login_layout)
+//                .setGoogleButtonId(R.id.google_login)
+//                .setEmailButtonId(R.id.email_login) // ...
+//                //.setTosAndPrivacyPolicyId(R.id.baz)
+//                .build()
 
         startActivityForResult(
-            AuthUI.getInstance().createSignInIntentBuilder().setAvailableProviders(providers)
-                //.setAuthMethodPickerLayout(customLayout)
-                .setIsSmartLockEnabled(false)
-                .build(), SIGN_IN_RESULT_CODE
+                AuthUI.getInstance().createSignInIntentBuilder().setAvailableProviders(providers)
+                        //.setAuthMethodPickerLayout(customLayout)
+                        .setIsSmartLockEnabled(false)
+                        .build(), SIGN_IN_RESULT_CODE
         )
         // Create and launch sign-in intent. We listen to the response of this activity with the
         // SIGN_IN_RESULT_CODE code.
