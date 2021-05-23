@@ -7,6 +7,6 @@
         <item name="windowNoTitle">true</item>
     </style>
     <style name="FirebaseAuthActionBarStyle" parent="Widget.AppCompat.ActionBar">
-        <item name="android:background">@color/colorPrimary</item>
+        <item name="android:background">@color/white</item>
     </style>
 </resources>
