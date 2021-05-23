@@ -26,7 +26,7 @@
         android:layout_marginBottom="80dp"
         android:text="@string/signin_with_email"
         android:background="@drawable/btn_email_rounded_corners"
-        android:drawableLeft="@android:drawable/ic_dialog_email"
+        android:drawableLeft="@drawable/fui_ic_mail_white_24dp"
         app:layout_constraintBottom_toTopOf="@+id/google_login"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
@@ -38,7 +38,7 @@
         android:layout_marginBottom="92dp"
         android:text="@string/signin_with_google"
         android:background="@drawable/btn_google_rounded_corners"
-        android:drawableLeft="@android:drawable/ic_dialog_email"
+        android:drawableLeft="@drawable/googleg_standard_color_18"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
