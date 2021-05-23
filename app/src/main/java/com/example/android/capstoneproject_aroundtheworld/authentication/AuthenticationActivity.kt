@@ -4,6 +4,7 @@ import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.view.Window
 import androidx.appcompat.app.AppCompatActivity
 import com.example.android.capstoneproject_aroundtheworld.MainActivity
 import com.example.android.capstoneproject_aroundtheworld.R
@@ -25,6 +26,8 @@ class AuthenticationActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        requestWindowFeature(Window.FEATURE_NO_TITLE); //will hide the title
+        getSupportActionBar()?.hide(); // hide the title bar
         setContentView(R.layout.activity_authentication)
 //         TODO: Implement the create account and sign in using FirebaseUI, use sign in using email and sign in using Google
 

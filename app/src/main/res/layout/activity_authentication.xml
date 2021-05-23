@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".authentication.AuthenticationActivity"
-    android:background="@drawable/First_time_startup_background">
+    android:background="@drawable/first_time_startup_background">
 
     <Button
         android:id="@+id/getstarted_button"
