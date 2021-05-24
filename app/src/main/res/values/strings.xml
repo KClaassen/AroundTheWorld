@@ -32,4 +32,9 @@
     <string name="app_title_login">Around The World</string>
     <string name="signin_with_email">SIGN IN WITH EMAIL</string>
     <string name="signin_with_google">SIGN IN WITH GOOGLE</string>
+    <string name="countries_been_title">Keep track of the countries where you have been…</string>
+    <string name="save_trips_title">…and save your upcoming trips</string>
+    <string name="create_your_account">Create your account</string>
+    <string name="and_start_exploring">…and start exploring</string>
+
 </resources>
