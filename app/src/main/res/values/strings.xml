@@ -40,5 +40,6 @@
     <string name="enter_booking_number">Enter booking number...</string>
     <string name="accomodation_name">Accomodation name...</string>
     <string name="save_trip">Save</string>
+    <string name="trip_detail_description_label">Trip description:</string>
 
 </resources>

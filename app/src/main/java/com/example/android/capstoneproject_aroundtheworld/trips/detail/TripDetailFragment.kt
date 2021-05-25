@@ -64,7 +64,7 @@ class TripDetailFragment : Fragment(), ImageListAdapter.ImageListListener {
         // Get a reference to the binding object and inflate the fragment views.
         binding = DataBindingUtil.inflate(
                 inflater, R.layout.fragment_trip_detail, container, false)
-        requireActivity().window.statusBarColor = Color.WHITE
+        //requireActivity().window.statusBarColor = Color.WHITE
 
         //Initializing ViewModel
         binding.lifecycleOwner = this
