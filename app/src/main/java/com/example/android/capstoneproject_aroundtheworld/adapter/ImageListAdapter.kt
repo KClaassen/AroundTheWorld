@@ -13,7 +13,7 @@ import kotlinx.android.synthetic.main.item_trip_add_image.view.*
 import kotlinx.android.synthetic.main.item_trip_view_image.view.*
 
 class ImageListAdapter(
-    val context: Context, val clicklistener: ImageListListener, val images: ArrayList<String>
+    val context: Context, val imageListListener: ImageListListener, val images: ArrayList<String>
 ): RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     companion object {
@@ -37,12 +37,13 @@ class ImageListAdapter(
         }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-        if (holder is ImageAddViewHolder) {
-            //holder.addBindView
-            clicklistener.onClick()
-        } else if (holder is ImageViewViewHolder) {
-            // Add image from Camera or Gallery
-            //holder.viewItem.setImageResource()
+        when(getItemViewType(position)) {
+            IMAGE_ADD -> {
+                (holder as ImageAddViewHolder).bind(imageListListener)
+            }
+            IMAGE_VIEW -> {
+                (holder as ImageViewViewHolder).bind(images[position - 1])
+            }
         }
 
     }
@@ -51,9 +52,10 @@ class ImageListAdapter(
 
         //val addItem = binding.tripDetailAddImage
 
-        fun addBindView(listener: ImageListListener) {
-            binding.listener = listener
-            listener.onClick()
+        fun bind(listener: ImageListListener) {
+            binding.tripDetailAddImage.setOnClickListener {
+                listener.onClick()
+            }
         }
     }
 
@@ -61,9 +63,9 @@ class ImageListAdapter(
 
         val viewItem = binding.tripDetailViewImage
 
-//        fun bindView(position: Int) {
-//
-//        }
+        fun bind(imagePath: String) {
+
+        }
     }
 
 
