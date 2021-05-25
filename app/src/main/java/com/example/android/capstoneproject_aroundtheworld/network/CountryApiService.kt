@@ -22,7 +22,7 @@ val retrofitRESTClient = Retrofit.Builder()
 
 interface CountryApiService {
 
-    @GET("all?fields=name;capital;currencies;languages;flag;region")
+    @GET("all?fields=name;capital;currencies;languages;flag;subregion")
     suspend fun getCountries():List<Country>
 
 //    @GET("all?fields=name;capital;currencies;languages;flag;region")

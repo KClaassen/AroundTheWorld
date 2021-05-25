@@ -45,6 +45,7 @@
                     android:layout_marginStart="24dp"
                     android:layout_marginTop="8dp"
                     android:text="@string/date_from"
+                    android:textColor="@color/black"
                     android:textStyle="bold"
                     card_view:layout_constraintStart_toStartOf="parent"
                     card_view:layout_constraintTop_toTopOf="parent" />
@@ -55,7 +56,6 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
                     android:layout_marginTop="8dp"
-                    android:hint="date from"
                     android:text="@{trip.dateFrom}"
                     android:textColor="@color/black"
                     card_view:layout_constraintStart_toEndOf="@+id/trip_list_date_from_label"
@@ -68,6 +68,7 @@
                     android:layout_marginStart="16dp"
                     android:layout_marginTop="8dp"
                     android:text="@string/date_to"
+                    android:textColor="@color/black"
                     android:textStyle="bold"
                     card_view:layout_constraintStart_toEndOf="@+id/trip_list_date_from_text"
                     card_view:layout_constraintTop_toTopOf="parent" />
@@ -78,7 +79,6 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
                     android:layout_marginTop="8dp"
-                    android:hint="date to"
                     android:text="@{trip.dateTo}"
                     android:textColor="@color/black"
                     card_view:layout_constraintStart_toEndOf="@+id/trip_list_date_to_label"
@@ -90,7 +90,8 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="24dp"
                     android:layout_marginTop="50dp"
-                    android:text="Name: "
+                    android:text="Trip name: "
+                    android:textStyle="bold"
                     android:textColor="@color/black"
                     card_view:layout_constraintStart_toStartOf="parent"
                     card_view:layout_constraintTop_toTopOf="parent" />

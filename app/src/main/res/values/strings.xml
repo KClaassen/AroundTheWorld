@@ -9,11 +9,11 @@
     <string name="newtrip_button">New Trip</string>
     <string name="new_trip_header">New Trip</string>
     <string name="new_trip_name_label">Trip name: </string>
-    <string name="new_trip_description_label">Description*: </string>
+    <string name="new_trip_description_label">Description: </string>
     <string name="new_trip_airline_label">Airline: </string>
     <string name="new_trip_booking_label">Booking Nr: </string>
     <string name="new_trip_accomodation_label">Accomodation: </string>
-    <string name="new_trip_dates_label">Dates*: </string>
+    <string name="new_trip_dates_label">Dates: </string>
     <string name="pick_from_date">From</string>
     <string name="pick_to_date">To</string>
     <string name="country_region_label">Region: </string>
@@ -36,5 +36,9 @@
     <string name="save_trips_title">…and save your upcoming trips</string>
     <string name="create_your_account">Create your account</string>
     <string name="and_start_exploring">…and start exploring</string>
+    <string name="enter_airline">Enter airline...</string>
+    <string name="enter_booking_number">Enter booking number...</string>
+    <string name="accomodation_name">Accomodation name...</string>
+    <string name="save_trip">Save</string>
 
 </resources>

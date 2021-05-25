@@ -28,7 +28,7 @@ interface CountryDao {
 
 
 
-@Database(entities = [Country::class], version = 1, exportSchema = false)
+@Database(entities = [Country::class], version = 2, exportSchema = false)
 @TypeConverters(Converters::class)
 abstract class CountryDatabase: RoomDatabase() {
 

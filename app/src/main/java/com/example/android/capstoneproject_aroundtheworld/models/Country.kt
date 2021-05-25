@@ -21,7 +21,7 @@ data class Country(
         @PrimaryKey
         val name: String,
         val capital: String,
-        val region: String
+        val subregion: String
 ):Parcelable {
         //@Ignore
         var isSelected: Boolean = false
