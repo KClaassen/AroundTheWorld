@@ -39,60 +39,14 @@
                 android:onClick="@{() -> clickListener.onClick(trip)}">
 
                 <TextView
-                    android:id="@+id/trip_list_date_from_label"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="24dp"
-                    android:layout_marginTop="8dp"
-                    android:text="@string/date_from"
-                    android:textColor="@color/black"
-                    android:textStyle="bold"
-                    card_view:layout_constraintStart_toStartOf="parent"
-                    card_view:layout_constraintTop_toTopOf="parent" />
-
-                <TextView
-                    android:id="@+id/trip_list_date_from_text"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginTop="8dp"
-                    android:text="@{trip.dateFrom}"
-                    android:textColor="@color/black"
-                    card_view:layout_constraintStart_toEndOf="@+id/trip_list_date_from_label"
-                    card_view:layout_constraintTop_toTopOf="parent" />
-
-                <TextView
-                    android:id="@+id/trip_list_date_to_label"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
-                    android:layout_marginTop="8dp"
-                    android:text="@string/date_to"
-                    android:textColor="@color/black"
-                    android:textStyle="bold"
-                    card_view:layout_constraintStart_toEndOf="@+id/trip_list_date_from_text"
-                    card_view:layout_constraintTop_toTopOf="parent" />
-
-                <TextView
-                    android:id="@+id/trip_list_date_to_text"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginTop="8dp"
-                    android:text="@{trip.dateTo}"
-                    android:textColor="@color/black"
-                    card_view:layout_constraintStart_toEndOf="@+id/trip_list_date_to_label"
-                    card_view:layout_constraintTop_toTopOf="parent" />
-
-                <TextView
                     android:id="@+id/trip_list_name_label"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="24dp"
-                    android:layout_marginTop="50dp"
-                    android:text="Trip name: "
-                    android:textStyle="bold"
+                    android:layout_marginTop="24dp"
+                    android:text="Trip: "
                     android:textColor="@color/black"
+                    android:textStyle="bold"
                     card_view:layout_constraintStart_toStartOf="parent"
                     card_view:layout_constraintTop_toTopOf="parent" />
 
@@ -106,6 +60,52 @@
                     android:textColor="@color/black"
                     card_view:layout_constraintBaseline_toBaselineOf="@+id/trip_list_name_label"
                     card_view:layout_constraintStart_toEndOf="@+id/trip_list_name_label" />
+
+                <TextView
+                    android:id="@+id/trip_list_date_from_label"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="24dp"
+                    android:layout_marginBottom="24dp"
+                    android:text="@string/date_from"
+                    android:textColor="@color/black"
+                    android:textStyle="bold"
+                    card_view:layout_constraintBottom_toBottomOf="parent"
+                    card_view:layout_constraintStart_toStartOf="parent" />
+
+                <TextView
+                    android:id="@+id/trip_list_date_from_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginBottom="24dp"
+                    android:text="@{trip.dateFrom}"
+                    android:textColor="@color/black"
+                    card_view:layout_constraintBottom_toBottomOf="parent"
+                    card_view:layout_constraintStart_toEndOf="@+id/trip_list_date_from_label" />
+
+                <TextView
+                    android:id="@+id/trip_list_date_to_label"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="24dp"
+                    android:layout_marginBottom="24dp"
+                    android:text="@string/date_to"
+                    android:textColor="@color/black"
+                    android:textStyle="bold"
+                    card_view:layout_constraintBottom_toBottomOf="parent"
+                    card_view:layout_constraintStart_toEndOf="@+id/trip_list_date_from_text" />
+
+                <TextView
+                    android:id="@+id/trip_list_date_to_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginBottom="24dp"
+                    android:text="@{trip.dateTo}"
+                    android:textColor="@color/black"
+                    card_view:layout_constraintBottom_toBottomOf="parent"
+                    card_view:layout_constraintStart_toEndOf="@+id/trip_list_date_to_label" />
 
                 <ImageView
                     android:id="@+id/imageView"

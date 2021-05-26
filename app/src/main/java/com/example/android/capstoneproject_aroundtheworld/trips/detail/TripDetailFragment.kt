@@ -38,6 +38,7 @@ import com.karumi.dexter.listener.multi.MultiplePermissionsListener
 import kotlinx.android.synthetic.main.fragment_trip_detail.*
 import kotlinx.android.synthetic.main.item_trip_add_image.*
 import kotlinx.android.synthetic.main.item_trip_view_image.*
+import java.net.URI
 import kotlin.reflect.jvm.internal.impl.metadata.ProtoBuf
 
 class TripDetailFragment : Fragment(), ImageListAdapter.ImageListListener {
@@ -100,58 +101,105 @@ class TripDetailFragment : Fragment(), ImageListAdapter.ImageListListener {
     override fun onClick() {
         Log.i("listener", "Camera clicked")
 //        add_image_card_view.setOnClickListener {
-            if (ContextCompat.checkSelfPermission(requireContext(), Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED) {
-                val intent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
-                startActivityForResult(intent, CAMERA)
-            } else {
-                ActivityCompat.requestPermissions(requireActivity(), arrayOf(Manifest.permission.CAMERA), CAMERA_PERMISSION_CODE)
-          //  }
-        }
+//            if (ContextCompat.checkSelfPermission(requireContext(), Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED) {
+//                val intent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
+//                startActivityForResult(intent, CAMERA)
+//            } else {
+//                ActivityCompat.requestPermissions(requireActivity(), arrayOf(Manifest.permission.CAMERA), PERMISSION_REQUEST_CODE)
+//          //  }
+//        }
+        choosePhotoFromCameraOrGallery()
     }
 
     private fun choosePhotoFromCameraOrGallery() {
-        Dexter.withContext(requireContext()).withPermissions(
-            Manifest.permission.READ_EXTERNAL_STORAGE,
-            Manifest.permission.WRITE_EXTERNAL_STORAGE,
-            Manifest.permission.CAMERA
-        ).withListener(object : MultiplePermissionsListener {
-            override fun onPermissionsChecked(report: MultiplePermissionsReport) {
-                if(report.areAllPermissionsGranted()) {
-                    val intent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
-                    startActivityForResult(intent, CAMERA)
+        if (ContextCompat.checkSelfPermission(requireContext(), Manifest.permission.CAMERA)
+                + ContextCompat.checkSelfPermission(requireContext(), Manifest.permission.WRITE_EXTERNAL_STORAGE)
+        + ContextCompat.checkSelfPermission(requireContext(), Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+
+            // When permissions not granted
+            if (ActivityCompat.shouldShowRequestPermissionRationale(
+                            requireActivity(), Manifest.permission.CAMERA
+            ) || ActivityCompat.shouldShowRequestPermissionRationale(
+                            requireActivity(), Manifest.permission.WRITE_EXTERNAL_STORAGE
+            ) || ActivityCompat.shouldShowRequestPermissionRationale(
+                            requireActivity(), Manifest.permission.READ_EXTERNAL_STORAGE
+            )) {
+
+                // Explanation of requested permissions, show alert with request explanation
+                AlertDialog.Builder(requireContext()).setMessage("Permissions for this feature are turned disabled. Please go to settings to enable these")
+                        .setPositiveButton("Settings") { _,_ ->
+                            try {
+                                val intent = Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS)
+                                val uri = Uri.fromParts("package", activity?.packageName, null)
+                                intent.data = uri
+                                startActivity(intent)
+                            } catch (e: ActivityNotFoundException) {
+                                e.printStackTrace()
+                            }
+                        }.setNegativeButton("Cancel") { dialog, _ ->
+                            dialog.dismiss()
+                        }.show()
                 }
-            }
+//            else {
+//                    ActivityCompat.requestPermissions(
+//                            requireActivity(), Array {
+//                                Manifest.permission.CAMERA,
+//                                Manifest.permission.WRITE_EXTERNAL_STORAGE,
+//                                Manifest.permission.READ_EXTERNAL_STORAGE
+//                            },
+//                            PERMISSION_REQUEST_CODE
+//                    )
+//            }
+            } else {
+                // Display Toast when permissions are already granted
+                Toast.makeText(requireContext(), "Permissions already granted", Toast.LENGTH_SHORT).show()
+        }
+        }
+//        Dexter.withContext(requireContext()).withPermissions(
+//            Manifest.permission.READ_EXTERNAL_STORAGE,
+//            Manifest.permission.WRITE_EXTERNAL_STORAGE,
+//            Manifest.permission.CAMERA
+//        ).withListener(object : MultiplePermissionsListener {
+//            override fun onPermissionsChecked(report: MultiplePermissionsReport) {
+//                if(report.areAllPermissionsGranted()) {
+//                    val intent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
+//                    startActivityForResult(intent, CAMERA)
+//                }
+//            }
+//
+//            override fun onPermissionRationaleShouldBeShown(
+//                permissions: MutableList<PermissionRequest>?,
+//                token: PermissionToken?
+//            ) {
+//                showRationalDialogForPermissions()
+//            }
+//        }).check()
+//    }
 
-            override fun onPermissionRationaleShouldBeShown(
-                permissions: MutableList<PermissionRequest>?,
-                token: PermissionToken?
-            ) {
-                showRationalDialogForPermissions()
-            }
-        }).check()
-    }
-
-    private fun showRationalDialogForPermissions() {
-        AlertDialog.Builder(requireContext()).setMessage(
-                " " + "Permissions required for this feature are turned off, " +
-                        "you can turn these on under Application Settings"
-        ).setPositiveButton("Go to Settings") { _, _ ->
-            try {
-                val intent = Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS)
-                val uri = Uri.fromParts("package", activity?.packageName, null)
-                intent.data = uri
-                startActivity(intent)
-            } catch (e: ActivityNotFoundException) {
-                e.printStackTrace()
-            }
-        }.setNegativeButton("Cancel") { dialog, _ ->
-            dialog.dismiss()
-        }.show()
-    }
+//    private fun showRationalDialogForPermissions() {
+//        AlertDialog.Builder(requireContext()).setMessage(
+//                " " + "Permissions required for this feature are turned off, " +
+//                        "you can turn these on under Application Settings"
+//        ).setPositiveButton("Go to Settings") { _, _ ->
+//            try {
+//                val intent = Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS)
+//                val uri = Uri.fromParts("package", activity?.packageName, null)
+//                intent.data = uri
+//                startActivity(intent)
+//            } catch (e: ActivityNotFoundException) {
+//                e.printStackTrace()
+//            }
+//        }.setNegativeButton("Cancel") { dialog, _ ->
+//            dialog.dismiss()
+//        }.show()
+//    }
 
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
-        if (requestCode == CAMERA_PERMISSION_CODE) {
+//        val cameraPermission = ContextCompat.checkSelfPermission(requireContext(), Manifest.permission.CAMERA)
+//        val galleryWritePermissions = ContextCompat.checkSelfPermission(requireContext(), Manifest.permission.WRITE_EXTERNAL_STORAGE)
+//        if (cameraPermission !=)
+        if (requestCode == PERMISSION_REQUEST_CODE) {
             if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                 val intent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
                 startActivityForResult(intent, CAMERA)
@@ -172,7 +220,7 @@ class TripDetailFragment : Fragment(), ImageListAdapter.ImageListListener {
     }
 
     companion object {
-        private const val CAMERA_PERMISSION_CODE = 1
+        private const val PERMISSION_REQUEST_CODE = 1
         private const val CAMERA = 2
         private const val GALLERY = 3
 

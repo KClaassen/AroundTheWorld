@@ -36,10 +36,13 @@
     <string name="save_trips_title">…and save your upcoming trips</string>
     <string name="create_your_account">Create your account</string>
     <string name="and_start_exploring">…and start exploring</string>
-    <string name="enter_airline">Enter airline...</string>
-    <string name="enter_booking_number">Enter booking number...</string>
-    <string name="accomodation_name">Accomodation name...</string>
+    <string name="enter_airline">Enter airline…</string>
+    <string name="enter_booking_number">Enter booking number…</string>
+    <string name="accomodation_name">Accommodation name…</string>
     <string name="save_trip">Save</string>
     <string name="trip_detail_description_label">Trip description:</string>
+    <string name="airline_detail_label">Airline:</string>
+    <string name="accomodation_detail_label">Accommodation: </string>
+    <string name="bookingnr_detail_label">Booking number:</string>
 
 </resources>

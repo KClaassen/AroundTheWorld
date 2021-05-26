@@ -60,7 +60,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/trip_detail_from_label" />
 
             <View
-                android:id="@+id/view"
+                android:id="@+id/date_divider_vc"
                 android:layout_width="1dp"
                 android:layout_height="50dp"
                 android:layout_marginTop="50dp"
@@ -73,34 +73,34 @@
                 android:id="@+id/trip_detail_to_label"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="50dp"
+                android:layout_marginStart="30dp"
                 android:layout_marginTop="25dp"
                 android:text="@string/date_to"
                 android:textColor="@color/black"
-                app:layout_constraintStart_toEndOf="@+id/view"
+                app:layout_constraintStart_toEndOf="@+id/date_divider_vc"
                 app:layout_constraintTop_toBottomOf="@+id/trip_header" />
 
             <TextView
                 android:id="@+id/trip_date_to_detail_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="50dp"
+                android:layout_marginStart="30dp"
                 android:layout_marginTop="16dp"
                 android:text="@{trip.dateTo}"
                 android:textColor="@color/black"
                 android:textSize="22sp"
-                app:layout_constraintStart_toEndOf="@+id/view"
+                app:layout_constraintStart_toEndOf="@+id/date_divider_vc"
                 app:layout_constraintTop_toBottomOf="@+id/trip_detail_to_label" />
 
             <View
-                android:id="@+id/view2"
+                android:id="@+id/date_divider_hz"
                 style="@style/Divider"
                 android:layout_marginStart="50dp"
                 android:layout_marginTop="24dp"
                 android:layout_marginEnd="50dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/view" />
+                app:layout_constraintTop_toBottomOf="@+id/date_divider_vc" />
 
             <TextView
                 android:id="@+id/trip_description_detail_label"
@@ -113,7 +113,7 @@
                 android:textSize="18sp"
                 android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/view2" />
+                app:layout_constraintTop_toBottomOf="@+id/date_divider_hz" />
 
             <TextView
                 android:id="@+id/trip_description_detail_text"
@@ -122,20 +122,102 @@
                 android:layout_marginStart="50dp"
                 android:layout_marginTop="16dp"
                 android:text="@{trip.description}"
+                android:textSize="18sp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/trip_description_detail_label" />
+
+            <TextView
+                android:id="@+id/airline_detail_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="50dp"
+                android:layout_marginTop="32dp"
+                android:text="@string/airline_detail_label"
+                android:textColor="@color/black"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/trip_description_detail_text" />
+
+            <TextView
+                android:id="@+id/airline_detail_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="50dp"
+                android:layout_marginTop="8dp"
+                android:text="@{trip.airline}"
+                android:textSize="18sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/airline_detail_label" />
+
+            <TextView
+                android:id="@+id/bookingnr_detail_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="32dp"
+                android:layout_marginEnd="50dp"
+                android:text="@string/bookingnr_detail_label"
+                android:textColor="@color/black"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/trip_description_detail_text" />
+
+            <TextView
+                android:id="@+id/bookingnr_detail_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="@{trip.bookingNr}"
+                android:textSize="18sp"
+                app:layout_constraintStart_toStartOf="@+id/bookingnr_detail_label"
+                app:layout_constraintTop_toBottomOf="@+id/bookingnr_detail_label" />
+
+            <TextView
+                android:id="@+id/accomodation_detail_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="50dp"
+                android:layout_marginTop="24dp"
+                android:text="@string/accomodation_detail_label"
+                android:textColor="@color/black"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/airline_detail_text" />
+
+            <TextView
+                android:id="@+id/accomodation_detail_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="50dp"
+                android:layout_marginTop="8dp"
+                android:text="@{trip.accomodation}"
+                android:textSize="18sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/accomodation_detail_label" />
+
+            <View
+                android:id="@+id/detail_divider_hz"
+                style="@style/Divider"
+                android:layout_marginStart="50dp"
+                android:layout_marginTop="24dp"
+                android:layout_marginEnd="50dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/accomodation_detail_text" />
 
             <TextView
                 android:id="@+id/favotite_pictures_text_view"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="500dp"
+                android:layout_marginTop="24dp"
                 android:text="@string/upload_your_favorite_pictures"
                 android:textSize="20sp"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="@+id/detail_divider_hz" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/image_list_recycler"
