@@ -44,5 +44,7 @@
     <string name="airline_detail_label">Airline:</string>
     <string name="accomodation_detail_label">Accommodation: </string>
     <string name="bookingnr_detail_label">Booking number:</string>
+    <string name="capture_photo_from_camera">Capture photo from camera</string>
+    <string name="select_photo_from_gallery">Select photo from gallery</string>
 
 </resources>

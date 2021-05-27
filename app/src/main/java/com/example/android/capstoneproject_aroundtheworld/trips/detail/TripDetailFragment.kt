@@ -13,23 +13,28 @@ import android.os.Build
 import android.os.Bundle
 import android.provider.MediaStore
 import android.provider.Settings
+import android.text.Layout
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
+import android.view.View.inflate
 import android.view.ViewGroup
 import android.view.WindowManager
 import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
+import androidx.databinding.DataBindingUtil.inflate
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.android.capstoneproject_aroundtheworld.R
 import com.example.android.capstoneproject_aroundtheworld.adapter.ImageListAdapter
+import com.example.android.capstoneproject_aroundtheworld.databinding.FragmentCountriesListBinding.inflate
 import com.example.android.capstoneproject_aroundtheworld.databinding.FragmentTripDetailBinding
 import com.example.android.capstoneproject_aroundtheworld.trips.TripsViewModel
+import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.karumi.dexter.Dexter
 import com.karumi.dexter.MultiplePermissionsReport
 import com.karumi.dexter.PermissionToken
@@ -88,27 +93,31 @@ class TripDetailFragment : Fragment(), ImageListAdapter.ImageListListener {
         adapter = ImageListAdapter(requireActivity(), this, images)
         image_list_recycler.adapter = adapter
 
-//        add_image_card_view.setOnClickListener {
-//            if (ContextCompat.checkSelfPermission(requireContext(), Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED) {
-//                val intent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
-//                startActivityForResult(intent, CAMERA_REQUEST_CODE)
-//            } else {
-//                ActivityCompat.requestPermissions(requireActivity(), arrayOf(Manifest.permission.CAMERA), CAMERA_PERMISSION_CODE)
-//            }
-//        }
     }
 
     override fun onClick() {
         Log.i("listener", "Camera clicked")
-//        add_image_card_view.setOnClickListener {
 //            if (ContextCompat.checkSelfPermission(requireContext(), Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED) {
 //                val intent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
 //                startActivityForResult(intent, CAMERA)
 //            } else {
 //                ActivityCompat.requestPermissions(requireActivity(), arrayOf(Manifest.permission.CAMERA), PERMISSION_REQUEST_CODE)
-//          //  }
+//            }
+//        val pictureDialog = androidx.appcompat.app.AlertDialog.Builder(requireContext())
+//        //pictureDialog.setTitle("Select Action")
+//        val pictureDialogItems =
+//                arrayOf("Select photo from gallery", "Capture photo from camera")
+//        pictureDialog.setItems(
+//                pictureDialogItems
+//        ) { dialog, which ->
+//            when (which) {
+//                // Here we have create the methods for image selection from GALLERY
+//                0 -> Toast.makeText(requireContext(), "Camera", Toast.LENGTH_SHORT).show()
+//                1 -> Toast.makeText(requireContext(), "Gallery", Toast.LENGTH_SHORT).show()
+//            }
 //        }
-        choosePhotoFromCameraOrGallery()
+//        pictureDialog.show()
+        costomImageSelectionDialog()
     }
 
     private fun choosePhotoFromCameraOrGallery() {
@@ -140,65 +149,14 @@ class TripDetailFragment : Fragment(), ImageListAdapter.ImageListListener {
                             dialog.dismiss()
                         }.show()
                 }
-//            else {
-//                    ActivityCompat.requestPermissions(
-//                            requireActivity(), Array {
-//                                Manifest.permission.CAMERA,
-//                                Manifest.permission.WRITE_EXTERNAL_STORAGE,
-//                                Manifest.permission.READ_EXTERNAL_STORAGE
-//                            },
-//                            PERMISSION_REQUEST_CODE
-//                    )
-//            }
             } else {
                 // Display Toast when permissions are already granted
                 Toast.makeText(requireContext(), "Permissions already granted", Toast.LENGTH_SHORT).show()
         }
         }
-//        Dexter.withContext(requireContext()).withPermissions(
-//            Manifest.permission.READ_EXTERNAL_STORAGE,
-//            Manifest.permission.WRITE_EXTERNAL_STORAGE,
-//            Manifest.permission.CAMERA
-//        ).withListener(object : MultiplePermissionsListener {
-//            override fun onPermissionsChecked(report: MultiplePermissionsReport) {
-//                if(report.areAllPermissionsGranted()) {
-//                    val intent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
-//                    startActivityForResult(intent, CAMERA)
-//                }
-//            }
-//
-//            override fun onPermissionRationaleShouldBeShown(
-//                permissions: MutableList<PermissionRequest>?,
-//                token: PermissionToken?
-//            ) {
-//                showRationalDialogForPermissions()
-//            }
-//        }).check()
-//    }
-
-//    private fun showRationalDialogForPermissions() {
-//        AlertDialog.Builder(requireContext()).setMessage(
-//                " " + "Permissions required for this feature are turned off, " +
-//                        "you can turn these on under Application Settings"
-//        ).setPositiveButton("Go to Settings") { _, _ ->
-//            try {
-//                val intent = Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS)
-//                val uri = Uri.fromParts("package", activity?.packageName, null)
-//                intent.data = uri
-//                startActivity(intent)
-//            } catch (e: ActivityNotFoundException) {
-//                e.printStackTrace()
-//            }
-//        }.setNegativeButton("Cancel") { dialog, _ ->
-//            dialog.dismiss()
-//        }.show()
-//    }
 
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
-//        val cameraPermission = ContextCompat.checkSelfPermission(requireContext(), Manifest.permission.CAMERA)
-//        val galleryWritePermissions = ContextCompat.checkSelfPermission(requireContext(), Manifest.permission.WRITE_EXTERNAL_STORAGE)
-//        if (cameraPermission !=)
         if (requestCode == PERMISSION_REQUEST_CODE) {
             if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                 val intent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
@@ -217,6 +175,13 @@ class TripDetailFragment : Fragment(), ImageListAdapter.ImageListListener {
                 trip_detail_view_image.setImageBitmap(thumbnail)
             }
         }
+    }
+
+    private fun costomImageSelectionDialog() {
+        val dialog = BottomSheetDialog(requireContext())
+        val customDialog  = layoutInflater.inflate(R.layout.custom_bottom_dialog_image_selection, null)
+        dialog.setContentView(customDialog)
+        dialog.show()
     }
 
     companion object {
