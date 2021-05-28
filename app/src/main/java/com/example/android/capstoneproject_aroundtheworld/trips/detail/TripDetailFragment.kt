@@ -69,9 +69,11 @@ class TripDetailFragment : Fragment(), ImageListAdapter.ImageListListener {
 
     private lateinit var binding: FragmentTripDetailBinding
     private lateinit var adapter: ImageListAdapter
+    private lateinit var images: ArrayList<String>
 
     // A global variable for stored image path.
     private var imagePath: String = ""
+
 
     /**
      * Lazily initialize our [TripsViewModel].
@@ -107,10 +109,10 @@ class TripDetailFragment : Fragment(), ImageListAdapter.ImageListListener {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val images = ArrayList<String>()
-        images.add("Path to image 1")
-        images.add("Path to image 2")
-        images.add("Path to image 3")
+//        val images = ArrayList<String>()
+//        images.add("Path to image 1")
+//        images.add("Path to image 2")
+//        images.add("Path to image 3")
         image_list_recycler.layoutManager = GridLayoutManager(requireContext(), 2, RecyclerView.VERTICAL, false)
         adapter = ImageListAdapter(requireActivity(), this, images)
         image_list_recycler.adapter = adapter
@@ -270,38 +272,40 @@ class TripDetailFragment : Fragment(), ImageListAdapter.ImageListListener {
                     val selectedPhotoUri = data.data
 
                     // Set Selected Image URI to the imageView using Glide
-                    Glide.with(requireActivity())
-                            .load(selectedPhotoUri)
-                            .centerCrop()
-                            .diskCacheStrategy(DiskCacheStrategy.ALL)
-                            .listener(object : RequestListener<Drawable> {
-                                override fun onLoadFailed(
-                                        @Nullable e: GlideException?,
-                                        model: Any?,
-                                        target: Target<Drawable>?,
-                                        isFirstResource: Boolean
-                                ): Boolean {
-                                    // log exception
-                                    Log.e("TAG", "Error loading image", e)
-                                    return false // important to return false so the error placeholder can be placed
-                                }
-
-                                override fun onResourceReady(
-                                        resource: Drawable,
-                                        model: Any?,
-                                        target: Target<Drawable>?,
-                                        dataSource: DataSource?,
-                                        isFirstResource: Boolean
-                                ): Boolean {
-
-                                    val bitmap: Bitmap = resource.toBitmap()
-
-                                    imagePath = saveImageToInternalStorage(bitmap)
-                                    Log.i("ImagePath", imagePath)
-                                    return false
-                                }
-                            })
-                            .into(trip_detail_view_image)
+                    images.add(selectedPhotoUri.toString())
+                    adapter.notifyDataSetChanged()
+//                    Glide.with(requireActivity())
+//                            .load(selectedPhotoUri)
+//                            .centerCrop()
+//                            .diskCacheStrategy(DiskCacheStrategy.ALL)
+//                            .listener(object : RequestListener<Drawable> {
+//                                override fun onLoadFailed(
+//                                        @Nullable e: GlideException?,
+//                                        model: Any?,
+//                                        target: Target<Drawable>?,
+//                                        isFirstResource: Boolean
+//                                ): Boolean {
+//                                    // log exception
+//                                    Log.e("TAG", "Error loading image", e)
+//                                    return false // important to return false so the error placeholder can be placed
+//                                }
+//
+//                                override fun onResourceReady(
+//                                        resource: Drawable,
+//                                        model: Any?,
+//                                        target: Target<Drawable>?,
+//                                        dataSource: DataSource?,
+//                                        isFirstResource: Boolean
+//                                ): Boolean {
+//
+//                                    val bitmap: Bitmap = resource.toBitmap()
+//
+//                                    imagePath = saveImageToInternalStorage(bitmap)
+//                                    Log.i("ImagePath", imagePath)
+//                                    return false
+//                                }
+//                            })
+//                            .into(trip_detail_view_image)
                 }
             }
         } else if (resultCode == Activity.RESULT_CANCELED) {
