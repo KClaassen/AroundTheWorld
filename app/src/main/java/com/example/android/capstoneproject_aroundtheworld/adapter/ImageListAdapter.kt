@@ -5,6 +5,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
+import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.example.android.capstoneproject_aroundtheworld.R
 import com.example.android.capstoneproject_aroundtheworld.databinding.ItemTripAddImageBinding
 import com.example.android.capstoneproject_aroundtheworld.databinding.ItemTripViewImageBinding
@@ -42,7 +44,7 @@ class ImageListAdapter(
                 (holder as ImageAddViewHolder).bind(imageListListener)
             }
             IMAGE_VIEW -> {
-                (holder as ImageViewViewHolder).bind(images[position - 1])
+                (holder as ImageViewViewHolder).bind(images[position - 1], context)
             }
         }
 
@@ -59,8 +61,12 @@ class ImageListAdapter(
 
     class ImageViewViewHolder(val binding: ItemTripViewImageBinding) : RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(imagePath: String) {
-            binding.tripDetailViewImage.setImageResource(imagePath)
+        fun bind(imagePath: String, context: Context) {
+            //binding.tripDetailViewImage.setImageResource(imagePath)
+            Glide.with(context)
+                    .load(imagePath)
+                    .diskCacheStrategy(DiskCacheStrategy.ALL)
+                    .into(binding.tripDetailViewImage)
         }
     }
 
