@@ -257,10 +257,7 @@ class TripDetailFragment : Fragment(), ImageListAdapter.ImageListListener {
                             data.extras!!.get("data") as Bitmap // Bitmap from camera
 
                     // Set Capture Image bitmap to the imageView using Glide
-                    Glide.with(requireActivity())
-                            .load(thumbnail)
-                            .centerCrop()
-                            .into(trip_detail_view_image)
+                    data.data.toString()
 
                     imagePath = saveImageToInternalStorage(thumbnail)
                     Log.i("ImagePath", imagePath)
