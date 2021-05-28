@@ -60,7 +60,7 @@ class ImageListAdapter(
     class ImageViewViewHolder(val binding: ItemTripViewImageBinding) : RecyclerView.ViewHolder(binding.root) {
 
         fun bind(imagePath: String) {
-
+            binding.tripDetailViewImage.setImageResource(imagePath)
         }
     }
 

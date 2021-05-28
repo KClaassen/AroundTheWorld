@@ -4,10 +4,13 @@ import android.Manifest
 import android.app.Activity
 import android.app.AlertDialog
 import android.content.ActivityNotFoundException
+import android.content.Context
+import android.content.ContextWrapper
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
 import android.graphics.Color
+import android.graphics.drawable.Drawable
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
@@ -22,13 +25,21 @@ import android.view.View.inflate
 import android.view.ViewGroup
 import android.view.WindowManager
 import android.widget.Toast
+import androidx.annotation.Nullable
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import androidx.core.graphics.drawable.toBitmap
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.DataBindingUtil.inflate
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
+import com.bumptech.glide.load.DataSource
+import com.bumptech.glide.load.engine.DiskCacheStrategy
+import com.bumptech.glide.load.engine.GlideException
+import com.bumptech.glide.request.RequestListener
+import com.bumptech.glide.request.target.Target
 import com.example.android.capstoneproject_aroundtheworld.R
 import com.example.android.capstoneproject_aroundtheworld.adapter.ImageListAdapter
 import com.example.android.capstoneproject_aroundtheworld.databinding.FragmentCountriesListBinding.inflate
@@ -45,13 +56,22 @@ import kotlinx.android.synthetic.main.custom_bottom_dialog_image_selection.view.
 import kotlinx.android.synthetic.main.fragment_trip_detail.*
 import kotlinx.android.synthetic.main.item_trip_add_image.*
 import kotlinx.android.synthetic.main.item_trip_view_image.*
+import java.io.File
+import java.io.FileOutputStream
+import java.io.IOException
+import java.io.OutputStream
 import java.net.URI
+import java.util.*
+import kotlin.collections.ArrayList
 import kotlin.reflect.jvm.internal.impl.metadata.ProtoBuf
 
 class TripDetailFragment : Fragment(), ImageListAdapter.ImageListListener {
 
     private lateinit var binding: FragmentTripDetailBinding
     private lateinit var adapter: ImageListAdapter
+
+    // A global variable for stored image path.
+    private var imagePath: String = ""
 
     /**
      * Lazily initialize our [TripsViewModel].
@@ -135,34 +155,79 @@ class TripDetailFragment : Fragment(), ImageListAdapter.ImageListListener {
 
         customDialog.select_from_gallery.setOnClickListener {
             Toast.makeText(requireContext(), "Gallery", Toast.LENGTH_SHORT).show()
+            choosePhotoFromGallery()
             dialog.dismiss()
         }
 
         dialog.show()
     }
 
+    /**
+     * A method is used  asking the permission for camera and storage and image capturing and selection from Camera.
+     */
     private fun takePhotoFromCamera() {
-        if (ContextCompat.checkSelfPermission(requireContext(), Manifest.permission.CAMERA)
-                + ContextCompat.checkSelfPermission(requireContext(), Manifest.permission.WRITE_EXTERNAL_STORAGE)
-        + ContextCompat.checkSelfPermission(requireContext(), Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+        Dexter.withActivity(requireActivity())
+                .withPermissions(
+                        Manifest.permission.READ_EXTERNAL_STORAGE,
+                        Manifest.permission.WRITE_EXTERNAL_STORAGE,
+                        Manifest.permission.CAMERA
+                )
+                .withListener(object : MultiplePermissionsListener {
+                    override fun onPermissionsChecked(report: MultiplePermissionsReport?) {
+                        // Here after all the permission are granted launch the CAMERA to capture an image.
+                        if (report!!.areAllPermissionsGranted()) {
+                            val intent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
+                            startActivityForResult(intent, CAMERA)
+                        }
+                    }
 
-        // When permissions not granted
-        if (ActivityCompat.shouldShowRequestPermissionRationale(
-                        requireActivity(), Manifest.permission.CAMERA
-        ) || ActivityCompat.shouldShowRequestPermissionRationale(
-                        requireActivity(), Manifest.permission.WRITE_EXTERNAL_STORAGE
-        ) || ActivityCompat.shouldShowRequestPermissionRationale(
-                        requireActivity(), Manifest.permission.READ_EXTERNAL_STORAGE
-        )) {
-            showRationalDialogForPermissions()
-            }
-        } else {
-            // Permissions are granted, start Camera intent
-            val intent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
-            startActivityForResult(intent, CAMERA)
-        }
+                    override fun onPermissionRationaleShouldBeShown(
+                            permissions: MutableList<PermissionRequest>?,
+                            token: PermissionToken?
+                    ) {
+                        showRationalDialogForPermissions()
+                    }
+                }).onSameThread()
+                .check()
     }
 
+    /**
+     * A method is used for image selection from GALLERY / PHOTOS of phone storage.
+     */
+    private fun choosePhotoFromGallery() {
+        Dexter.withActivity(requireActivity())
+                .withPermissions(
+                        Manifest.permission.READ_EXTERNAL_STORAGE,
+                        Manifest.permission.WRITE_EXTERNAL_STORAGE
+                )
+                .withListener(object : MultiplePermissionsListener {
+                    override fun onPermissionsChecked(report: MultiplePermissionsReport?) {
+
+                        // Here after all the permission are granted launch the gallery to select and image.
+                        if (report!!.areAllPermissionsGranted()) {
+
+                            val galleryIntent = Intent(
+                                    Intent.ACTION_PICK,
+                                    MediaStore.Images.Media.EXTERNAL_CONTENT_URI
+                            )
+
+                            startActivityForResult(galleryIntent, GALLERY)
+                        }
+                    }
+
+                    override fun onPermissionRationaleShouldBeShown(
+                            permissions: MutableList<PermissionRequest>?,
+                            token: PermissionToken?
+                    ) {
+                        showRationalDialogForPermissions()
+                    }
+                }).onSameThread()
+                .check()
+    }
+
+    /**
+     * A function used to show the alert dialog when the permissions are denied and need to allow it from settings app info.
+     */
     private fun showRationalDialogForPermissions() {
         // Explanation of requested permissions, show alert with request explanation
         AlertDialog.Builder(requireContext()).setMessage("Permissions for this feature are turned disabled. Please go to settings to enable these")
@@ -180,32 +245,114 @@ class TripDetailFragment : Fragment(), ImageListAdapter.ImageListListener {
                 }.show()
     }
 
-    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
-        if (requestCode == PERMISSION_REQUEST_CODE) {
-            if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                val intent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
-                startActivityForResult(intent, CAMERA)
-            } else {
-                Toast.makeText(requireContext(), "Permission denied, please check in settings", Toast.LENGTH_SHORT).show()
-            }
-        }
-    }
-
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if (resultCode == Activity.RESULT_OK) {
             if (requestCode == CAMERA) {
-                val thumbnail: Bitmap = data!!.extras!!.get("data") as Bitmap
-                trip_detail_view_image.setImageBitmap(thumbnail)
+
+                data?.extras?.let {
+                    val thumbnail: Bitmap =
+                            data.extras!!.get("data") as Bitmap // Bitmap from camera
+
+                    // Set Capture Image bitmap to the imageView using Glide
+                    Glide.with(requireActivity())
+                            .load(thumbnail)
+                            .centerCrop()
+                            .into(trip_detail_view_image)
+
+                    imagePath = saveImageToInternalStorage(thumbnail)
+                    Log.i("ImagePath", imagePath)
+                }
+            } else if (requestCode == GALLERY) {
+
+                data?.let {
+                    // Here we will get the select image URI.
+                    val selectedPhotoUri = data.data
+
+                    // Set Selected Image URI to the imageView using Glide
+                    Glide.with(requireActivity())
+                            .load(selectedPhotoUri)
+                            .centerCrop()
+                            .diskCacheStrategy(DiskCacheStrategy.ALL)
+                            .listener(object : RequestListener<Drawable> {
+                                override fun onLoadFailed(
+                                        @Nullable e: GlideException?,
+                                        model: Any?,
+                                        target: Target<Drawable>?,
+                                        isFirstResource: Boolean
+                                ): Boolean {
+                                    // log exception
+                                    Log.e("TAG", "Error loading image", e)
+                                    return false // important to return false so the error placeholder can be placed
+                                }
+
+                                override fun onResourceReady(
+                                        resource: Drawable,
+                                        model: Any?,
+                                        target: Target<Drawable>?,
+                                        dataSource: DataSource?,
+                                        isFirstResource: Boolean
+                                ): Boolean {
+
+                                    val bitmap: Bitmap = resource.toBitmap()
+
+                                    imagePath = saveImageToInternalStorage(bitmap)
+                                    Log.i("ImagePath", imagePath)
+                                    return false
+                                }
+                            })
+                            .into(trip_detail_view_image)
+                }
             }
+        } else if (resultCode == Activity.RESULT_CANCELED) {
+            Log.e("Cancelled", "Cancelled")
         }
     }
 
+    /**
+     * A function to save a copy of an image to internal storage for HappyPlaceApp to use.
+     */
+    private fun saveImageToInternalStorage(bitmap: Bitmap): String {
+        // Get the context wrapper instance
+        val wrapper = ContextWrapper(requireContext())
+
+        // Initializing a new file
+        // The bellow line return a directory in internal storage
+        /**
+         * The Mode Private here is
+         * File creation mode: the default mode, where the created file can only
+         * be accessed by the calling application (or all applications sharing the
+         * same user ID).
+         */
+        var file = wrapper.getDir(IMAGE_DIRECTORY, Context.MODE_PRIVATE)
+
+        // Mention a file name to save the image
+        file = File(file, "${UUID.randomUUID()}.jpg")
+
+        try {
+            // Get the file output stream
+            val stream: OutputStream = FileOutputStream(file)
+
+            // Compress bitmap
+            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, stream)
+
+            // Flush the stream
+            stream.flush()
+
+            // Close stream
+            stream.close()
+        } catch (e: IOException) { // Catch the exception
+            e.printStackTrace()
+        }
+
+        // Return the saved image absolute path
+        return file.absolutePath
+    }
+
     companion object {
-        private const val PERMISSION_REQUEST_CODE = 1
-        private const val CAMERA = 2
-        private const val GALLERY = 3
+        private const val CAMERA = 1
+        private const val GALLERY = 2
+        private const val IMAGE_DIRECTORY = "AroundTheWorldImages"
 
     }
 
