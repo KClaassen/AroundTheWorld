@@ -109,7 +109,7 @@ class TripDetailFragment : Fragment(), ImageListAdapter.ImageListListener {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-//        val images = ArrayList<String>()
+        val images = ArrayList<String>()
 //        images.add("Path to image 1")
 //        images.add("Path to image 2")
 //        images.add("Path to image 3")
@@ -269,6 +269,7 @@ class TripDetailFragment : Fragment(), ImageListAdapter.ImageListListener {
                     val selectedPhotoUri = data.data
 
                     // Set Selected Image URI to the imageView using Glide
+                    //val images = ArrayList<String>()
                     images.add(selectedPhotoUri.toString())
                     adapter.notifyDataSetChanged()
 //                    Glide.with(requireActivity())
