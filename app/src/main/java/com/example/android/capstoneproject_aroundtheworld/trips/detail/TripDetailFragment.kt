@@ -109,7 +109,7 @@ class TripDetailFragment : Fragment(), ImageListAdapter.ImageListListener {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val images = ArrayList<String>()
+        //val images = ArrayList<String>()
 //        images.add("Path to image 1")
 //        images.add("Path to image 2")
 //        images.add("Path to image 3")
@@ -257,7 +257,8 @@ class TripDetailFragment : Fragment(), ImageListAdapter.ImageListListener {
                             data.extras!!.get("data") as Bitmap // Bitmap from camera
 
                     // Set Capture Image bitmap to the imageView using Glide
-                    data.data.toString()
+                    images.add(imagePath)
+                    adapter.notifyDataSetChanged()
 
                     imagePath = saveImageToInternalStorage(thumbnail)
                     Log.i("ImagePath", imagePath)
