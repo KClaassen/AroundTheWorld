@@ -66,6 +66,7 @@ class ImageListAdapter(
             Glide.with(context)
                     .load(imagePath)
                     .diskCacheStrategy(DiskCacheStrategy.ALL)
+                    .centerCrop()
                     .into(binding.tripDetailViewImage)
         }
     }

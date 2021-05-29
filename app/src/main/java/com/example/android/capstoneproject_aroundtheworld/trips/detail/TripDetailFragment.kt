@@ -69,7 +69,8 @@ class TripDetailFragment : Fragment(), ImageListAdapter.ImageListListener {
 
     private lateinit var binding: FragmentTripDetailBinding
     private lateinit var adapter: ImageListAdapter
-    private lateinit var images: ArrayList<String>
+
+    private var images: ArrayList<String> = ArrayList()
 
     // A global variable for stored image path.
     private var imagePath: String = ""
