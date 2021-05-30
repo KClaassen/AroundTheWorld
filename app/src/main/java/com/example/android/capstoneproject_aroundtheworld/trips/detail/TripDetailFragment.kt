@@ -258,11 +258,13 @@ class TripDetailFragment : Fragment(), ImageListAdapter.ImageListListener {
                             data.extras!!.get("data") as Bitmap // Bitmap from camera
 
                     // Set Capture Image bitmap to the imageView using Glide
-                    images.add(imagePath)
-                    adapter.notifyDataSetChanged()
-
+                    // Setting ImagePath before adding it in the ArrayList
                     imagePath = saveImageToInternalStorage(thumbnail)
+                    // Adding imagePath to ArrayList
+                    images.add(imagePath)
                     Log.i("ImagePath", imagePath)
+                    // Send changes to adapter
+                    adapter.notifyDataSetChanged()
                 }
             } else if (requestCode == GALLERY) {
 

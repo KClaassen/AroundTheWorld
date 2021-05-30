@@ -16,5 +16,7 @@ data class Trip(
         var bookingNr: String?,
         var accomodation: String?,
         var dateFrom: String,
-        var dateTo: String)
+        var dateTo: String
+       // val image: String
+        )
         : Parcelable
