@@ -96,6 +96,7 @@ interface TripDao {
 
 
 @Database(entities = [Trip::class], version = 1, exportSchema = false)
+@TypeConverters(Converters::class)
 abstract class TripDatabase: RoomDatabase() {
 
     abstract val tripDao: TripDao

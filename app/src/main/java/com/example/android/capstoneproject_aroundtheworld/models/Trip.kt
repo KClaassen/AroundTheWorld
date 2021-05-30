@@ -18,11 +18,12 @@ data class Trip(
         var accomodation: String?,
         var dateFrom: String,
         var dateTo: String,
-        val images: ArrayList<Images>
+        val images: ArrayList<String>
         )
-        : Parcelable {
-                @Parcelize
-                data class Images(
-                        val image: String
-                )
-        }
+        : Parcelable
+//{
+//                @Parcelize
+//                data class Images(
+//                        val image: String?
+//                )
+//        }

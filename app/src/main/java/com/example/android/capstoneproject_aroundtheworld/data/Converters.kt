@@ -35,9 +35,15 @@ class Converters {
     }
 
     @TypeConverter
-    fun fromImagetoString(value: String): ArrayList<Trip.Images>? {
+    fun fromArrayListToJson(value: String): ArrayList<String>? {
         val listType: Type =
-                object: TypeToken<ArrayList<Trip.Images>>() {}.type
-        return 
+                object: TypeToken<ArrayList<String>>() {}.type
+        return Gson().fromJson<ArrayList<String>>(value, listType)
+    }
+
+    @TypeConverter
+    fun JsontoArrayList(value: ArrayList<String>): String? {
+        val gson = Gson()
+        return gson.toJson(value)
     }
 }
