@@ -1,6 +1,7 @@
 package com.example.android.capstoneproject_aroundtheworld.models
 
 import android.os.Parcelable
+import android.provider.MediaStore
 import androidx.databinding.BaseObservable
 import androidx.room.Entity
 import androidx.room.PrimaryKey
@@ -16,7 +17,12 @@ data class Trip(
         var bookingNr: String?,
         var accomodation: String?,
         var dateFrom: String,
-        var dateTo: String
-       // val image: String
+        var dateTo: String,
+        val images: ArrayList<Images>
         )
-        : Parcelable
+        : Parcelable {
+                @Parcelize
+                data class Images(
+                        val image: String
+                )
+        }
