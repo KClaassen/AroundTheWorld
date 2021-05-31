@@ -89,7 +89,7 @@ interface TripDao {
     suspend fun insertAllTrips(vararg trip: Trip)
 
     //Update trip with Image
-    @Update(entity = Trip::class)
+    @Update(onConflict = OnConflictStrategy.REPLACE)
     fun updateTripImages(trip: Trip)
 
     // Delete a trip

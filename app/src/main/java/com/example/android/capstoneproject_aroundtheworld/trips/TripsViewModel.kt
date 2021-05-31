@@ -85,6 +85,13 @@ class TripsViewModel(
         }
     }
 
+    fun getTripByName(tripName: String) {
+//        // Added _selectedCountriesCount.value which connects to the LiveData to keep track of selected countries
+        CoroutineScope(Dispatchers.IO).launch {
+            database.tripDao.getTripByName(tripName)
+        }
+    }
+
 //    //Create Live Data Object
 //    private var _imageList = MutableLiveData<MutableList<Image>>()
 //    val imageList: LiveData<MutableList<Image>>

@@ -82,6 +82,8 @@ class TripDetailFragment : Fragment(), ImageListAdapter.ImageListListener {
         trip = TripDetailFragmentArgs.fromBundle(requireArguments()).trip
         binding.trip = trip
 
+        viewModel.getTripByName(trip.name)
+
         return binding.root
     }
 
@@ -255,8 +257,10 @@ class TripDetailFragment : Fragment(), ImageListAdapter.ImageListListener {
                     //val images = ArrayList<String>()
                     images.add(selectedPhotoUri.toString())
                     adapter.notifyDataSetChanged()
+
                     trip.images.add(selectedPhotoUri.toString())
                     viewModel.updateTripImages(trip)
+
 //                    Glide.with(requireActivity())
 //                            .load(selectedPhotoUri)
 //                            .centerCrop()
