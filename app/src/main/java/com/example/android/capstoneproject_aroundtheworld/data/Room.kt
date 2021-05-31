@@ -5,7 +5,6 @@ import androidx.lifecycle.LiveData
 import androidx.room.*
 import com.example.android.capstoneproject_aroundtheworld.models.Country
 import com.example.android.capstoneproject_aroundtheworld.models.Trip
-import com.example.android.capstoneproject_aroundtheworld.models.TripImagesUpdate
 
 /**
  *  Countries
@@ -89,9 +88,9 @@ interface TripDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertAllTrips(vararg trip: Trip)
 
-    //Update trip with Image
-    @Update(entity = Trip::class)
-    fun updateTripImages(tripImagesUpdate: TripImagesUpdate)
+//    //Update trip with Image
+//    @Update(entity = Trip::class)
+//    fun updateTripImages(tripImagesUpdate: TripImagesUpdate)
 
     // Delete a trip
     @Delete()

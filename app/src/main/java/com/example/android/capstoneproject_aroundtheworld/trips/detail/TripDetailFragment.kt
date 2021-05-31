@@ -25,8 +25,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.android.capstoneproject_aroundtheworld.R
 import com.example.android.capstoneproject_aroundtheworld.adapter.ImageListAdapter
 import com.example.android.capstoneproject_aroundtheworld.databinding.FragmentTripDetailBinding
-import com.example.android.capstoneproject_aroundtheworld.models.Trip
-import com.example.android.capstoneproject_aroundtheworld.models.TripImagesUpdate
 import com.example.android.capstoneproject_aroundtheworld.trips.TripsViewModel
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.karumi.dexter.Dexter
@@ -49,6 +47,7 @@ class TripDetailFragment : Fragment(), ImageListAdapter.ImageListListener {
     private lateinit var adapter: ImageListAdapter
 
     private var images: ArrayList<String> = ArrayList()
+    val trip = TripDetailFragmentArgs.fromBundle(requireArguments()).trip
 
     // A global variable for stored image path.
     private var imagePath: String = ""
@@ -79,8 +78,8 @@ class TripDetailFragment : Fragment(), ImageListAdapter.ImageListListener {
         binding.lifecycleOwner = this
         binding.viewmodel = viewModel
 
-        val arguments = TripDetailFragmentArgs.fromBundle(requireArguments()).trip
-        binding.trip = arguments
+        //val trip = TripDetailFragmentArgs.fromBundle(requireArguments()).trip
+        binding.trip = trip
 
 
         return binding.root
@@ -243,10 +242,7 @@ class TripDetailFragment : Fragment(), ImageListAdapter.ImageListListener {
                     Log.i("ImagePath", imagePath)
                     // Send changes to adapter
                     adapter.notifyDataSetChanged()
-                    viewModel.updateTripImages(tripImagesUpdate = TripImagesUpdate(
-                            Trip.name,
-                            Trip.images = imagePath
-                    ))
+                    trip.images.add(imagePath)
                 }
             } else if (requestCode == GALLERY) {
 
@@ -258,6 +254,7 @@ class TripDetailFragment : Fragment(), ImageListAdapter.ImageListListener {
                     //val images = ArrayList<String>()
                     images.add(selectedPhotoUri.toString())
                     adapter.notifyDataSetChanged()
+                    trip.images.add(selectedPhotoUri.toString())
 //                    Glide.with(requireActivity())
 //                            .load(selectedPhotoUri)
 //                            .centerCrop()
