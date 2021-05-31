@@ -97,7 +97,6 @@ class TripDetailFragment : Fragment(), ImageListAdapter.ImageListListener {
 //        images.add("Path to image 3")
         image_list_recycler.layoutManager = GridLayoutManager(requireContext(), 2, RecyclerView.VERTICAL, false)
         adapter = ImageListAdapter(requireActivity(), this, images)
-        image_list_recycler.adapter = adapter
 
     }
 
