@@ -25,6 +25,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.android.capstoneproject_aroundtheworld.R
 import com.example.android.capstoneproject_aroundtheworld.adapter.ImageListAdapter
 import com.example.android.capstoneproject_aroundtheworld.databinding.FragmentTripDetailBinding
+import com.example.android.capstoneproject_aroundtheworld.models.Trip
 import com.example.android.capstoneproject_aroundtheworld.trips.TripsViewModel
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.karumi.dexter.Dexter
@@ -47,7 +48,7 @@ class TripDetailFragment : Fragment(), ImageListAdapter.ImageListListener {
     private lateinit var adapter: ImageListAdapter
 
     private var images: ArrayList<String> = ArrayList()
-    val trip = TripDetailFragmentArgs.fromBundle(requireArguments()).trip
+    private lateinit var trip: Trip
 
     // A global variable for stored image path.
     private var imagePath: String = ""
@@ -78,9 +79,8 @@ class TripDetailFragment : Fragment(), ImageListAdapter.ImageListListener {
         binding.lifecycleOwner = this
         binding.viewmodel = viewModel
 
-        //val trip = TripDetailFragmentArgs.fromBundle(requireArguments()).trip
+        trip = TripDetailFragmentArgs.fromBundle(requireArguments()).trip
         binding.trip = trip
-
 
         return binding.root
     }
@@ -243,6 +243,7 @@ class TripDetailFragment : Fragment(), ImageListAdapter.ImageListListener {
                     // Send changes to adapter
                     adapter.notifyDataSetChanged()
                     trip.images.add(imagePath)
+                    viewModel.updateTripImages(trip)
                 }
             } else if (requestCode == GALLERY) {
 
@@ -255,6 +256,7 @@ class TripDetailFragment : Fragment(), ImageListAdapter.ImageListListener {
                     images.add(selectedPhotoUri.toString())
                     adapter.notifyDataSetChanged()
                     trip.images.add(selectedPhotoUri.toString())
+                    viewModel.updateTripImages(trip)
 //                    Glide.with(requireActivity())
 //                            .load(selectedPhotoUri)
 //                            .centerCrop()

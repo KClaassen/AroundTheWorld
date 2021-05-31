@@ -88,9 +88,9 @@ interface TripDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertAllTrips(vararg trip: Trip)
 
-//    //Update trip with Image
-//    @Update(entity = Trip::class)
-//    fun updateTripImages(tripImagesUpdate: TripImagesUpdate)
+    //Update trip with Image
+    @Update(entity = Trip::class)
+    fun updateTripImages(trip: Trip)
 
     // Delete a trip
     @Delete()
