@@ -5,6 +5,7 @@ import androidx.lifecycle.LiveData
 import androidx.room.*
 import com.example.android.capstoneproject_aroundtheworld.models.Country
 import com.example.android.capstoneproject_aroundtheworld.models.Trip
+import com.example.android.capstoneproject_aroundtheworld.models.TripImagesUpdate
 
 /**
  *  Countries
@@ -88,6 +89,10 @@ interface TripDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertAllTrips(vararg trip: Trip)
 
+    //Update trip with Image
+    @Update(entity = Trip::class)
+    fun updateTripImages(tripImagesUpdate: TripImagesUpdate)
+
     // Delete a trip
     @Delete()
     fun deleteTrip(trip: Trip)
@@ -95,7 +100,7 @@ interface TripDao {
 
 
 
-@Database(entities = [Trip::class], version = 1, exportSchema = false)
+@Database(entities = [Trip::class], version = 2, exportSchema = false)
 @TypeConverters(Converters::class)
 abstract class TripDatabase: RoomDatabase() {
 

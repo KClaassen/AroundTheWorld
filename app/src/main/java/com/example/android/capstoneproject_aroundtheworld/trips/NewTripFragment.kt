@@ -1,18 +1,13 @@
 package com.example.android.capstoneproject_aroundtheworld.trips
 
-import android.app.AlertDialog
 import android.app.DatePickerDialog
-import android.os.Build
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.DatePicker
 import android.widget.EditText
-import androidx.annotation.RequiresApi
 import androidx.databinding.DataBindingUtil
-import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.ViewModelProvider
 import com.example.android.capstoneproject_aroundtheworld.R
 import com.example.android.capstoneproject_aroundtheworld.databinding.FragmentNewTripBinding
@@ -20,6 +15,7 @@ import com.example.android.capstoneproject_aroundtheworld.models.Trip
 import kotlinx.android.synthetic.main.fragment_new_trip.*
 import java.text.SimpleDateFormat
 import java.util.*
+import kotlin.collections.ArrayList
 
 class NewTripFragment : Fragment(), View.OnClickListener {
 
@@ -58,7 +54,8 @@ class NewTripFragment : Fragment(), View.OnClickListener {
                 "",
                 "",
                 "",
-                ""
+                "",
+                ArrayList<String>()
         )
 
         datesetListener = DatePickerDialog.OnDateSetListener {

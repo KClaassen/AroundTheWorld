@@ -11,6 +11,7 @@ import com.example.android.capstoneproject_aroundtheworld.data.CountryDatabase
 import com.example.android.capstoneproject_aroundtheworld.data.TripDatabase
 import com.example.android.capstoneproject_aroundtheworld.models.Country
 import com.example.android.capstoneproject_aroundtheworld.models.Trip
+import com.example.android.capstoneproject_aroundtheworld.models.TripImagesUpdate
 import com.example.android.capstoneproject_aroundtheworld.repository.TripsRepository
 import kotlinx.coroutines.*
 
@@ -78,10 +79,17 @@ class TripsViewModel(
      *  Image List
      */
 
-    //Create Live Data Object
-    private var _imageList = MutableLiveData<MutableList<Image>>()
-    val imageList: LiveData<MutableList<Image>>
-        get() = _imageList
+    fun updateTripImages(tripImagesUpdate: TripImagesUpdate) {
+//        // Added _selectedCountriesCount.value which connects to the LiveData to keep track of selected countries
+        CoroutineScope(Dispatchers.IO).launch {
+            database.tripDao.updateTripImages(tripImagesUpdate)
+        }
+    }
+
+//    //Create Live Data Object
+//    private var _imageList = MutableLiveData<MutableList<Image>>()
+//    val imageList: LiveData<MutableList<Image>>
+//        get() = _imageList
 
     // Factory for constructing TripsListViewModel with parameter
     class Factory(val app: Application) : ViewModelProvider.Factory {

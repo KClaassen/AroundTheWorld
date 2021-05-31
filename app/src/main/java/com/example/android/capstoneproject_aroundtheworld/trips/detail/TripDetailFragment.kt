@@ -7,43 +7,26 @@ import android.content.ActivityNotFoundException
 import android.content.Context
 import android.content.ContextWrapper
 import android.content.Intent
-import android.content.pm.PackageManager
 import android.graphics.Bitmap
-import android.graphics.Color
-import android.graphics.drawable.Drawable
 import android.net.Uri
-import android.os.Build
 import android.os.Bundle
 import android.provider.MediaStore
 import android.provider.Settings
-import android.text.Layout
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
-import android.view.View.inflate
 import android.view.ViewGroup
-import android.view.WindowManager
 import android.widget.Toast
-import androidx.annotation.Nullable
-import androidx.core.app.ActivityCompat
-import androidx.core.content.ContextCompat
-import androidx.core.graphics.drawable.toBitmap
 import androidx.databinding.DataBindingUtil
-import androidx.databinding.DataBindingUtil.inflate
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
-import com.bumptech.glide.load.DataSource
-import com.bumptech.glide.load.engine.DiskCacheStrategy
-import com.bumptech.glide.load.engine.GlideException
-import com.bumptech.glide.request.RequestListener
-import com.bumptech.glide.request.target.Target
 import com.example.android.capstoneproject_aroundtheworld.R
 import com.example.android.capstoneproject_aroundtheworld.adapter.ImageListAdapter
-import com.example.android.capstoneproject_aroundtheworld.databinding.FragmentCountriesListBinding.inflate
 import com.example.android.capstoneproject_aroundtheworld.databinding.FragmentTripDetailBinding
+import com.example.android.capstoneproject_aroundtheworld.models.Trip
+import com.example.android.capstoneproject_aroundtheworld.models.TripImagesUpdate
 import com.example.android.capstoneproject_aroundtheworld.trips.TripsViewModel
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.karumi.dexter.Dexter
@@ -51,19 +34,14 @@ import com.karumi.dexter.MultiplePermissionsReport
 import com.karumi.dexter.PermissionToken
 import com.karumi.dexter.listener.PermissionRequest
 import com.karumi.dexter.listener.multi.MultiplePermissionsListener
-import kotlinx.android.synthetic.main.custom_bottom_dialog_image_selection.*
 import kotlinx.android.synthetic.main.custom_bottom_dialog_image_selection.view.*
 import kotlinx.android.synthetic.main.fragment_trip_detail.*
-import kotlinx.android.synthetic.main.item_trip_add_image.*
-import kotlinx.android.synthetic.main.item_trip_view_image.*
 import java.io.File
 import java.io.FileOutputStream
 import java.io.IOException
 import java.io.OutputStream
-import java.net.URI
 import java.util.*
 import kotlin.collections.ArrayList
-import kotlin.reflect.jvm.internal.impl.metadata.ProtoBuf
 
 class TripDetailFragment : Fragment(), ImageListAdapter.ImageListListener {
 
@@ -265,6 +243,10 @@ class TripDetailFragment : Fragment(), ImageListAdapter.ImageListListener {
                     Log.i("ImagePath", imagePath)
                     // Send changes to adapter
                     adapter.notifyDataSetChanged()
+                    viewModel.updateTripImages(tripImagesUpdate = TripImagesUpdate(
+                            Trip.name,
+                            Trip.images = imagePath
+                    ))
                 }
             } else if (requestCode == GALLERY) {
 

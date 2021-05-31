@@ -21,9 +21,3 @@ data class Trip(
         val images: ArrayList<String>
         )
         : Parcelable
-//{
-//                @Parcelize
-//                data class Images(
-//                        val image: String?
-//                )
-//        }
