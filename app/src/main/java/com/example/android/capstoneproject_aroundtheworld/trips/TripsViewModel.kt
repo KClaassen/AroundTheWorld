@@ -78,19 +78,20 @@ class TripsViewModel(
      *  Image List
      */
 
-    fun updateTripImages(trip: Trip) {
-//        // Added _selectedCountriesCount.value which connects to the LiveData to keep track of selected countries
+    fun updateTripImages(trip: Trip){
         CoroutineScope(Dispatchers.IO).launch {
-            database.tripDao.updateTripImages(trip)
+            repository.updateTripImages(trip)
         }
     }
 
-    fun getTripByName(tripName: String) {
-//        // Added _selectedCountriesCount.value which connects to the LiveData to keep track of selected countries
-        CoroutineScope(Dispatchers.IO).launch {
-            database.tripDao.getTripByName(tripName)
-        }
-    }
+//    fun updateTripImages(trip: Trip) {
+////        // Added _selectedCountriesCount.value which connects to the LiveData to keep track of selected countries
+//        CoroutineScope(Dispatchers.IO).launch {
+//            database.tripDao.updateTripImages(trip)
+//        }
+//    }
+
+    fun getTripByName(tripName: String) = repository.getTripByName(tripName)
 
 //    //Create Live Data Object
 //    private var _imageList = MutableLiveData<MutableList<Image>>()

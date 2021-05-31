@@ -82,7 +82,7 @@ interface TripDao {
     suspend fun saveTrip(trip: Trip)
 
     @Query("SELECT * FROM trip WHERE name = :tripName")
-    fun getTripByName(tripName: String): Trip
+    fun getTripByName(tripName: String): LiveData<Trip>
 
     //Store values in cache
     @Insert(onConflict = OnConflictStrategy.REPLACE)

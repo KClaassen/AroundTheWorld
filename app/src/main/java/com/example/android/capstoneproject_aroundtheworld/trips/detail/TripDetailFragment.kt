@@ -82,7 +82,9 @@ class TripDetailFragment : Fragment(), ImageListAdapter.ImageListListener {
         trip = TripDetailFragmentArgs.fromBundle(requireArguments()).trip
         binding.trip = trip
 
-        viewModel.getTripByName(trip.name)
+        viewModel.getTripByName(trip.name).observe(viewLifecycleOwner, androidx.lifecycle.Observer {
+            trip = it
+        })
 
         return binding.root
     }

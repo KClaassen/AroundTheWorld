@@ -13,6 +13,10 @@ class TripsRepository (
 
     fun deleteTrip(trip: Trip) = database.tripDao.deleteTrip(trip)
 
+    fun getTripByName(tripName: String) = database.tripDao.getTripByName(tripName)
+
+    fun updateTripImages(trip: Trip) = database.tripDao.updateTripImages(trip)
+
     fun getAllTrips() = database.tripDao.getAllTrips()
     
 }
