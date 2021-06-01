@@ -84,44 +84,23 @@ class TripDetailFragment : Fragment(), ImageListAdapter.ImageListListener {
 
         viewModel.getTripByName(trip.name).observe(viewLifecycleOwner, androidx.lifecycle.Observer {
             trip = it
+            image_list_recycler.layoutManager = GridLayoutManager(requireContext(), 2, RecyclerView.VERTICAL, false)
+            adapter = ImageListAdapter(requireActivity(), this, images)
         })
 
         return binding.root
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        //val images = ArrayList<String>()
-//        images.add("Path to image 1")
-//        images.add("Path to image 2")
-//        images.add("Path to image 3")
-        image_list_recycler.layoutManager = GridLayoutManager(requireContext(), 2, RecyclerView.VERTICAL, false)
-        adapter = ImageListAdapter(requireActivity(), this, images)
-
-    }
+//    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+//        super.onViewCreated(view, savedInstanceState)
+//        //val images = ArrayList<String>()
+////        images.add("Path to image 1")
+////        images.add("Path to image 2")
+////        images.add("Path to image 3")
+//    }
 
     override fun onClick() {
         Log.i("listener", "Camera clicked")
-//            if (ContextCompat.checkSelfPermission(requireContext(), Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED) {
-//                val intent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
-//                startActivityForResult(intent, CAMERA)
-//            } else {
-//                ActivityCompat.requestPermissions(requireActivity(), arrayOf(Manifest.permission.CAMERA), PERMISSION_REQUEST_CODE)
-//            }
-//        val pictureDialog = androidx.appcompat.app.AlertDialog.Builder(requireContext())
-//        //pictureDialog.setTitle("Select Action")
-//        val pictureDialogItems =
-//                arrayOf("Select photo from gallery", "Capture photo from camera")
-//        pictureDialog.setItems(
-//                pictureDialogItems
-//        ) { dialog, which ->
-//            when (which) {
-//                // Here we have create the methods for image selection from GALLERY
-//                0 -> Toast.makeText(requireContext(), "Camera", Toast.LENGTH_SHORT).show()
-//                1 -> Toast.makeText(requireContext(), "Gallery", Toast.LENGTH_SHORT).show()
-//            }
-//        }
-//        pictureDialog.show()
         costomImageSelectionDialog()
     }
 
@@ -241,7 +220,7 @@ class TripDetailFragment : Fragment(), ImageListAdapter.ImageListListener {
                     // Setting ImagePath before adding it in the ArrayList
                     imagePath = saveImageToInternalStorage(thumbnail)
                     // Adding imagePath to ArrayList
-                    images.add(imagePath)
+                    //images.add(imagePath)
                     Log.i("ImagePath", imagePath)
                     // Send changes to adapter
                     adapter.notifyDataSetChanged()
@@ -256,7 +235,7 @@ class TripDetailFragment : Fragment(), ImageListAdapter.ImageListListener {
 
                     // Set Selected Image URI to the imageView using Glide
                     //val images = ArrayList<String>()
-                    images.add(selectedPhotoUri.toString())
+                    //images.add(selectedPhotoUri.toString())
                     adapter.notifyDataSetChanged()
 
                     trip.images.add(selectedPhotoUri.toString())
