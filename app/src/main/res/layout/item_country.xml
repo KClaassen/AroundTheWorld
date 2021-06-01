@@ -35,12 +35,21 @@
                 android:layout_height="match_parent"
                 android:onClick="@{() -> clickListener.onClick(country)}">
 
+                <androidx.appcompat.widget.AppCompatCheckBox
+                    android:id="@+id/country_select_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:checked="@{country.isSelected}"
+                    android:button="@drawable/custom_checkbox"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
                 <ImageView
                     android:id="@+id/country_list_flag"
                     android:layout_width="25dp"
                     android:layout_height="25dp"
                     android:layout_marginStart="8dp"
-                    android:src="@drawable/ic_launcher_background"
                     app:imageUrl="@{country.flag}"
                     android:contentDescription="@string/country_flag"
                     app:layout_constraintBottom_toBottomOf="parent"
@@ -55,15 +64,6 @@
                     android:text="@{country.name}"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toEndOf="@+id/country_list_flag"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <androidx.appcompat.widget.AppCompatCheckBox
-                    android:id="@+id/country_select_button"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:checked="@{country.isSelected}"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
