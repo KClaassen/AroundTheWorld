@@ -91,7 +91,7 @@ class TripsViewModel(
 //        }
 //    }
 
-    fun getTripByName(tripName: String) = repository.getTripByName(tripName)
+    fun getTripById(id: Int) = repository.getTripById(id)
 
 //    //Create Live Data Object
 //    private var _imageList = MutableLiveData<MutableList<Image>>()

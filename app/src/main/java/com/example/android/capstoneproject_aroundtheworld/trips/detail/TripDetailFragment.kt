@@ -82,10 +82,11 @@ class TripDetailFragment : Fragment(), ImageListAdapter.ImageListListener {
         trip = TripDetailFragmentArgs.fromBundle(requireArguments()).trip
         binding.trip = trip
 
-        viewModel.getTripByName(trip.name).observe(viewLifecycleOwner, androidx.lifecycle.Observer {
+        viewModel.getTripById(trip.id).observe(viewLifecycleOwner, androidx.lifecycle.Observer {
             trip = it
+            adapter = ImageListAdapter(requireActivity(), this, trip.images)
             image_list_recycler.layoutManager = GridLayoutManager(requireContext(), 2, RecyclerView.VERTICAL, false)
-            adapter = ImageListAdapter(requireActivity(), this, images)
+            image_list_recycler.adapter = adapter
         })
 
         return binding.root

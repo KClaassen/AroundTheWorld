@@ -48,6 +48,7 @@ class NewTripFragment : Fragment(), View.OnClickListener {
         binding.lifecycleOwner = this
         binding.viewmodel = viewModel
         binding.trip = Trip(
+                0,
                 "",
                 "",
                 "",

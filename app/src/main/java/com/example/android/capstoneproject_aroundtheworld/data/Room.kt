@@ -74,15 +74,15 @@ abstract class CountryDatabase: RoomDatabase() {
 interface TripDao {
     // Loads all trips and returns them as List
     // Not suspend as it's LiveData
-    @Query("SELECT * FROM trip ORDER BY dateFrom DESC")
+    @Query("SELECT * FROM trip ORDER BY ID DESC")
     fun getAllTrips(): LiveData<MutableList<Trip>>
 
     // Insert a Trip in the database. If the trip already exists, replace it.
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun saveTrip(trip: Trip)
 
-    @Query("SELECT * FROM trip WHERE name = :tripName")
-    fun getTripByName(tripName: String): LiveData<Trip>
+    @Query("SELECT * FROM trip WHERE id = :id")
+    fun getTripById(id: Int): LiveData<Trip>
 
     //Store values in cache
     @Insert(onConflict = OnConflictStrategy.REPLACE)
@@ -99,7 +99,7 @@ interface TripDao {
 
 
 
-@Database(entities = [Trip::class], version = 2, exportSchema = false)
+@Database(entities = [Trip::class], version = 3, exportSchema = false)
 @TypeConverters(Converters::class)
 abstract class TripDatabase: RoomDatabase() {
 
