@@ -46,5 +46,6 @@
     <string name="bookingnr_detail_label">Booking number:</string>
     <string name="capture_photo_from_camera">Capture photo from camera</string>
     <string name="select_photo_from_gallery">Select photo from gallery</string>
+    <string name="countries_been">Countries Been</string>
 
 </resources>
