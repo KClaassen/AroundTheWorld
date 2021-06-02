@@ -18,7 +18,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.android.capstoneproject_aroundtheworld.R
 import com.example.android.capstoneproject_aroundtheworld.adapter.CountryAdapter
-import com.example.android.capstoneproject_aroundtheworld.adapter.SwipeToDelete
 import com.example.android.capstoneproject_aroundtheworld.adapter.TripAdapter
 import com.example.android.capstoneproject_aroundtheworld.countries.CountriesListFragmentDirections
 import com.example.android.capstoneproject_aroundtheworld.countries.CountriesListViewModel
@@ -100,14 +99,14 @@ class TripsListFragment : Fragment() {
         trips_recycler.layoutManager = LinearLayoutManager(requireContext())
         trips_recycler.adapter = adapter
 
-        // Swipe to delete item in Trips Recycler
-        val item = object : SwipeToDelete(requireContext(),0, ItemTouchHelper.LEFT){
-            override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
-                Toast.makeText(requireContext(), "Item has been deleted", Toast.LENGTH_LONG ).show()
-                viewModel.deleteTrip(adapter.getTripAt(viewHolder.adapterPosition))
-            }
-        }
-        ItemTouchHelper(item).attachToRecyclerView(trips_recycler)
+//        // Swipe to delete item in Trips Recycler
+//        val item = object : SwipeToDelete(requireContext(),0, ItemTouchHelper.LEFT){
+//            override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
+//                Toast.makeText(requireContext(), "Item has been deleted", Toast.LENGTH_LONG ).show()
+//                viewModel.deleteTrip(adapter.getTripAt(viewHolder.adapterPosition))
+//            }
+//        }
+//        ItemTouchHelper(item).attachToRecyclerView(trips_recycler)
     }
 
 

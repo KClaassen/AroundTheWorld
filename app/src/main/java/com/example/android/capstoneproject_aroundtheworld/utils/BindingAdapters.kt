@@ -15,7 +15,7 @@ fun bindCountryFlag(imageView: ImageView, imageUrl: String?) {
                 .load(imageUrl)
                 .centerCrop()
                 .override(10, 10)
-                .placeholder(R.drawable.common_google_signin_btn_icon_dark)
+                .placeholder(R.drawable.ic_launcher_background)
             .listener(SvgSoftwareLayerSetter())
                 .into(imageView)
     }

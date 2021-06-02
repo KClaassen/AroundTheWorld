@@ -46,6 +46,10 @@ class MainActivity : AppCompatActivity() {
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
 
+        back_button.setOnClickListener {
+            onBackPressed()
+        }
+
         logout_button.setOnClickListener {
             showPopup(it)
         }

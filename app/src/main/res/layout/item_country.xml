@@ -51,7 +51,6 @@
                     android:layout_height="25dp"
                     android:layout_marginStart="8dp"
                     app:imageUrl="@{country.flag}"
-                    android:src="@drawable/ic_launcher_background"
                     android:contentDescription="@string/country_flag"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toEndOf="@+id/country_select_button"
