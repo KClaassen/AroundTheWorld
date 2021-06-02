@@ -121,6 +121,19 @@
                     card_view:layout_constraintTop_toTopOf="parent"
                     card_view:srcCompat="@drawable/outline_arrow_forward_24_black" />
 
+                <ImageView
+                    android:id="@+id/trip_delete"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_marginEnd="24dp"
+                    android:background="#F44336"
+                    android:padding="12dp"
+                    android:src="@drawable/outline_delete_24"
+                    card_view:layout_constraintBottom_toBottomOf="parent"
+                    card_view:layout_constraintEnd_toEndOf="parent"
+                    card_view:layout_constraintTop_toTopOf="parent" />
+
+
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.cardview.widget.CardView>
     </androidx.constraintlayout.motion.widget.MotionLayout>
