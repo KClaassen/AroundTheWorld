@@ -23,7 +23,6 @@
                motion:framePosition="100"
                android:scaleX="1.2" />
        </KeyFrameSet>
-        <OnClick motion:targetId="@+id/getstarted_button" />
     </Transition>
 
     <ConstraintSet android:id="@+id/start">

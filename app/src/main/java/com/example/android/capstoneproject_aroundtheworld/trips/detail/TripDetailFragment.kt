@@ -111,13 +111,13 @@ class TripDetailFragment : Fragment(), ImageListAdapter.ImageListListener {
         dialog.setContentView(customDialog)
 
         customDialog.photo_from_camera.setOnClickListener {
-            Toast.makeText(requireContext(), "Camera", Toast.LENGTH_SHORT).show()
+           // Toast.makeText(requireContext(), "Camera", Toast.LENGTH_SHORT).show()
             takePhotoFromCamera()
             dialog.dismiss()
         }
 
         customDialog.select_from_gallery.setOnClickListener {
-            Toast.makeText(requireContext(), "Gallery", Toast.LENGTH_SHORT).show()
+            //Toast.makeText(requireContext(), "Gallery", Toast.LENGTH_SHORT).show()
             choosePhotoFromGallery()
             dialog.dismiss()
         }
