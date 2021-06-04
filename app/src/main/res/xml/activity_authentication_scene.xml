@@ -21,8 +21,12 @@
            <KeyAttribute
                motion:motionTarget="@+id/logo_icon"
                motion:framePosition="100"
-               android:scaleX="1.2" />
+               android:scaleX="0.7"
+               android:scaleY="0.7"/>
        </KeyFrameSet>
+        <OnClick
+            motion:targetId="@+id/getstarted_button"
+            motion:clickAction="transitionToEnd"/>
     </Transition>
 
     <ConstraintSet android:id="@+id/start">
