@@ -53,7 +53,7 @@ class ImageListAdapter(
     class ImageAddViewHolder(val binding: ItemTripAddImageBinding) : RecyclerView.ViewHolder(binding.root) {
 
         fun bind(listener: ImageListListener) {
-            binding.tripDetailAddImage.setOnClickListener {
+            binding.addImageCardView.setOnClickListener {
                 listener.onClick()
             }
         }
