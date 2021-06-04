@@ -60,6 +60,7 @@ dependencies {
     implementation 'com.caverock:androidsvg:1.2.1'
     implementation 'org.jetbrains.anko:anko-design:0.10.5'
     implementation 'com.karumi:dexter:6.2.2'
+    implementation 'com.github.stfalcon:stfalcon-imageviewer:latest_version'
 
     // For converting the List in data class to GSON and converting them back to List
     implementation 'com.google.code.gson:gson:2.8.6'
