@@ -6,6 +6,8 @@ import android.os.Bundle
 import android.util.Log
 import android.view.Window
 import androidx.appcompat.app.AppCompatActivity
+import androidx.constraintlayout.motion.widget.MotionLayout
+import androidx.constraintlayout.widget.ConstraintSet
 import com.example.android.capstoneproject_aroundtheworld.MainActivity
 import com.example.android.capstoneproject_aroundtheworld.R
 import com.firebase.ui.auth.AuthMethodPickerLayout
@@ -38,7 +40,11 @@ class AuthenticationActivity : AppCompatActivity() {
             return
         }
 
-        getstarted_button.setOnClickListener { launchSignInFlow() }
+        getstarted_button.setOnClickListener {
+            motion_layout.transitionToStart()
+            motion_layout.transitionToEnd()
+            launchSignInFlow()
+        }
 
 //          TODO: a bonus is to customize the sign in flow to look nice using :
         //https://github.com/firebase/FirebaseUI-Android/blob/master/auth/README.md#custom-layout

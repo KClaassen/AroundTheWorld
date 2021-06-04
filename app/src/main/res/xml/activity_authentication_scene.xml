@@ -24,9 +24,6 @@
                android:scaleX="0.7"
                android:scaleY="0.7"/>
        </KeyFrameSet>
-        <OnClick
-            motion:targetId="@+id/getstarted_button"
-            motion:clickAction="transitionToEnd"/>
     </Transition>
 
     <ConstraintSet android:id="@+id/start">
