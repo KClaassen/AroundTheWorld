@@ -33,6 +33,7 @@ import com.karumi.dexter.MultiplePermissionsReport
 import com.karumi.dexter.PermissionToken
 import com.karumi.dexter.listener.PermissionRequest
 import com.karumi.dexter.listener.multi.MultiplePermissionsListener
+import kotlinx.android.synthetic.main.custom_bottom_dialog_image_selection.*
 import kotlinx.android.synthetic.main.custom_bottom_dialog_image_selection.view.*
 import kotlinx.android.synthetic.main.fragment_trip_detail.*
 import java.io.File
@@ -103,109 +104,6 @@ class TripDetailFragment : Fragment(), ImageListAdapter.ImageListListener {
     override fun onClick() {
         Log.i("listener", "Camera clicked")
         costomImageSelectionDialog()
-    }
-
-    private fun costomImageSelectionDialog() {
-        val dialog = BottomSheetDialog(requireContext())
-        val customDialog  = layoutInflater.inflate(R.layout.custom_bottom_dialog_image_selection, null)
-        dialog.setContentView(customDialog)
-
-        customDialog.photo_from_camera.setOnClickListener {
-           // Toast.makeText(requireContext(), "Camera", Toast.LENGTH_SHORT).show()
-            takePhotoFromCamera()
-            dialog.dismiss()
-        }
-
-        customDialog.select_from_gallery.setOnClickListener {
-            //Toast.makeText(requireContext(), "Gallery", Toast.LENGTH_SHORT).show()
-            choosePhotoFromGallery()
-            dialog.dismiss()
-        }
-
-        dialog.show()
-    }
-
-    /**
-     * A method is used  asking the permission for camera and storage and image capturing and selection from Camera.
-     */
-    private fun takePhotoFromCamera() {
-        Dexter.withActivity(requireActivity())
-                .withPermissions(
-                        Manifest.permission.READ_EXTERNAL_STORAGE,
-                        Manifest.permission.WRITE_EXTERNAL_STORAGE,
-                        Manifest.permission.CAMERA
-                )
-                .withListener(object : MultiplePermissionsListener {
-                    override fun onPermissionsChecked(report: MultiplePermissionsReport?) {
-                        // Here after all the permission are granted launch the CAMERA to capture an image.
-                        if (report!!.areAllPermissionsGranted()) {
-                            val intent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
-                            startActivityForResult(intent, CAMERA)
-                        }
-                    }
-
-                    override fun onPermissionRationaleShouldBeShown(
-                            permissions: MutableList<PermissionRequest>?,
-                            token: PermissionToken?
-                    ) {
-                        showRationalDialogForPermissions()
-                    }
-                }).onSameThread()
-                .check()
-    }
-
-    /**
-     * A method is used for image selection from GALLERY / PHOTOS of phone storage.
-     */
-    private fun choosePhotoFromGallery() {
-        Dexter.withActivity(requireActivity())
-                .withPermissions(
-                        Manifest.permission.READ_EXTERNAL_STORAGE,
-                        Manifest.permission.WRITE_EXTERNAL_STORAGE
-                )
-                .withListener(object : MultiplePermissionsListener {
-                    override fun onPermissionsChecked(report: MultiplePermissionsReport?) {
-
-                        // Here after all the permission are granted launch the gallery to select and image.
-                        if (report!!.areAllPermissionsGranted()) {
-
-                            val galleryIntent = Intent(
-                                    Intent.ACTION_PICK,
-                                    MediaStore.Images.Media.EXTERNAL_CONTENT_URI
-                            )
-
-                            startActivityForResult(galleryIntent, GALLERY)
-                        }
-                    }
-
-                    override fun onPermissionRationaleShouldBeShown(
-                            permissions: MutableList<PermissionRequest>?,
-                            token: PermissionToken?
-                    ) {
-                        showRationalDialogForPermissions()
-                    }
-                }).onSameThread()
-                .check()
-    }
-
-    /**
-     * A function used to show the alert dialog when the permissions are denied and need to allow it from settings app info.
-     */
-    private fun showRationalDialogForPermissions() {
-        // Explanation of requested permissions, show alert with request explanation
-        AlertDialog.Builder(requireContext()).setMessage("Permissions for this feature are turned disabled. Please go to settings to enable these")
-                .setPositiveButton("Settings") { _,_ ->
-                    try {
-                        val intent = Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS)
-                        val uri = Uri.fromParts("package", activity?.packageName, null)
-                        intent.data = uri
-                        startActivity(intent)
-                    } catch (e: ActivityNotFoundException) {
-                        e.printStackTrace()
-                    }
-                }.setNegativeButton("Cancel") { dialog, _ ->
-                    dialog.dismiss()
-                }.show()
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -280,6 +178,117 @@ class TripDetailFragment : Fragment(), ImageListAdapter.ImageListListener {
             Log.e("Cancelled", "Cancelled")
         }
     }
+
+    private fun costomImageSelectionDialog() {
+        val dialog = BottomSheetDialog(requireContext())
+        val customDialog  = layoutInflater.inflate(R.layout.custom_bottom_dialog_image_selection, null)
+        dialog.setContentView(customDialog)
+
+        customDialog.photo_from_camera.setOnClickListener {
+           // Toast.makeText(requireContext(), "Camera", Toast.LENGTH_SHORT).show()
+            takePhotoFromCamera()
+            dialog.dismiss()
+        }
+
+        customDialog.select_from_gallery.setOnClickListener {
+            //Toast.makeText(requireContext(), "Gallery", Toast.LENGTH_SHORT).show()
+            choosePhotoFromGallery()
+            dialog.dismiss()
+        }
+
+        dialog.show()
+    }
+
+    /**
+     * A method is used  asking the permission for camera and storage and image capturing and selection from Camera.
+     */
+    private fun takePhotoFromCamera() {
+        Log.i("camera", "take photo from camera")
+        Dexter.withContext(requireActivity())
+                .withPermissions(
+                        Manifest.permission.READ_EXTERNAL_STORAGE,
+                        Manifest.permission.WRITE_EXTERNAL_STORAGE,
+                        Manifest.permission.CAMERA
+                )
+                .withListener(object : MultiplePermissionsListener {
+                    override fun onPermissionsChecked(report: MultiplePermissionsReport?) {
+                        report.let {
+                            // Here after all the permission are granted launch the CAMERA to capture an image.
+                            if (report!!.areAllPermissionsGranted()) {
+                                val intent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
+                                startActivityForResult(intent, CAMERA)
+                            }
+                        }
+
+                    }
+
+                    override fun onPermissionRationaleShouldBeShown(
+                            permissions: MutableList<PermissionRequest>?,
+                            token: PermissionToken?
+                    ) {
+                        showRationalDialogForPermissions()
+                    }
+                }).onSameThread()
+                .check()
+    }
+
+    /**
+     * A method is used for image selection from GALLERY / PHOTOS of phone storage.
+     */
+    private fun choosePhotoFromGallery() {
+        Dexter.withContext(requireActivity())
+                .withPermissions(
+                        Manifest.permission.READ_EXTERNAL_STORAGE,
+                        Manifest.permission.WRITE_EXTERNAL_STORAGE
+                )
+                .withListener(object : MultiplePermissionsListener {
+                    override fun onPermissionsChecked(report: MultiplePermissionsReport?) {
+
+                        report.let {
+                            // Here after all the permission are granted launch the gallery to select and image.
+                            if (report!!.areAllPermissionsGranted()) {
+
+                                val galleryIntent = Intent(
+                                        Intent.ACTION_PICK,
+                                        MediaStore.Images.Media.EXTERNAL_CONTENT_URI
+                                )
+
+                                startActivityForResult(galleryIntent, GALLERY)
+                            }
+                        }
+                    }
+
+                    override fun onPermissionRationaleShouldBeShown(
+                            permissions: MutableList<PermissionRequest>?,
+                            token: PermissionToken?
+                    ) {
+                        showRationalDialogForPermissions()
+                    }
+                }).onSameThread()
+                .check()
+    }
+
+    /**
+     * A function used to show the alert dialog when the permissions are denied and need to allow it from settings app info.
+     */
+    private fun showRationalDialogForPermissions() {
+        // Explanation of requested permissions, show alert with request explanation
+        AlertDialog.Builder(requireContext()).setMessage("Permissions for this feature are turned disabled. Please go to settings to enable these")
+                .setPositiveButton("Settings") { _,_ ->
+                    try {
+                        val intent = Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS)
+                        val uri = Uri.fromParts("package", activity?.packageName, null)
+                        intent.data = uri
+                        startActivity(intent)
+                    } catch (e: ActivityNotFoundException) {
+                        e.printStackTrace()
+                    }
+                }.setNegativeButton("Cancel") { dialog, _ ->
+                    dialog.dismiss()
+                }.show()
+    }
+
+
 
     /**
      * A function to save a copy of an image to internal storage for HappyPlaceApp to use.
