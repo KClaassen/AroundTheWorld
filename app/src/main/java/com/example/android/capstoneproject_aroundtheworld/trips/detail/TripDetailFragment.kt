@@ -31,8 +31,11 @@ import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.karumi.dexter.Dexter
 import com.karumi.dexter.MultiplePermissionsReport
 import com.karumi.dexter.PermissionToken
+import com.karumi.dexter.listener.PermissionDeniedResponse
+import com.karumi.dexter.listener.PermissionGrantedResponse
 import com.karumi.dexter.listener.PermissionRequest
 import com.karumi.dexter.listener.multi.MultiplePermissionsListener
+import com.karumi.dexter.listener.single.PermissionListener
 import kotlinx.android.synthetic.main.custom_bottom_dialog_image_selection.*
 import kotlinx.android.synthetic.main.custom_bottom_dialog_image_selection.view.*
 import kotlinx.android.synthetic.main.fragment_trip_detail.*
@@ -103,7 +106,7 @@ class TripDetailFragment : Fragment(), ImageListAdapter.ImageListListener {
 
     override fun onClick() {
         Log.i("listener", "Camera clicked")
-        costomImageSelectionDialog()
+        customImageSelectionDialog()
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -179,20 +182,20 @@ class TripDetailFragment : Fragment(), ImageListAdapter.ImageListListener {
         }
     }
 
-    private fun costomImageSelectionDialog() {
+    private fun customImageSelectionDialog() {
         val dialog = BottomSheetDialog(requireContext())
         val customDialog  = layoutInflater.inflate(R.layout.custom_bottom_dialog_image_selection, null)
         dialog.setContentView(customDialog)
 
         customDialog.photo_from_camera.setOnClickListener {
            // Toast.makeText(requireContext(), "Camera", Toast.LENGTH_SHORT).show()
-            takePhotoFromCamera()
+            takePhotoFromCamera(dialog)
             dialog.dismiss()
         }
 
         customDialog.select_from_gallery.setOnClickListener {
             //Toast.makeText(requireContext(), "Gallery", Toast.LENGTH_SHORT).show()
-            choosePhotoFromGallery()
+            choosePhotoFromGallery(dialog)
             dialog.dismiss()
         }
 
@@ -202,19 +205,19 @@ class TripDetailFragment : Fragment(), ImageListAdapter.ImageListListener {
     /**
      * A method is used  asking the permission for camera and storage and image capturing and selection from Camera.
      */
-    private fun takePhotoFromCamera() {
+    private fun takePhotoFromCamera(dialog: BottomSheetDialog) {
         Log.i("camera", "take photo from camera")
         Dexter.withContext(requireActivity())
                 .withPermissions(
                         Manifest.permission.READ_EXTERNAL_STORAGE,
-                        Manifest.permission.WRITE_EXTERNAL_STORAGE,
+                        //Manifest.permission.WRITE_EXTERNAL_STORAGE,
                         Manifest.permission.CAMERA
                 )
                 .withListener(object : MultiplePermissionsListener {
                     override fun onPermissionsChecked(report: MultiplePermissionsReport?) {
-                        report.let {
+                        report?.let {
                             // Here after all the permission are granted launch the CAMERA to capture an image.
-                            if (report!!.areAllPermissionsGranted()) {
+                            if (report.areAllPermissionsGranted()) {
                                 val intent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
                                 startActivityForResult(intent, CAMERA)
                             }
@@ -230,42 +233,48 @@ class TripDetailFragment : Fragment(), ImageListAdapter.ImageListListener {
                     }
                 }).onSameThread()
                 .check()
+
+        dialog.dismiss()
     }
 
     /**
      * A method is used for image selection from GALLERY / PHOTOS of phone storage.
      */
-    private fun choosePhotoFromGallery() {
+    private fun choosePhotoFromGallery(dialog: BottomSheetDialog) {
         Dexter.withContext(requireActivity())
-                .withPermissions(
-                        Manifest.permission.READ_EXTERNAL_STORAGE,
-                        Manifest.permission.WRITE_EXTERNAL_STORAGE
+                .withPermission(
+                        Manifest.permission.READ_EXTERNAL_STORAGE
+                        //Manifest.permission.WRITE_EXTERNAL_STORAGE
                 )
-                .withListener(object : MultiplePermissionsListener {
-                    override fun onPermissionsChecked(report: MultiplePermissionsReport?) {
+                .withListener(object : PermissionListener {
 
-                        report.let {
-                            // Here after all the permission are granted launch the gallery to select and image.
-                            if (report!!.areAllPermissionsGranted()) {
+                    override fun onPermissionGranted(response: PermissionGrantedResponse?) {
+                        val galleryIntent = Intent(
+                                Intent.ACTION_PICK,
+                                MediaStore.Images.Media.EXTERNAL_CONTENT_URI
+                        )
 
-                                val galleryIntent = Intent(
-                                        Intent.ACTION_PICK,
-                                        MediaStore.Images.Media.EXTERNAL_CONTENT_URI
-                                )
+                        startActivityForResult(galleryIntent, GALLERY)
+                    }
 
-                                startActivityForResult(galleryIntent, GALLERY)
-                            }
-                        }
+                    override fun onPermissionDenied(response: PermissionDeniedResponse?) {
+                        Toast.makeText(
+                                requireContext(),
+                                "You have denied the storage permission to select image.",
+                                Toast.LENGTH_SHORT
+                        ).show()
                     }
 
                     override fun onPermissionRationaleShouldBeShown(
-                            permissions: MutableList<PermissionRequest>?,
-                            token: PermissionToken?
-                    ) {
+                            permission: PermissionRequest?,
+                            token: PermissionToken?) {
                         showRationalDialogForPermissions()
                     }
+
                 }).onSameThread()
                 .check()
+
+        dialog.dismiss()
     }
 
     /**
@@ -305,7 +314,7 @@ class TripDetailFragment : Fragment(), ImageListAdapter.ImageListListener {
          * be accessed by the calling application (or all applications sharing the
          * same user ID).
          */
-        var file = wrapper.getDir(IMAGE_DIRECTORY, Context.MODE_PRIVATE)
+        var file = wrapper.getExternalFilesDir(IMAGE_DIRECTORY)
 
         // Mention a file name to save the image
         file = File(file, "${UUID.randomUUID()}.jpg")
