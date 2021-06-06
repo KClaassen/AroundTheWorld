@@ -80,8 +80,8 @@
                 android:id="@+id/desciption_edit_text"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="32dp"
                 android:layout_marginTop="16dp"
+                android:layout_marginStart="32dp"
                 android:layout_marginEnd="32dp"
                 android:textSize="20sp"
                 android:text="@={trip.description}"
@@ -107,13 +107,15 @@
 
             <EditText
                 android:id="@+id/airline_edit_text"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="32dp"
                 android:layout_marginTop="16dp"
-                android:text="@={trip.airline}"
+                android:layout_marginStart="32dp"
+                android:layout_marginEnd="32dp"
                 android:inputType="textPersonName"
+                android:text="@={trip.airline}"
                 android:textSize="20sp"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/new_trip_airline_label" />
 
@@ -132,13 +134,15 @@
 
             <EditText
                 android:id="@+id/booking_edit_text"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="32dp"
                 android:layout_marginTop="16dp"
-                android:text="@={trip.bookingNr}"
+                android:layout_marginStart="32dp"
+                android:layout_marginEnd="32dp"
                 android:inputType="textPersonName"
+                android:text="@={trip.bookingNr}"
                 android:textSize="20sp"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/new_trip_booking_label" />
 
@@ -157,13 +161,15 @@
 
             <EditText
                 android:id="@+id/accomodation_edit_text"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="32dp"
                 android:layout_marginTop="16dp"
-                android:text="@={trip.accomodation}"
+                android:layout_marginStart="32dp"
+                android:layout_marginEnd="32dp"
                 android:inputType="textPersonName"
+                android:text="@={trip.accomodation}"
                 android:textSize="20sp"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/new_trip_accomodation_label" />
 
