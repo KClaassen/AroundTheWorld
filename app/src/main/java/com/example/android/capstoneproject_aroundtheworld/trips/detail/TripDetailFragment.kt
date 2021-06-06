@@ -300,7 +300,7 @@ class TripDetailFragment : Fragment(), ImageListAdapter.ImageListListener {
 
 
     /**
-     * A function to save a copy of an image to internal storage for HappyPlaceApp to use.
+     * A function to save a copy of an image to internal storage for App to use.
      */
     private fun saveImageToInternalStorage(bitmap: Bitmap): String {
         // Get the context wrapper instance
@@ -308,12 +308,7 @@ class TripDetailFragment : Fragment(), ImageListAdapter.ImageListListener {
 
         // Initializing a new file
         // The bellow line return a directory in internal storage
-        /**
-         * The Mode Private here is
-         * File creation mode: the default mode, where the created file can only
-         * be accessed by the calling application (or all applications sharing the
-         * same user ID).
-         */
+        // Changed getDir to getExternalFilesDir as per google developer documentation
         var file = wrapper.getExternalFilesDir(IMAGE_DIRECTORY)
 
         // Mention a file name to save the image
