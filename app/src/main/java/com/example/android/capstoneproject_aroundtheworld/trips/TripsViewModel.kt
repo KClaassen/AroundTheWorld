@@ -1,15 +1,11 @@
 package com.example.android.capstoneproject_aroundtheworld.trips
 
 import android.app.Application
-import android.media.Image
-import android.text.TextUtils
 import android.util.Log
 import android.view.View
 import androidx.lifecycle.*
 import androidx.navigation.findNavController
-import com.example.android.capstoneproject_aroundtheworld.data.CountryDatabase
 import com.example.android.capstoneproject_aroundtheworld.data.TripDatabase
-import com.example.android.capstoneproject_aroundtheworld.models.Country
 import com.example.android.capstoneproject_aroundtheworld.models.Trip
 import com.example.android.capstoneproject_aroundtheworld.repository.TripsRepository
 import kotlinx.coroutines.*
@@ -39,11 +35,6 @@ class TripsViewModel(
         }
     }
 
-//    suspend fun deleteTrip(trip: Trip) {
-//        (Dispatchers.IO) {
-//            repository.deleteTrip(trip)
-//        }
-//    }
     fun deleteTrip(trip: Trip){
         CoroutineScope(Dispatchers.IO).launch {
             repository.deleteTrip(trip)
@@ -84,19 +75,7 @@ class TripsViewModel(
         }
     }
 
-//    fun updateTripImages(trip: Trip) {
-////        // Added _selectedCountriesCount.value which connects to the LiveData to keep track of selected countries
-//        CoroutineScope(Dispatchers.IO).launch {
-//            database.tripDao.updateTripImages(trip)
-//        }
-//    }
-
     fun getTripById(id: Int) = repository.getTripById(id)
-
-//    //Create Live Data Object
-//    private var _imageList = MutableLiveData<MutableList<Image>>()
-//    val imageList: LiveData<MutableList<Image>>
-//        get() = _imageList
 
     // Factory for constructing TripsListViewModel with parameter
     class Factory(val app: Application) : ViewModelProvider.Factory {

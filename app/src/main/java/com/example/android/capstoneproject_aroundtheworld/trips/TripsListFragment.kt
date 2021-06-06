@@ -1,14 +1,12 @@
 package com.example.android.capstoneproject_aroundtheworld.trips
 
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
-import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
@@ -17,14 +15,9 @@ import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.android.capstoneproject_aroundtheworld.R
-import com.example.android.capstoneproject_aroundtheworld.adapter.CountryAdapter
 import com.example.android.capstoneproject_aroundtheworld.adapter.SwipeToDelete
 import com.example.android.capstoneproject_aroundtheworld.adapter.TripAdapter
-import com.example.android.capstoneproject_aroundtheworld.countries.CountriesListFragmentDirections
-import com.example.android.capstoneproject_aroundtheworld.countries.CountriesListViewModel
 import com.example.android.capstoneproject_aroundtheworld.databinding.FragmentTripsListBinding
-import com.example.android.capstoneproject_aroundtheworld.models.Trip
-import com.example.android.capstoneproject_aroundtheworld.repository.TripsRepository
 import kotlinx.android.synthetic.main.fragment_trips_list.*
 
 class TripsListFragment : Fragment() {

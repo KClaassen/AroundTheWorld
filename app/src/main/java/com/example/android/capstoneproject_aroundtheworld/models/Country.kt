@@ -2,10 +2,8 @@ package com.example.android.capstoneproject_aroundtheworld.models
 
 import android.os.Parcelable
 import androidx.room.Entity
-import androidx.room.Ignore
 import androidx.room.PrimaryKey
 import com.google.gson.annotations.SerializedName
-import com.squareup.moshi.Json
 import kotlinx.android.parcel.Parcelize
 
 // use this class as a return type of your api call

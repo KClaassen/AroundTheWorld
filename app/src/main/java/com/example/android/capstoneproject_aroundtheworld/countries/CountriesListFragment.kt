@@ -14,13 +14,11 @@ import com.example.android.capstoneproject_aroundtheworld.R
 import com.example.android.capstoneproject_aroundtheworld.adapter.CountryAdapter
 import com.example.android.capstoneproject_aroundtheworld.databinding.FragmentCountriesListBinding
 import com.example.android.capstoneproject_aroundtheworld.models.Country
-import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.fragment_countries_list.*
 
 class CountriesListFragment : Fragment(), CountryAdapter.CountryListener {
 
     private lateinit var binding: FragmentCountriesListBinding
-    private lateinit var countryAdapter: CountryAdapter
 
     /**
      * Lazily initialize our [CountriesListViewModel].
@@ -47,10 +45,6 @@ class CountriesListFragment : Fragment(), CountryAdapter.CountryListener {
         viewModel.countryListLiveData.observe(viewLifecycleOwner, Observer {
             processList(it)
         })
-        
-//        viewModel.errorStateLiveData.observe(viewLifecycleOwner, Observer {
-//            Snackbar.make(this.requireView(), "Error, please try again", Snackbar.LENGTH_SHORT).show()
-//        })
 
         fetchCountries()
 
@@ -61,17 +55,6 @@ class CountriesListFragment : Fragment(), CountryAdapter.CountryListener {
                 viewModel.onCountryNavigated()
             }
         })
-
-
-//        val adapter = CountryAdapter(CountryAdapter.CountryListener {
-//            Country -> Toast.makeText(context, "${Country}", Toast.LENGTH_SHORT).show()
-//        })
-
-        //binding.countriesRecycler.adapter = adapter
-
-//        binding.countriesRecycler.layoutManager = LinearLayoutManager(requireContext())
-//        val adapter = countryAdapter
-//        binding.countriesRecycler.adapter = adapter
 
         return binding.root
     }

@@ -4,7 +4,6 @@ import android.Manifest
 import android.app.Activity
 import android.app.AlertDialog
 import android.content.ActivityNotFoundException
-import android.content.Context
 import android.content.ContextWrapper
 import android.content.Intent
 import android.graphics.Bitmap
@@ -36,7 +35,6 @@ import com.karumi.dexter.listener.PermissionGrantedResponse
 import com.karumi.dexter.listener.PermissionRequest
 import com.karumi.dexter.listener.multi.MultiplePermissionsListener
 import com.karumi.dexter.listener.single.PermissionListener
-import kotlinx.android.synthetic.main.custom_bottom_dialog_image_selection.*
 import kotlinx.android.synthetic.main.custom_bottom_dialog_image_selection.view.*
 import kotlinx.android.synthetic.main.fragment_trip_detail.*
 import java.io.File
@@ -142,39 +140,6 @@ class TripDetailFragment : Fragment(), ImageListAdapter.ImageListListener {
 
                     trip.images.add(selectedPhotoUri.toString())
                     viewModel.updateTripImages(trip)
-
-//                    Glide.with(requireActivity())
-//                            .load(selectedPhotoUri)
-//                            .centerCrop()
-//                            .diskCacheStrategy(DiskCacheStrategy.ALL)
-//                            .listener(object : RequestListener<Drawable> {
-//                                override fun onLoadFailed(
-//                                        @Nullable e: GlideException?,
-//                                        model: Any?,
-//                                        target: Target<Drawable>?,
-//                                        isFirstResource: Boolean
-//                                ): Boolean {
-//                                    // log exception
-//                                    Log.e("TAG", "Error loading image", e)
-//                                    return false // important to return false so the error placeholder can be placed
-//                                }
-//
-//                                override fun onResourceReady(
-//                                        resource: Drawable,
-//                                        model: Any?,
-//                                        target: Target<Drawable>?,
-//                                        dataSource: DataSource?,
-//                                        isFirstResource: Boolean
-//                                ): Boolean {
-//
-//                                    val bitmap: Bitmap = resource.toBitmap()
-//
-//                                    imagePath = saveImageToInternalStorage(bitmap)
-//                                    Log.i("ImagePath", imagePath)
-//                                    return false
-//                                }
-//                            })
-//                            .into(trip_detail_view_image)
                 }
             }
         } else if (resultCode == Activity.RESULT_CANCELED) {

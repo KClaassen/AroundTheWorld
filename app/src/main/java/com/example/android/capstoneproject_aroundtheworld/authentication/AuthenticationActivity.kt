@@ -6,8 +6,6 @@ import android.os.Bundle
 import android.util.Log
 import android.view.Window
 import androidx.appcompat.app.AppCompatActivity
-import androidx.constraintlayout.motion.widget.MotionLayout
-import androidx.constraintlayout.widget.ConstraintSet
 import com.example.android.capstoneproject_aroundtheworld.MainActivity
 import com.example.android.capstoneproject_aroundtheworld.R
 import com.firebase.ui.auth.AuthMethodPickerLayout
@@ -15,10 +13,6 @@ import com.firebase.ui.auth.AuthUI
 import com.firebase.ui.auth.IdpResponse
 import com.google.firebase.auth.FirebaseAuth
 import kotlinx.android.synthetic.main.activity_authentication.*
-
-
-//import kotlinx.android.synthetic.main.activity_authentication.*
-
 
 class AuthenticationActivity : AppCompatActivity() {
 
@@ -105,12 +99,5 @@ class AuthenticationActivity : AppCompatActivity() {
                         .setIsSmartLockEnabled(false)
                         .build(), SIGN_IN_RESULT_CODE
         )
-        // Create and launch sign-in intent. We listen to the response of this activity with the
-        // SIGN_IN_RESULT_CODE code.
-//        startActivityForResult(
-//            AuthUI.getInstance().createSignInIntentBuilder().setAvailableProviders(
-//                providers
-//            ).setIsSmartLockEnabled(false).build(), SIGN_IN_RESULT_CODE
-//        )
     }
 }

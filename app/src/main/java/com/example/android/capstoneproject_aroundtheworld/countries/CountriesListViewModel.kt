@@ -2,13 +2,8 @@ package com.example.android.capstoneproject_aroundtheworld.countries
 
 import android.app.Application
 import android.util.Log
-import android.view.animation.Transformation
-import androidx.databinding.BindingAdapter
 import androidx.lifecycle.*
-import com.example.android.capstoneproject_aroundtheworld.adapter.CountryAdapter
 import com.example.android.capstoneproject_aroundtheworld.data.CountryDatabase.Companion.getDatabase
-//import com.example.android.capstoneproject_aroundtheworld.data.CountryDatabase
-//import com.example.android.capstoneproject_aroundtheworld.data.CountryDatabase.Companion.getDatabase
 import com.example.android.capstoneproject_aroundtheworld.models.Country
 import com.example.android.capstoneproject_aroundtheworld.repository.CountriesRepository
 import kotlinx.coroutines.CoroutineScope
@@ -26,7 +21,6 @@ class CountriesListViewModel(application: Application) : ViewModel() {
      */
 
     var countryListLiveData: LiveData<List<Country>> = database.countryDao.getCountries()
-    //val errorStateLiveData: MutableLiveData<String> = MutableLiveData()
 
     init {
         viewModelScope.launch {
@@ -56,13 +50,7 @@ class CountriesListViewModel(application: Application) : ViewModel() {
         countries.filter { it.isSelected }.size
     }
 
-//    // Live Data to keep track of Countries count selected
-//    private val _selectedCountriesCount = MutableLiveData(0)
-//    val selectedCountriesCount: LiveData<Int>
-//        get() = _selectedCountriesCount
-
     fun updateCountry(country: Country) {
-//        // Added _selectedCountriesCount.value which connects to the LiveData to keep track of selected countries
         CoroutineScope(Dispatchers.IO).launch {
             database.countryDao.updateCountry(country)
         }
@@ -72,6 +60,7 @@ class CountriesListViewModel(application: Application) : ViewModel() {
     /**
      *  Navigate to Detail Screen
      */
+
     // To navigate and complete navigation for selected Country onclick
 
     private val _navigateToCountry = MutableLiveData<Country>()

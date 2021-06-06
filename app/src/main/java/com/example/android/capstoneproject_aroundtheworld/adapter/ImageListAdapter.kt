@@ -2,17 +2,12 @@ package com.example.android.capstoneproject_aroundtheworld.adapter
 
 import android.content.Context
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
-import com.example.android.capstoneproject_aroundtheworld.R
 import com.example.android.capstoneproject_aroundtheworld.databinding.ItemTripAddImageBinding
 import com.example.android.capstoneproject_aroundtheworld.databinding.ItemTripViewImageBinding
-import com.example.android.capstoneproject_aroundtheworld.trips.detail.TripDetailFragment
-import kotlinx.android.synthetic.main.item_trip_add_image.view.*
-import kotlinx.android.synthetic.main.item_trip_view_image.view.*
 
 class ImageListAdapter(
     val context: Context, val imageListListener: ImageListListener, val images: ArrayList<String>
@@ -87,5 +82,4 @@ class ImageListAdapter(
     interface ImageListListener {
         fun onClick()
     }
-
 }

@@ -1,11 +1,9 @@
 package com.example.android.capstoneproject_aroundtheworld.adapter
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.android.capstoneproject_aroundtheworld.databinding.ItemTripBinding
-import com.example.android.capstoneproject_aroundtheworld.models.Country
 import com.example.android.capstoneproject_aroundtheworld.models.Trip
 
 class TripAdapter(val clicklistener: TripListener
@@ -49,5 +47,4 @@ class TripAdapter(val clicklistener: TripListener
 
     // Get current trip item for swipe to delete
     fun getTripAt(position: Int) = trips[position]
-
 }

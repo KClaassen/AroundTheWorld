@@ -1,7 +1,5 @@
 package com.example.android.capstoneproject_aroundtheworld.repository
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.Transformations
 import com.example.android.capstoneproject_aroundtheworld.data.TripDatabase
 import com.example.android.capstoneproject_aroundtheworld.models.Trip
 

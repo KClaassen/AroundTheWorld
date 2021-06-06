@@ -4,7 +4,6 @@ import com.example.android.capstoneproject_aroundtheworld.models.Country
 import com.example.android.capstoneproject_aroundtheworld.utils.Constants.BASE_URL
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
-import retrofit2.Call
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 import retrofit2.converter.scalars.ScalarsConverterFactory
@@ -24,9 +23,6 @@ interface CountryApiService {
 
     @GET("all?fields=name;capital;currencies;languages;flag;subregion")
     suspend fun getCountries():List<Country>
-
-//    @GET("all?fields=name;capital;currencies;languages;flag;region")
-//    fun getCountries2(): Call<List<Map<String, Object>>>
 
 }
 

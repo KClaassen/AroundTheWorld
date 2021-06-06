@@ -1,9 +1,7 @@
 package com.example.android.capstoneproject_aroundtheworld.data
 
-import android.net.Uri
 import androidx.room.TypeConverter
 import com.example.android.capstoneproject_aroundtheworld.models.Country
-import com.example.android.capstoneproject_aroundtheworld.models.Trip
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import java.lang.reflect.Type
