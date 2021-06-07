@@ -47,5 +47,6 @@
     <string name="capture_photo_from_camera">Capture photo from camera</string>
     <string name="select_photo_from_gallery">Select photo from gallery</string>
     <string name="countries_been">Countries Been</string>
+    <string name="description_zoom_touch_close">expanded trip view image</string>
 
 </resources>
