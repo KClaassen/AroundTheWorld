@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">CapstoneProject_AroundTheWorld</string>
+    <string name="app_name">Around The World</string>
     <string name="get_started">Let\'s get started</string>
     <string name="countries_button">Countries</string>
     <string name="mytrips_button">My Trips</string>
