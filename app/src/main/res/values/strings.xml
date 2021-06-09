@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Around The World</string>
+    <string name="app_name">Around the World</string>
     <string name="get_started">Let\'s get started</string>
     <string name="countries_button">Countries</string>
     <string name="mytrips_button">My Trips</string>
@@ -12,7 +12,7 @@
     <string name="new_trip_description_label">Description: </string>
     <string name="new_trip_airline_label">Airline: </string>
     <string name="new_trip_booking_label">Booking Nr: </string>
-    <string name="new_trip_accomodation_label">Accomodation: </string>
+    <string name="new_trip_accomodation_label">Accommodation: </string>
     <string name="new_trip_dates_label">Dates: </string>
     <string name="pick_from_date">From</string>
     <string name="pick_to_date">To</string>
