@@ -10,7 +10,7 @@ import com.kevinclaassen.aroundtheworld.databinding.ItemTripAddImageBinding
 import com.kevinclaassen.aroundtheworld.databinding.ItemTripViewImageBinding
 
 class ImageListAdapter(
-    val context: Context, val imageListListener: ImageListListener, val images: ArrayList<String>
+    val context: Context, val imageListListener: ImageListListener, val imageExpandListener: ImageExpandListener, val images: ArrayList<String>
 ): RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     companion object {
@@ -39,7 +39,7 @@ class ImageListAdapter(
                 (holder as ImageAddViewHolder).bind(imageListListener)
             }
             IMAGE_VIEW -> {
-                (holder as ImageViewViewHolder).bind(images[position - 1], context)
+                (holder as ImageViewViewHolder).bind(images[position - 1], context, imageExpandListener)
             }
         }
 

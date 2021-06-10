@@ -21,6 +21,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.kevinclaassen.aroundtheworld.R
 import com.kevinclaassen.aroundtheworld.adapter.ImageListAdapter
 import com.kevinclaassen.aroundtheworld.databinding.FragmentTripDetailBinding
@@ -87,7 +88,7 @@ class TripDetailFragment : Fragment(), ImageListAdapter.ImageListListener, Image
 
         viewModel.getTripById(trip.id).observe(viewLifecycleOwner, androidx.lifecycle.Observer {
             trip = it
-            adapter = ImageListAdapter(requireActivity(), this, trip.images)
+            adapter = ImageListAdapter(requireActivity(), this, this, trip.images)
             image_list_recycler.layoutManager = GridLayoutManager(requireContext(), 2, RecyclerView.VERTICAL, false)
             image_list_recycler.adapter = adapter
         })
@@ -109,7 +110,10 @@ class TripDetailFragment : Fragment(), ImageListAdapter.ImageListListener, Image
     }
 
     override fun onImageClick(imagePath: String) {
-        expanded_trip_view_image.
+        Log.i("expand image", "expand image clicked")
+        Glide.with(requireActivity())
+            .load(imagePath)
+            .into(expanded_trip_view_image)
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
