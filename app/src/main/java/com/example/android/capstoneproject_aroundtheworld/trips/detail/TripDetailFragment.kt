@@ -56,16 +56,6 @@ class TripDetailFragment : Fragment(), ImageListAdapter.ImageListListener {
     // A global variable for stored image path.
     private var imagePath: String = ""
 
-    // For zoom function image view trip
-    // Hold a reference to the current animator,
-    // so that it can be canceled mid-way.
-    private var currentAnimator: Animator? = null
-
-    // The system "short" animation time duration, in milliseconds. This
-    // duration is ideal for subtle animations or animations that occur
-    // very frequently.
-    private var shortAnimationDuration: Int = 0
-
 
 
     /**

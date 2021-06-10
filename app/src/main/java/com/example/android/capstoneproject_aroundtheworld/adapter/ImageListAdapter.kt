@@ -63,6 +63,10 @@ class ImageListAdapter(
                     .diskCacheStrategy(DiskCacheStrategy.ALL)
                     .centerCrop()
                     .into(binding.tripDetailViewImage)
+
+            binding.tripDetailViewImage.setOnClickListener {
+                
+            }
         }
     }
 

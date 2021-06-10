@@ -17,11 +17,12 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
+        <androidx.constraintlayout.motion.widget.MotionLayout
             android:id="@+id/trip_detail_layout"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            tools:context=".countries.detail.CountryDetailFragment">
+            tools:context=".countries.detail.CountryDetailFragment"
+            app:layoutDescription="@xml/fragment_trip_detail_scene">
 
             <TextView
                 android:id="@+id/trip_header"
@@ -230,13 +231,15 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/favotite_pictures_text_view" />
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
+            <ImageView
+                android:id="@+id/expanded_trip_view_image"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:visibility="invisible"
+                android:contentDescription="@string/expanded_trip_view_image" />
+
+
+        </androidx.constraintlayout.motion.widget.MotionLayout>
     </androidx.core.widget.NestedScrollView>
-    <ImageView
-        android:id="@+id/expanded__trip_viewimage"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:visibility="invisible"
-        android:contentDescription="@string/description_zoom_touch_close" />
 
 </layout>
