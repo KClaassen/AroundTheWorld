@@ -56,7 +56,7 @@ class ImageListAdapter(
 
     class ImageViewViewHolder(val binding: ItemTripViewImageBinding) : RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(imagePath: String, context: Context) {
+        fun bind(imagePath: String, context: Context, listener: ImageExpandListener) {
             //binding.tripDetailViewImage.setImageResource(imagePath)
             Glide.with(context)
                     .load(imagePath)
@@ -65,7 +65,7 @@ class ImageListAdapter(
                     .into(binding.tripDetailViewImage)
 
             binding.tripDetailViewImage.setOnClickListener {
-
+                listener.onImageClick(imagePath)
             }
         }
     }
@@ -85,5 +85,9 @@ class ImageListAdapter(
 
     interface ImageListListener {
         fun onClick()
+    }
+
+    interface ImageExpandListener {
+        fun onImageClick(imagePath: String)
     }
 }

@@ -44,7 +44,7 @@ import java.io.OutputStream
 import java.util.*
 import kotlin.collections.ArrayList
 
-class TripDetailFragment : Fragment(), ImageListAdapter.ImageListListener {
+class TripDetailFragment : Fragment(), ImageListAdapter.ImageListListener, ImageListAdapter.ImageExpandListener {
 
     private lateinit var binding: FragmentTripDetailBinding
     private lateinit var adapter: ImageListAdapter
@@ -106,6 +106,10 @@ class TripDetailFragment : Fragment(), ImageListAdapter.ImageListListener {
     override fun onClick() {
         Log.i("listener", "Camera clicked")
         customImageSelectionDialog()
+    }
+
+    override fun onImageClick(imagePath: String) {
+        expanded_trip_view_image.
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
