@@ -7,10 +7,10 @@
     <data>
         <variable
             name="country"
-            type="com.example.android.capstoneproject_aroundtheworld.models.Country" />
+            type="com.kevinclaassen.aroundtheworld.models.Country" />
         <variable
             name="viewmodel"
-            type="com.example.android.capstoneproject_aroundtheworld.countries.CountriesListViewModel" />
+            type="com.kevinclaassen.aroundtheworld.countries.CountriesListViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

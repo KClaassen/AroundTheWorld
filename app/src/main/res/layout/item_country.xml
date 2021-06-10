@@ -7,10 +7,10 @@
     <data>
         <variable
             name="country"
-            type="com.example.android.capstoneproject_aroundtheworld.models.Country" />
+            type="com.kevinclaassen.aroundtheworld.models.Country" />
         <variable
             name="clickListener"
-            type="com.example.android.capstoneproject_aroundtheworld.adapter.CountryAdapter.CountryListener" />
+            type="com.kevinclaassen.aroundtheworld.adapter.CountryAdapter.CountryListener" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

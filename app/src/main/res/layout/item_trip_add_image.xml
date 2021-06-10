@@ -7,7 +7,7 @@
     <data>
         <variable
             name="listener"
-            type="com.example.android.capstoneproject_aroundtheworld.adapter.ImageListAdapter.ImageListListener" />
+            type="com.kevinclaassen.aroundtheworld.adapter.ImageListAdapter.ImageListListener" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

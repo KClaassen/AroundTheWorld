@@ -7,10 +7,10 @@
     <data>
         <variable
             name="trip"
-            type="com.example.android.capstoneproject_aroundtheworld.models.Trip" />
+            type="com.kevinclaassen.aroundtheworld.models.Trip" />
         <variable
             name="viewmodel"
-            type="com.example.android.capstoneproject_aroundtheworld.trips.TripsViewModel" />
+            type="com.kevinclaassen.aroundtheworld.trips.TripsViewModel" />
     </data>
 
     <androidx.core.widget.NestedScrollView
@@ -237,7 +237,6 @@
                 android:layout_height="match_parent"
                 android:visibility="invisible"
                 android:contentDescription="@string/expanded_trip_view_image" />
-
 
         </androidx.constraintlayout.motion.widget.MotionLayout>
     </androidx.core.widget.NestedScrollView>

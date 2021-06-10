@@ -7,12 +7,20 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:235802162769:android:06c02b27b6a7245dd7aa70",
+        "mobilesdk_app_id": "1:235802162769:android:97eab59303043a7ed7aa70",
         "android_client_info": {
-          "package_name": "com.example.android.capstoneproject_aroundtheworld"
+          "package_name": "com.kevinclaassen.aroundtheworld"
         }
       },
       "oauth_client": [
+        {
+          "client_id": "235802162769-agcjf79841plj6o26djrpcuu3hcibjof.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.kevinclaassen.aroundtheworld",
+            "certificate_hash": "dabdd9099a933d6c83836f5f5ab308a600b37006"
+          }
+        },
         {
           "client_id": "235802162769-7tsfld7hgur5ufp3edhh3907ve8gs8s2.apps.googleusercontent.com",
           "client_type": 3
