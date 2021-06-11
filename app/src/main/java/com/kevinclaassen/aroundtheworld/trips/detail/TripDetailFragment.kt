@@ -112,10 +112,11 @@ class TripDetailFragment : Fragment(), ImageListAdapter.ImageListListener, Image
 
     override fun onImageClick(imagePath: String) {
         Log.i("expand image", "expand image clicked")
-        Glide.with(requireContext())
+        Glide.with(requireActivity())
             .load(imagePath)
             .into(expanded_trip_view_image)
-        expanded_trip_view_image.motion_layout.transitionToStart()
+        binding.tripDetailLayout.transitionToStart()
+        binding.tripDetailLayout.transitionToEnd()
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
