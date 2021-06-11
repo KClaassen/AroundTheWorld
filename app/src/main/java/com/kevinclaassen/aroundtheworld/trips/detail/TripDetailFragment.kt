@@ -7,6 +7,7 @@ import android.content.ActivityNotFoundException
 import android.content.ContextWrapper
 import android.content.Intent
 import android.graphics.Bitmap
+import android.graphics.drawable.Drawable
 import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
@@ -22,7 +23,10 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.DataSource
+import com.bumptech.glide.load.engine.GlideException
 import com.bumptech.glide.request.RequestListener
+import com.bumptech.glide.request.target.Target
 import com.kevinclaassen.aroundtheworld.R
 import com.kevinclaassen.aroundtheworld.adapter.ImageListAdapter
 import com.kevinclaassen.aroundtheworld.databinding.FragmentTripDetailBinding
@@ -115,7 +119,27 @@ class TripDetailFragment : Fragment(), ImageListAdapter.ImageListListener, Image
         Log.i("expand image", "expand image clicked")
         Glide.with(requireActivity())
             .load(imagePath)
-            .listener(object: RequestListener<>)
+            .listener(object: RequestListener<Drawable> {
+                override fun onLoadFailed(
+                        e: GlideException?,
+                        model: Any?,
+                        target: Target<Drawable>?,
+                        isFirstResource: Boolean
+                ): Boolean {
+                    TODO("Not yet implemented")
+                }
+
+                override fun onResourceReady(
+                        resource: Drawable?,
+                        model: Any?,
+                        target: Target<Drawable>?,
+                        dataSource: DataSource?,
+                        isFirstResource: Boolean
+                ): Boolean {
+                    TODO("Not yet implemented")
+                }
+            })
+                .into(expanded_trip_view_image)
         binding.tripDetailLayout.transitionToStart()
         binding.tripDetailLayout.transitionToEnd()
     }
