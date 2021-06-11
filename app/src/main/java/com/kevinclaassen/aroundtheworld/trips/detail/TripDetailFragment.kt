@@ -126,7 +126,7 @@ class TripDetailFragment : Fragment(), ImageListAdapter.ImageListListener, Image
                         target: Target<Drawable>?,
                         isFirstResource: Boolean
                 ): Boolean {
-                    TODO("Not yet implemented")
+                    return false
                 }
 
                 override fun onResourceReady(
@@ -136,7 +136,7 @@ class TripDetailFragment : Fragment(), ImageListAdapter.ImageListListener, Image
                         dataSource: DataSource?,
                         isFirstResource: Boolean
                 ): Boolean {
-                    TODO("Not yet implemented")
+                    return false
                 }
             })
                 .into(expanded_trip_view_image)
