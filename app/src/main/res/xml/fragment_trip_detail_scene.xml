@@ -12,7 +12,7 @@
         <Constraint
             android:scaleX="0"
             android:scaleY="0"
-            android:id="@+id/expanded__trip_viewimage"
+            android:id="@+id/expanded_trip_view_image"
             android:visibility="invisible"/>
     </ConstraintSet>
 
@@ -20,7 +20,7 @@
         <Constraint
             android:scaleX="1"
             android:scaleY="1"
-            android:id="@+id/expanded__trip_viewimage"
+            android:id="@+id/expanded_trip_view_image"
             motion:layout_constraintLeft_toLeftOf="parent"
             motion:layout_constraintRight_toRightOf="parent"
             motion:layout_constraintBottom_toBottomOf="parent"

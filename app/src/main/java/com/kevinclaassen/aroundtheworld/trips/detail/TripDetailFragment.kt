@@ -36,6 +36,7 @@ import com.karumi.dexter.listener.PermissionGrantedResponse
 import com.karumi.dexter.listener.PermissionRequest
 import com.karumi.dexter.listener.multi.MultiplePermissionsListener
 import com.karumi.dexter.listener.single.PermissionListener
+import kotlinx.android.synthetic.main.activity_authentication.view.*
 import kotlinx.android.synthetic.main.custom_bottom_dialog_image_selection.view.*
 import kotlinx.android.synthetic.main.fragment_trip_detail.*
 import java.io.File
@@ -111,9 +112,10 @@ class TripDetailFragment : Fragment(), ImageListAdapter.ImageListListener, Image
 
     override fun onImageClick(imagePath: String) {
         Log.i("expand image", "expand image clicked")
-        Glide.with(requireActivity())
+        Glide.with(requireContext())
             .load(imagePath)
             .into(expanded_trip_view_image)
+        expanded_trip_view_image.motion_layout.transitionToStart()
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
