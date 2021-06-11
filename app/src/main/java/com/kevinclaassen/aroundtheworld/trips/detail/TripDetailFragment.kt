@@ -22,6 +22,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.bumptech.glide.request.RequestListener
 import com.kevinclaassen.aroundtheworld.R
 import com.kevinclaassen.aroundtheworld.adapter.ImageListAdapter
 import com.kevinclaassen.aroundtheworld.databinding.FragmentTripDetailBinding
@@ -114,7 +115,7 @@ class TripDetailFragment : Fragment(), ImageListAdapter.ImageListListener, Image
         Log.i("expand image", "expand image clicked")
         Glide.with(requireActivity())
             .load(imagePath)
-            .into(expanded_trip_view_image)
+            .listener(object: RequestListener<>)
         binding.tripDetailLayout.transitionToStart()
         binding.tripDetailLayout.transitionToEnd()
     }
