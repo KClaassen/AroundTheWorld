@@ -130,6 +130,7 @@ class TripDetailFragment : Fragment(), ImageListAdapter.ImageListListener, Image
                             isFirstResource: Boolean
                     ): Boolean {
                         e?.printStackTrace()
+                        Log.i("onLoadFailed", "onLoadFailed called")
                         return false
                     }
 
@@ -140,13 +141,14 @@ class TripDetailFragment : Fragment(), ImageListAdapter.ImageListListener, Image
                             dataSource: DataSource?,
                             isFirstResource: Boolean
                     ): Boolean {
+                        Log.i("onResourceReady", "onResourceReady called")
                         binding.tripDetailLayout.transitionToStart()
                         binding.tripDetailLayout.transitionToEnd()
+
                         return false
                     }
                 })
                 .into(expanded_trip_view_image)
-
 
     }
 
