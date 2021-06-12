@@ -12,8 +12,10 @@
         <Constraint
             android:scaleX="0"
             android:scaleY="0"
+            motion:layout_constraintLeft_toLeftOf="parent"
             motion:layout_constraintRight_toRightOf="parent"
             motion:layout_constraintBottom_toBottomOf="parent"
+            motion:layout_constraintTop_toTopOf="parent"
             android:id="@+id/expanded_trip_view_image"
             android:visibility="invisible"/>
     </ConstraintSet>
