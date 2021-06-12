@@ -25,6 +25,8 @@
             android:scaleX="1"
             android:scaleY="1"
             android:id="@+id/expanded_trip_view_image"
+            android:layout_width="match_parent"
+            android:layout_height="400dp"
             motion:layout_constraintLeft_toLeftOf="parent"
             motion:layout_constraintRight_toRightOf="parent"
             motion:layout_constraintBottom_toBottomOf="parent"
