@@ -181,7 +181,10 @@ class TripDetailFragment : Fragment(), ImageListAdapter.ImageListListener, Image
                     val selectedPhotoUri = data.data
 
                     if (selectedPhotoUri != null) {
-                        activity?.applicationContext?.contentResolver?.takePersistableUriPermission(selectedPhotoUri, Intent.FLAG_GRANT_READ_URI_PERMISSION or Intent.FLAG_GRANT_WRITE_URI_PERMISSION)
+                        activity?.applicationContext?.contentResolver?.takePersistableUriPermission(
+                                selectedPhotoUri,
+                                Intent.FLAG_GRANT_READ_URI_PERMISSION
+                                        or Intent.FLAG_GRANT_WRITE_URI_PERMISSION)
                     }
 
                     //val images = ArrayList<String>()
