@@ -18,6 +18,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.annotation.Nullable
+import androidx.core.graphics.drawable.toBitmap
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
@@ -180,12 +182,45 @@ class TripDetailFragment : Fragment(), ImageListAdapter.ImageListListener, Image
                     // Here we will get the select image URI.
                     val selectedPhotoUri = data.data
 
-                    if (selectedPhotoUri != null) {
-                        activity?.applicationContext?.contentResolver?.takePersistableUriPermission(
-                                selectedPhotoUri,
-                                Intent.FLAG_GRANT_READ_URI_PERMISSION
-                                        or Intent.FLAG_GRANT_WRITE_URI_PERMISSION)
-                    }
+//                    if (selectedPhotoUri != null) {
+//                        activity?.applicationContext?.contentResolver?.takePersistableUriPermission(
+//                                selectedPhotoUri,
+//                                Intent.FLAG_GRANT_READ_URI_PERMISSION
+//                                        or Intent.FLAG_GRANT_WRITE_URI_PERMISSION)
+//                    }
+
+                    // Set Selected Image URI to the imageView using Glide
+                    Glide.with(requireActivity())
+                            .load(selectedPhotoUri)
+                            .centerCrop()
+                            .diskCacheStrategy(DiskCacheStrategy.ALL)
+                            .listener(object : RequestListener<Drawable> {
+                                override fun onLoadFailed(
+                                        @Nullable e: GlideException?,
+                                        model: Any?,
+                                        target: Target<Drawable>?,
+                                        isFirstResource: Boolean
+                                ): Boolean {
+                                    // log exception
+                                    Log.e("TAG", "Error loading image", e)
+                                    return false // important to return false so the error placeholder can be placed
+                                }
+
+                                override fun onResourceReady(
+                                        resource: Drawable,
+                                        model: Any?,
+                                        target: Target<Drawable>?,
+                                        dataSource: DataSource?,
+                                        isFirstResource: Boolean
+                                ): Boolean {
+
+                                    val bitmap: Bitmap = resource.toBitmap()
+
+                                    imagePath = saveImageToInternalStorage(bitmap)
+                                    Log.i("ImagePath", imagePath)
+                                    return false
+                                }
+                            })
 
                     //val images = ArrayList<String>()
                     //images.add(selectedPhotoUri.toString())

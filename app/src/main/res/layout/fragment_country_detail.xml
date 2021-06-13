@@ -31,39 +31,17 @@
             android:textSize="36sp"
             android:textStyle="bold"
             android:textColor="@color/white"
-            android:hint="test"
+            android:hint="Country"
             android:text="@{country.name}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <ImageView
-            android:id="@+id/country_detail_region_icon"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_marginStart="50dp"
-            android:layout_marginTop="25dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/country_detail_capital_icon"
-            app:srcCompat="@drawable/region"
-            app:tint="@color/teal_700" />
-
-        <TextView
-            android:id="@+id/country_region_text"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="32dp"
-            android:layout_marginTop="55dp"
-            android:hint="region"
-            android:text="@{country.subregion}"
-            app:layout_constraintStart_toEndOf="@+id/country_detail_region_icon"
-            app:layout_constraintTop_toBottomOf="@+id/country_capital_text_" />
-
-        <ImageView
             android:id="@+id/country_detail_capital_icon"
             android:layout_width="50dp"
             android:layout_height="50dp"
-            android:layout_marginStart="50dp"
+            android:layout_marginStart="24dp"
             android:layout_marginTop="125dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/country_header"
@@ -71,60 +49,120 @@
             app:tint="@color/teal_700" />
 
         <TextView
+            android:id="@+id/country_capital_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="4dp"
+            android:text="@string/country_capital_label"
+            android:textStyle="bold"
+            app:layout_constraintStart_toEndOf="@+id/country_detail_capital_icon"
+            app:layout_constraintTop_toTopOf="@+id/country_detail_capital_icon" />
+
+        <TextView
             android:id="@+id/country_capital_text_"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="32dp"
-            android:layout_marginTop="140dp"
-            android:hint="capital"
+            android:layout_marginStart="8dp"
+            android:layout_marginBottom="4dp"
             android:text="@{country.capital}"
-            app:layout_constraintStart_toEndOf="@+id/country_detail_capital_icon"
-            app:layout_constraintTop_toBottomOf="@+id/country_header" />
+            app:layout_constraintBottom_toBottomOf="@+id/country_detail_capital_icon"
+            app:layout_constraintStart_toEndOf="@+id/country_detail_capital_icon" />
 
         <ImageView
-            android:id="@+id/country_detail_language_icon"
+            android:id="@+id/country_detail_region_icon"
             android:layout_width="50dp"
             android:layout_height="50dp"
-            android:layout_marginStart="50dp"
+            android:layout_marginStart="24dp"
             android:layout_marginTop="25dp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/country_detail_currency_icon"
-            app:srcCompat="@drawable/language"
+            app:layout_constraintTop_toBottomOf="@+id/country_detail_capital_icon"
+            app:srcCompat="@drawable/region"
             app:tint="@color/teal_700" />
 
         <TextView
-            android:id="@+id/country_language_text"
+            android:id="@+id/country_region_label"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="32dp"
-            android:layout_marginTop="55dp"
-            android:hint="language"
-            android:text="@{language.name}"
-            app:layout_constraintStart_toEndOf="@+id/country_detail_language_icon"
-            app:layout_constraintTop_toBottomOf="@+id/country_currency_text" />
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="4dp"
+            android:text="@string/country_region_label"
+            android:textStyle="bold"
+            app:layout_constraintStart_toEndOf="@+id/country_detail_region_icon"
+            app:layout_constraintTop_toTopOf="@+id/country_detail_region_icon" />
+
+        <TextView
+            android:id="@+id/country_region_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginBottom="4dp"
+            android:text="@{country.subregion}"
+            app:layout_constraintBottom_toBottomOf="@+id/country_detail_region_icon"
+            app:layout_constraintStart_toEndOf="@+id/country_detail_region_icon" />
 
         <ImageView
             android:id="@+id/country_detail_currency_icon"
             android:layout_width="50dp"
             android:layout_height="50dp"
-            android:layout_marginStart="50dp"
-            android:layout_marginTop="25dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/country_detail_region_icon"
+            android:layout_marginStart="60dp"
+            android:layout_marginTop="125dp"
+            app:layout_constraintStart_toEndOf="@+id/country_capital_label"
+            app:layout_constraintTop_toBottomOf="@+id/country_header"
             app:srcCompat="@drawable/currency"
             app:tint="@color/teal_700" />
+
+        <TextView
+            android:id="@+id/country_currency_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="4dp"
+            android:text="@string/country_currency_label"
+            android:textStyle="bold"
+            app:layout_constraintStart_toEndOf="@+id/country_detail_currency_icon"
+            app:layout_constraintTop_toTopOf="@+id/country_detail_currency_icon" />
 
         <TextView
             android:id="@+id/country_currency_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="32dp"
-            android:layout_marginTop="55dp"
-            android:hint="currency"
+            android:layout_marginStart="8dp"
+            android:layout_marginBottom="4dp"
             android:text="@{currency.name}"
-            app:layout_constraintStart_toEndOf="@+id/country_detail_currency_icon"
-            app:layout_constraintTop_toBottomOf="@+id/country_region_text" />
+            app:layout_constraintBottom_toBottomOf="@+id/country_detail_currency_icon"
+            app:layout_constraintStart_toEndOf="@+id/country_detail_currency_icon" />
 
+        <ImageView
+            android:id="@+id/country_detail_language_icon"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="25dp"
+            app:layout_constraintStart_toStartOf="@+id/country_detail_currency_icon"
+            app:layout_constraintTop_toBottomOf="@+id/country_detail_currency_icon"
+            app:srcCompat="@drawable/language"
+            app:tint="@color/teal_700" />
+
+        <TextView
+            android:id="@+id/country_language_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="4dp"
+            android:text="@string/country_language_label"
+            android:textStyle="bold"
+            app:layout_constraintStart_toEndOf="@+id/country_detail_language_icon"
+            app:layout_constraintTop_toTopOf="@+id/country_detail_language_icon" />
+
+        <TextView
+            android:id="@+id/country_language_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginBottom="4dp"
+            android:text="@{language.name}"
+            app:layout_constraintBottom_toBottomOf="@+id/country_detail_language_icon"
+            app:layout_constraintStart_toEndOf="@+id/country_detail_language_icon" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
