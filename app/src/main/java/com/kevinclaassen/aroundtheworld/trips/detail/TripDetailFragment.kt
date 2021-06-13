@@ -9,16 +9,17 @@ import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.drawable.Drawable
 import android.net.Uri
+import android.os.Build
 import android.os.Bundle
 import android.provider.MediaStore
 import android.provider.Settings
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -28,11 +29,6 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.load.engine.GlideException
 import com.bumptech.glide.request.RequestListener
 import com.bumptech.glide.request.target.Target
-import com.kevinclaassen.aroundtheworld.R
-import com.kevinclaassen.aroundtheworld.adapter.ImageListAdapter
-import com.kevinclaassen.aroundtheworld.databinding.FragmentTripDetailBinding
-import com.kevinclaassen.aroundtheworld.models.Trip
-import com.kevinclaassen.aroundtheworld.trips.TripsViewModel
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.karumi.dexter.Dexter
 import com.karumi.dexter.MultiplePermissionsReport
@@ -42,6 +38,11 @@ import com.karumi.dexter.listener.PermissionGrantedResponse
 import com.karumi.dexter.listener.PermissionRequest
 import com.karumi.dexter.listener.multi.MultiplePermissionsListener
 import com.karumi.dexter.listener.single.PermissionListener
+import com.kevinclaassen.aroundtheworld.R
+import com.kevinclaassen.aroundtheworld.adapter.ImageListAdapter
+import com.kevinclaassen.aroundtheworld.databinding.FragmentTripDetailBinding
+import com.kevinclaassen.aroundtheworld.models.Trip
+import com.kevinclaassen.aroundtheworld.trips.TripsViewModel
 import kotlinx.android.synthetic.main.activity_authentication.view.*
 import kotlinx.android.synthetic.main.custom_bottom_dialog_image_selection.view.*
 import kotlinx.android.synthetic.main.fragment_trip_detail.*
@@ -51,6 +52,7 @@ import java.io.IOException
 import java.io.OutputStream
 import java.util.*
 import kotlin.collections.ArrayList
+
 
 class TripDetailFragment : Fragment(), ImageListAdapter.ImageListListener, ImageListAdapter.ImageExpandListener {
 
@@ -77,8 +79,8 @@ class TripDetailFragment : Fragment(), ImageListAdapter.ImageListListener, Image
     }
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
+            inflater: LayoutInflater, container: ViewGroup?,
+            savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
         // Get a reference to the binding object and inflate the fragment views.
@@ -122,7 +124,7 @@ class TripDetailFragment : Fragment(), ImageListAdapter.ImageListListener, Image
                 .load(imagePath)
                 .diskCacheStrategy(DiskCacheStrategy.ALL)
                 .centerCrop()
-                .listener(object: RequestListener<Drawable> {
+                .listener(object : RequestListener<Drawable> {
                     override fun onLoadFailed(
                             e: GlideException?,
                             model: Any?,
@@ -178,7 +180,10 @@ class TripDetailFragment : Fragment(), ImageListAdapter.ImageListListener, Image
                     // Here we will get the select image URI.
                     val selectedPhotoUri = data.data
 
-                    // Set Selected Image URI to the imageView using Glide
+                    if (selectedPhotoUri != null) {
+                        activity?.applicationContext?.contentResolver?.takePersistableUriPermission(selectedPhotoUri, Intent.FLAG_GRANT_READ_URI_PERMISSION or Intent.FLAG_GRANT_WRITE_URI_PERMISSION)
+                    }
+
                     //val images = ArrayList<String>()
                     //images.add(selectedPhotoUri.toString())
                     adapter.notifyDataSetChanged()
@@ -293,7 +298,7 @@ class TripDetailFragment : Fragment(), ImageListAdapter.ImageListListener, Image
     private fun showRationalDialogForPermissions() {
         // Explanation of requested permissions, show alert with request explanation
         AlertDialog.Builder(requireContext()).setMessage("Permissions for this feature are turned disabled. Please go to settings to enable these")
-                .setPositiveButton("Settings") { _,_ ->
+                .setPositiveButton("Settings") { _, _ ->
                     try {
                         val intent = Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS)
                         val uri = Uri.fromParts("package", activity?.packageName, null)
