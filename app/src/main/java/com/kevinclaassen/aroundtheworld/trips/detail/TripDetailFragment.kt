@@ -1,6 +1,7 @@
 package com.kevinclaassen.aroundtheworld.trips.detail
 
 import android.Manifest
+import android.annotation.SuppressLint
 import android.app.Activity
 import android.app.AlertDialog
 import android.content.ActivityNotFoundException
@@ -182,45 +183,13 @@ class TripDetailFragment : Fragment(), ImageListAdapter.ImageListListener, Image
                     // Here we will get the select image URI.
                     val selectedPhotoUri = data.data
 
-//                    if (selectedPhotoUri != null) {
-//                        activity?.applicationContext?.contentResolver?.takePersistableUriPermission(
-//                                selectedPhotoUri,
-//                                Intent.FLAG_GRANT_READ_URI_PERMISSION
-//                                        or Intent.FLAG_GRANT_WRITE_URI_PERMISSION)
-//                    }
+                    val contentResolver = requireContext().applicationContext.contentResolver
 
-                    // Set Selected Image URI to the imageView using Glide
-                    Glide.with(requireActivity())
-                            .load(selectedPhotoUri)
-                            .centerCrop()
-                            .diskCacheStrategy(DiskCacheStrategy.ALL)
-                            .listener(object : RequestListener<Drawable> {
-                                override fun onLoadFailed(
-                                        @Nullable e: GlideException?,
-                                        model: Any?,
-                                        target: Target<Drawable>?,
-                                        isFirstResource: Boolean
-                                ): Boolean {
-                                    // log exception
-                                    Log.e("TAG", "Error loading image", e)
-                                    return false // important to return false so the error placeholder can be placed
-                                }
+                    val takeFlags: Int = Intent.FLAG_GRANT_READ_URI_PERMISSION or
+                            Intent.FLAG_GRANT_WRITE_URI_PERMISSION
+                    // Check for the freshest data.
+                    contentResolver.takePersistableUriPermission(data.data!!, takeFlags)
 
-                                override fun onResourceReady(
-                                        resource: Drawable,
-                                        model: Any?,
-                                        target: Target<Drawable>?,
-                                        dataSource: DataSource?,
-                                        isFirstResource: Boolean
-                                ): Boolean {
-
-                                    val bitmap: Bitmap = resource.toBitmap()
-
-                                    imagePath = saveImageToInternalStorage(bitmap)
-                                    Log.i("ImagePath", imagePath)
-                                    return false
-                                }
-                            })
 
                     //val images = ArrayList<String>()
                     //images.add(selectedPhotoUri.toString())
@@ -301,9 +270,10 @@ class TripDetailFragment : Fragment(), ImageListAdapter.ImageListListener, Image
                 )
                 .withListener(object : PermissionListener {
 
+
                     override fun onPermissionGranted(response: PermissionGrantedResponse?) {
                         val galleryIntent = Intent(
-                                Intent.ACTION_PICK,
+                                Intent.ACTION_OPEN_DOCUMENT,
                                 MediaStore.Images.Media.EXTERNAL_CONTENT_URI
                         )
 
