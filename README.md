@@ -7,3 +7,5 @@ Also able to click on each country to view more info about that country
 
 Trip part is like a initiary, users can add there upcoming trips and some info about that trip
 and users can add images from camera or gallery to that trip
+
+App is created by using MVVM Architecture, using Coroutines, Room, Firebase Login, RestCountries.eu API and intents to access Camera and Gallery
