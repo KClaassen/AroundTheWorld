@@ -9,7 +9,6 @@ import kotlinx.android.parcel.Parcelize
 @Entity()
 data class Trip(
         @PrimaryKey(autoGenerate = true) val id: Int = 0,
-       // @PrimaryKey
         var name: String,
         var description: String,
         var airline: String?,

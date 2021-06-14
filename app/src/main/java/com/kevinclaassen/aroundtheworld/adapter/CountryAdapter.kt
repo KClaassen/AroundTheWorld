@@ -36,9 +36,7 @@ class CountryAdapter(val listener: CountryListener): ListAdapter<Country, Countr
     class ViewHolder(val binding: ItemCountryBinding) : RecyclerView.ViewHolder(binding.root) {
 
         // Added countryCheckCallBack to listen to changes for countries selected (for country count)
-        fun bindView(//context: CountriesListFragment,
-                     country: Country,
-                     listener: CountryListener) {
+        fun bindView(country: Country, listener: CountryListener) {
             //Holds the Textview that will add each item to
             binding.clickListener = listener
             binding.countryListName.text = country.name

@@ -1,7 +1,6 @@
 package com.kevinclaassen.aroundtheworld.trips.detail
 
 import android.Manifest
-import android.annotation.SuppressLint
 import android.app.Activity
 import android.app.AlertDialog
 import android.content.ActivityNotFoundException
@@ -10,7 +9,6 @@ import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.drawable.Drawable
 import android.net.Uri
-import android.os.Build
 import android.os.Bundle
 import android.provider.MediaStore
 import android.provider.Settings
@@ -19,8 +17,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.annotation.Nullable
-import androidx.core.graphics.drawable.toBitmap
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
@@ -46,7 +42,6 @@ import com.kevinclaassen.aroundtheworld.adapter.ImageListAdapter
 import com.kevinclaassen.aroundtheworld.databinding.FragmentTripDetailBinding
 import com.kevinclaassen.aroundtheworld.models.Trip
 import com.kevinclaassen.aroundtheworld.trips.TripsViewModel
-import kotlinx.android.synthetic.main.activity_authentication.view.*
 import kotlinx.android.synthetic.main.custom_bottom_dialog_image_selection.view.*
 import kotlinx.android.synthetic.main.fragment_trip_detail.*
 import java.io.File
@@ -54,7 +49,6 @@ import java.io.FileOutputStream
 import java.io.IOException
 import java.io.OutputStream
 import java.util.*
-import kotlin.collections.ArrayList
 
 
 class TripDetailFragment : Fragment(), ImageListAdapter.ImageListListener, ImageListAdapter.ImageExpandListener {
@@ -62,12 +56,10 @@ class TripDetailFragment : Fragment(), ImageListAdapter.ImageListListener, Image
     private lateinit var binding: FragmentTripDetailBinding
     private lateinit var adapter: ImageListAdapter
 
-    private var images: ArrayList<String> = ArrayList()
     private lateinit var trip: Trip
 
     // A global variable for stored image path.
     private var imagePath: String = ""
-
 
 
     /**
@@ -89,7 +81,6 @@ class TripDetailFragment : Fragment(), ImageListAdapter.ImageListListener, Image
         // Get a reference to the binding object and inflate the fragment views.
         binding = DataBindingUtil.inflate(
                 inflater, R.layout.fragment_trip_detail, container, false)
-        //requireActivity().window.statusBarColor = Color.WHITE
 
         //Initializing ViewModel
         binding.lifecycleOwner = this
@@ -98,7 +89,7 @@ class TripDetailFragment : Fragment(), ImageListAdapter.ImageListListener, Image
         trip = TripDetailFragmentArgs.fromBundle(requireArguments()).trip
         binding.trip = trip
 
-        viewModel.getTripById(trip.id).observe(viewLifecycleOwner, androidx.lifecycle.Observer {
+        viewModel.getTripById(trip.id).observe(viewLifecycleOwner, {
             trip = it
             adapter = ImageListAdapter(requireActivity(), this, this, trip.images)
             image_list_recycler.layoutManager = GridLayoutManager(requireContext(), 2, RecyclerView.VERTICAL, false)
@@ -107,14 +98,6 @@ class TripDetailFragment : Fragment(), ImageListAdapter.ImageListListener, Image
 
         return binding.root
     }
-
-//    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-//        super.onViewCreated(view, savedInstanceState)
-//        //val images = ArrayList<String>()
-////        images.add("Path to image 1")
-////        images.add("Path to image 2")
-////        images.add("Path to image 3")
-//    }
 
     override fun onClick() {
         Log.i("listener", "Camera clicked")
@@ -169,8 +152,7 @@ class TripDetailFragment : Fragment(), ImageListAdapter.ImageListListener, Image
                     // Set Capture Image bitmap to the imageView using Glide
                     // Setting ImagePath before adding it in the ArrayList
                     imagePath = saveImageToInternalStorage(thumbnail)
-                    // Adding imagePath to ArrayList
-                    //images.add(imagePath)
+
                     Log.i("ImagePath", imagePath)
                     // Send changes to adapter
                     adapter.notifyDataSetChanged()
@@ -183,6 +165,7 @@ class TripDetailFragment : Fragment(), ImageListAdapter.ImageListListener, Image
                     // Here we will get the select image URI.
                     val selectedPhotoUri = data.data
 
+                    // Implement for persistent data permission otherwise this will be lost after reboot
                     val contentResolver = requireContext().applicationContext.contentResolver
 
                     val takeFlags: Int = Intent.FLAG_GRANT_READ_URI_PERMISSION or
@@ -191,8 +174,6 @@ class TripDetailFragment : Fragment(), ImageListAdapter.ImageListListener, Image
                     contentResolver.takePersistableUriPermission(data.data!!, takeFlags)
 
 
-                    //val images = ArrayList<String>()
-                    //images.add(selectedPhotoUri.toString())
                     adapter.notifyDataSetChanged()
 
                     trip.images.add(selectedPhotoUri.toString())
@@ -210,13 +191,11 @@ class TripDetailFragment : Fragment(), ImageListAdapter.ImageListListener, Image
         dialog.setContentView(customDialog)
 
         customDialog.photo_from_camera.setOnClickListener {
-           // Toast.makeText(requireContext(), "Camera", Toast.LENGTH_SHORT).show()
             takePhotoFromCamera(dialog)
             dialog.dismiss()
         }
 
         customDialog.select_from_gallery.setOnClickListener {
-            //Toast.makeText(requireContext(), "Gallery", Toast.LENGTH_SHORT).show()
             choosePhotoFromGallery(dialog)
             dialog.dismiss()
         }
@@ -232,7 +211,6 @@ class TripDetailFragment : Fragment(), ImageListAdapter.ImageListListener, Image
         Dexter.withContext(requireActivity())
                 .withPermissions(
                         Manifest.permission.READ_EXTERNAL_STORAGE,
-                        //Manifest.permission.WRITE_EXTERNAL_STORAGE,
                         Manifest.permission.CAMERA
                 )
                 .withListener(object : MultiplePermissionsListener {
@@ -266,7 +244,6 @@ class TripDetailFragment : Fragment(), ImageListAdapter.ImageListListener, Image
         Dexter.withContext(requireActivity())
                 .withPermission(
                         Manifest.permission.READ_EXTERNAL_STORAGE
-                        //Manifest.permission.WRITE_EXTERNAL_STORAGE
                 )
                 .withListener(object : PermissionListener {
 

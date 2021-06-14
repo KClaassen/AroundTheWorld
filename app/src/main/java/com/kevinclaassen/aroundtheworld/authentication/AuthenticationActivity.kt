@@ -30,7 +30,7 @@ class AuthenticationActivity : AppCompatActivity() {
 
         val firebaseAuth = FirebaseAuth.getInstance()
         if (firebaseAuth.currentUser != null) {
-            navigateToReminderActivity()
+            navigateToMainActivity()
             return
         }
 
@@ -40,13 +40,10 @@ class AuthenticationActivity : AppCompatActivity() {
             launchSignInFlow()
         }
 
-//          TODO: a bonus is to customize the sign in flow to look nice using :
-        //https://github.com/firebase/FirebaseUI-Android/blob/master/auth/README.md#custom-layout
-
     }
 
-    private fun navigateToReminderActivity() {
-        //          TODO: Remember to chang this to HomeScreen once setup
+    private fun navigateToMainActivity() {
+        // Navigate to Main Activity this will go to the fragment that has been set as home in navigation file
         startActivity(Intent(this, MainActivity::class.java))
         finish()
     }
@@ -64,7 +61,7 @@ class AuthenticationActivity : AppCompatActivity() {
                         "Successfully signed in user " +
                                 "${FirebaseAuth.getInstance().currentUser?.displayName}!"
                 )
-                navigateToReminderActivity()
+                navigateToMainActivity()
             } else {
                 // Sign in failed. If response is null the user canceled the sign-in flow using
                 // the back button. Otherwise check response.getError().getErrorCode() and handle
@@ -87,8 +84,7 @@ class AuthenticationActivity : AppCompatActivity() {
         // that you have enabled.
         val customLayout = AuthMethodPickerLayout.Builder(R.layout.custom_login_layout)
                 .setGoogleButtonId(R.id.google_login)
-                .setEmailButtonId(R.id.email_login) // ...
-                //.setTosAndPrivacyPolicyId(R.id.baz)
+                .setEmailButtonId(R.id.email_login)
                 .build()
 
         startActivityForResult(

@@ -20,9 +20,6 @@ class CountriesRepository(private val database: CountryDatabase) {
             }
             Log.i("Repository", "${listOfCountries}")
         }
-//        listOfCountries = ArrayList<Country>()
-//        listOfCountries.add(Country("Capital", Currency("currency"), "flag", Language("spanish"),"the name","he region"))
-        //database.countryDao.getCountries()
         database.countryDao.insertAll(countries)
     }
 }

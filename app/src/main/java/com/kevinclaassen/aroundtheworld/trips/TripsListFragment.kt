@@ -49,13 +49,13 @@ class TripsListFragment : Fragment() {
             view.findNavController().navigate(R.id.action_tripsListFragment_to_newTripFragment)
         }
 
-        viewModel.getAllTrips().observe(viewLifecycleOwner, Observer {
+        viewModel.getAllTrips().observe(viewLifecycleOwner, {
             adapter.trips = it
             adapter.notifyDataSetChanged()
         })
 
         // Observing changes in TripsList
-        viewModel.tripList.observe(viewLifecycleOwner, Observer {
+        viewModel.tripList.observe(viewLifecycleOwner, {
             for (trip in it) {
                 DataBindingUtil.inflate<FragmentTripsListBinding>(
                         layoutInflater,
