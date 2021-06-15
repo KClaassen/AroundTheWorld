@@ -48,5 +48,6 @@
     <string name="select_photo_from_gallery">Select photo from gallery</string>
     <string name="countries_been">Countries Been</string>
     <string name="expanded_trip_view_image">expanded trip view image</string>
+    <string name="trip_title_label">Trip:</string>
 
 </resources>

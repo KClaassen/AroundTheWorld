@@ -1,7 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <dimen name="auth_horizontal_margin">16dp</dimen>
-    <dimen name="auth_button_margin">25dp</dimen>
+    <dimen name="button_margin">25dp</dimen>
     <dimen name="startup_title_1_top">300dp</dimen>
     <dimen name="startup_title_2_top">50dp</dimen>
+    <dimen name="standart_margin">16dp</dimen>
+    <dimen name="bottom_nav">0dp</dimen>
+    <dimen name="standard_margin_24">24dp</dimen>
+    <dimen name="fragment_title_top">50dp</dimen>
+    <dimen name="fragment_title">32dp</dimen>
+    <dimen name="new_trip_horizontal">32dp</dimen>
+    <dimen name="new_trip_vertical">16dp</dimen>
+    <dimen name="min_margin">8dp</dimen>
+    <dimen name="min_vertical">4dp</dimen>
+
 </resources>
