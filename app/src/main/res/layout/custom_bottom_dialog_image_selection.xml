@@ -10,8 +10,8 @@
         android:id="@+id/custom_dialog_camera"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/custom_dialog"
-        android:layout_marginTop="@dimen/custom_dialog"
+        android:layout_marginStart="@dimen/standard_margin_24"
+        android:layout_marginTop="@dimen/standard_margin_24"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/outline_photo_camera_24" />

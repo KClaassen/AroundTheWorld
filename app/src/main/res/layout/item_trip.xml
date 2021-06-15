@@ -44,7 +44,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/standard_margin_24"
                     android:layout_marginTop="@dimen/standard_margin_24"
-                    android:text="@string/Trip_title_label"
+                    android:text="@string/trip_title_label"
                     android:textColor="@color/black"
                     android:textStyle="bold"
                     card_view:layout_constraintStart_toStartOf="parent"
