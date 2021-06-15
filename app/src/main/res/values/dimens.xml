@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="auth_horizontal_margin">16dp</dimen>
+    <dimen name="auth_button_margin">25dp</dimen>
+    <dimen name="startup_title_1_top">300dp</dimen>
+    <dimen name="startup_title_2_top">50dp</dimen>
+</resources>
