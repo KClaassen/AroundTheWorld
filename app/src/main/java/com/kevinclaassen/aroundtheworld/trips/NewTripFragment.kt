@@ -23,7 +23,6 @@ const val KEY_TRIP = "trip_key"
 class NewTripFragment : Fragment(), View.OnClickListener {
 
     private lateinit var binding: FragmentNewTripBinding
-    private lateinit var trip: Trip
 
     //For date picker when creating new Trip
     private var cal = Calendar.getInstance()
@@ -86,16 +85,15 @@ class NewTripFragment : Fragment(), View.OnClickListener {
         // If there is a savedInstanceState bundle, then you're "restarting" the activity
         // If there isn't a bundle, then it's a "fresh" start
         if (savedInstanceState != null) {
-            // Get all the game state information from the bundle, set it
-            trip = savedInstanceState.getParcelable(KEY_TRIP)!!
+            // Get all the state information from the bundle, set it
+            binding.trip = savedInstanceState.getParcelable(KEY_TRIP)!!
         }
 
         return binding.root
     }
 
     override fun onSaveInstanceState(outState: Bundle) {
-        trip = Trip(0, "", "", "", "", "", "", "", ArrayList())
-        outState.putParcelable(KEY_TRIP, trip)
+        outState.putParcelable(KEY_TRIP, binding.trip)
         super.onSaveInstanceState(outState)
     }
 
