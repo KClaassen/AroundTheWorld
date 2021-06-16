@@ -7,7 +7,6 @@
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"
         android:maxSdkVersion="29"/>
-    <uses-permission android:name="android.permission.CAMERA"/>
 
     <uses-feature android:name="android.hardware.camera"
         android:required="true" />
@@ -26,7 +25,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
          </activity>
-        <activity android:name="com.kevinclaassen.aroundtheworld.MainActivity"></activity>
+        <activity android:name="com.kevinclaassen.aroundtheworld.MainActivity" />
     </application>
 
 </manifest>

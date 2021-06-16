@@ -30,12 +30,10 @@ import com.bumptech.glide.request.RequestListener
 import com.bumptech.glide.request.target.Target
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.karumi.dexter.Dexter
-import com.karumi.dexter.MultiplePermissionsReport
 import com.karumi.dexter.PermissionToken
 import com.karumi.dexter.listener.PermissionDeniedResponse
 import com.karumi.dexter.listener.PermissionGrantedResponse
 import com.karumi.dexter.listener.PermissionRequest
-import com.karumi.dexter.listener.multi.MultiplePermissionsListener
 import com.karumi.dexter.listener.single.PermissionListener
 import com.kevinclaassen.aroundtheworld.R
 import com.kevinclaassen.aroundtheworld.adapter.ImageListAdapter
@@ -191,11 +189,13 @@ class TripDetailFragment : Fragment(), ImageListAdapter.ImageListListener, Image
         dialog.setContentView(customDialog)
 
         customDialog.photo_from_camera.setOnClickListener {
+            Log.i("camera click", "camera clicked")
             takePhotoFromCamera(dialog)
             dialog.dismiss()
         }
 
         customDialog.select_from_gallery.setOnClickListener {
+            Log.i("gallery click", "gallery clicked")
             choosePhotoFromGallery(dialog)
             dialog.dismiss()
         }
@@ -209,27 +209,28 @@ class TripDetailFragment : Fragment(), ImageListAdapter.ImageListListener, Image
     private fun takePhotoFromCamera(dialog: BottomSheetDialog) {
         Log.i("camera", "take photo from camera")
         Dexter.withContext(requireActivity())
-                .withPermissions(
-                        Manifest.permission.READ_EXTERNAL_STORAGE,
-                        Manifest.permission.CAMERA
+                .withPermission(
+                        Manifest.permission.READ_EXTERNAL_STORAGE
                 )
-                .withListener(object : MultiplePermissionsListener {
-                    override fun onPermissionsChecked(report: MultiplePermissionsReport?) {
-                        report?.let {
-                            // Here after all the permission are granted launch the CAMERA to capture an image.
-                            if (report.areAllPermissionsGranted()) {
-                                val intent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
-                                startActivityForResult(intent, CAMERA)
-                            }
-                        }
+                .withListener(object : PermissionListener {
 
+                    override fun onPermissionGranted(permission: PermissionGrantedResponse?) {
+                        val intent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
+                        startActivityForResult(intent, CAMERA)
                     }
 
-                    override fun onPermissionRationaleShouldBeShown(
-                            permissions: MutableList<PermissionRequest>?,
-                            token: PermissionToken?
-                    ) {
+                    override fun onPermissionDenied(permission: PermissionDeniedResponse?) {
+                        Toast.makeText(
+                                requireContext(),
+                                "You have denied the permission to take picture.",
+                                Toast.LENGTH_SHORT
+                        ).show()
+                    }
+
+                    override fun onPermissionRationaleShouldBeShown(permission: PermissionRequest?, token: PermissionToken?) {
                         showRationalDialogForPermissions()
+
+                        token?.continuePermissionRequest()
                     }
                 }).onSameThread()
                 .check()
@@ -246,7 +247,6 @@ class TripDetailFragment : Fragment(), ImageListAdapter.ImageListListener, Image
                         Manifest.permission.READ_EXTERNAL_STORAGE
                 )
                 .withListener(object : PermissionListener {
-
 
                     override fun onPermissionGranted(response: PermissionGrantedResponse?) {
                         val galleryIntent = Intent(
@@ -269,6 +269,8 @@ class TripDetailFragment : Fragment(), ImageListAdapter.ImageListListener, Image
                             permission: PermissionRequest?,
                             token: PermissionToken?) {
                         showRationalDialogForPermissions()
+
+                        token?.continuePermissionRequest()
                     }
 
                 }).onSameThread()
