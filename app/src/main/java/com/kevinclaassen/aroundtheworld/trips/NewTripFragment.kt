@@ -87,6 +87,18 @@ class NewTripFragment : Fragment(), View.OnClickListener {
         if (savedInstanceState != null) {
             // Get all the state information from the bundle, set it
             binding.trip = savedInstanceState.getParcelable(KEY_TRIP)!!
+        } else {
+            binding.trip = Trip(
+                    0,
+                    "",
+                    "",
+                    "",
+                    "",
+                    "",
+                    "",
+                    "",
+                    ArrayList()
+            )
         }
 
         return binding.root
