@@ -30,17 +30,6 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/countries_been_count"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="32dp"
-            android:textSize="40sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/countries_been_label"
-            android:text="@{ `` + viewmodel.counter}"/>
-
-        <TextView
             android:id="@+id/countries_been_label"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -51,6 +40,17 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/countries_been_count"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
+            android:textSize="40sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/countries_been_label"
+            android:text="@{viewmodel.counter == null ? `` + 0 : `` + viewmodel.counter}"/>
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/countries_recycler"

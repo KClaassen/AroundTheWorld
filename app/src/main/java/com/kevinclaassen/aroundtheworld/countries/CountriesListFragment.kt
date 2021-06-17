@@ -26,7 +26,7 @@ class CountriesListFragment : Fragment(), CountryAdapter.CountryListener {
     private val viewModel: CountriesListViewModel by lazy {
         val activity = requireNotNull(this.activity) {
         }
-        ViewModelProvider(this, CountriesListViewModel.Factory(activity.application)).get(
+        ViewModelProvider(activity, CountriesListViewModel.Factory(activity.application)).get(
                 CountriesListViewModel::class.java
         )
     }
