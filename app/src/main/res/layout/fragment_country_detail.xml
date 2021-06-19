@@ -96,10 +96,12 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/min_margin"
-            android:layout_marginBottom="@dimen/min_vertical"
+            android:layout_marginTop="4dp"
+            android:maxWidth="100dp"
+            android:maxLines="2"
             android:text="@{country.subregion}"
-            app:layout_constraintBottom_toBottomOf="@+id/country_detail_region_icon"
-            app:layout_constraintStart_toEndOf="@+id/country_detail_region_icon" />
+            app:layout_constraintStart_toEndOf="@+id/country_detail_region_icon"
+            app:layout_constraintTop_toBottomOf="@+id/country_region_label" />
 
         <ImageView
             android:id="@+id/country_detail_currency_icon"
