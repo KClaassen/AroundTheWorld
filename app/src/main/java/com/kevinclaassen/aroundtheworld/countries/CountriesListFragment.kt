@@ -1,11 +1,12 @@
 package com.kevinclaassen.aroundtheworld.countries
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
+import android.os.Parcelable
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
@@ -16,9 +17,14 @@ import com.kevinclaassen.aroundtheworld.databinding.FragmentCountriesListBinding
 import com.kevinclaassen.aroundtheworld.models.Country
 import kotlinx.android.synthetic.main.fragment_countries_list.*
 
+
+//const val KEY_RECYCLER_STATE = "recycler_state"
+
 class CountriesListFragment : Fragment(), CountryAdapter.CountryListener {
 
     private lateinit var binding: FragmentCountriesListBinding
+//    private var listState: Parcelable? = null
+//    private var bundleRecyclerViewState: Bundle? = null
 
     /**
      * Lazily initialize our [CountriesListViewModel].
@@ -31,8 +37,8 @@ class CountriesListFragment : Fragment(), CountryAdapter.CountryListener {
         )
     }
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
+            inflater: LayoutInflater, container: ViewGroup?,
+            savedInstanceState: Bundle?
     ): View? {
         // Data Binding
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_countries_list, container, false)
@@ -78,5 +84,24 @@ class CountriesListFragment : Fragment(), CountryAdapter.CountryListener {
     override fun onChecked(country: Country) {
         viewModel.updateCountry(country)
     }
+
+//    override fun onPause() {
+//        super.onPause()
+//        bundleRecyclerViewState = Bundle()
+//        listState = countries_recycler.layoutManager?.onSaveInstanceState()
+//        bundleRecyclerViewState!!.putParcelable(KEY_RECYCLER_STATE, listState)
+//    }
+//
+//    override fun onResume() {
+//        super.onResume()
+//        if (bundleRecyclerViewState != null) {
+//            Handler().postDelayed(Runnable {
+//                listState = bundleRecyclerViewState!!.getParcelable(KEY_RECYCLER_STATE)
+//                countries_recycler.getLayoutManager()?.onRestoreInstanceState(listState)
+//            }, 50)
+//        }
+//
+//        countries_recycler.layoutManager
+//    }
 
 }
