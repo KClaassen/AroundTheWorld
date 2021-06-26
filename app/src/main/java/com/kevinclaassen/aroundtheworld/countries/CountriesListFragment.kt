@@ -15,16 +15,18 @@ import com.kevinclaassen.aroundtheworld.R
 import com.kevinclaassen.aroundtheworld.adapter.CountryAdapter
 import com.kevinclaassen.aroundtheworld.databinding.FragmentCountriesListBinding
 import com.kevinclaassen.aroundtheworld.models.Country
+import com.kevinclaassen.aroundtheworld.models.Trip
 import kotlinx.android.synthetic.main.fragment_countries_list.*
 
 
-//const val KEY_RECYCLER_STATE = "recycler_state"
+const val KEY_RECYCLER_STATE = "recycler_state"
 
 class CountriesListFragment : Fragment(), CountryAdapter.CountryListener {
 
     private lateinit var binding: FragmentCountriesListBinding
-//    private var listState: Parcelable? = null
-//    private var bundleRecyclerViewState: Bundle? = null
+    private lateinit var country: Country
+    private var listState: Parcelable? = null
+    private var bundleRecyclerViewState: Bundle? = null
 
     /**
      * Lazily initialize our [CountriesListViewModel].
@@ -85,23 +87,18 @@ class CountriesListFragment : Fragment(), CountryAdapter.CountryListener {
         viewModel.updateCountry(country)
     }
 
-//    override fun onPause() {
-//        super.onPause()
-//        bundleRecyclerViewState = Bundle()
-//        listState = countries_recycler.layoutManager?.onSaveInstanceState()
-//        bundleRecyclerViewState!!.putParcelable(KEY_RECYCLER_STATE, listState)
-//    }
-//
-//    override fun onResume() {
-//        super.onResume()
-//        if (bundleRecyclerViewState != null) {
-//            Handler().postDelayed(Runnable {
-//                listState = bundleRecyclerViewState!!.getParcelable(KEY_RECYCLER_STATE)
-//                countries_recycler.getLayoutManager()?.onRestoreInstanceState(listState)
-//            }, 50)
-//        }
-//
-//        countries_recycler.layoutManager
-//    }
+    override fun onViewStateRestored(savedInstanceState: Bundle?) {
+        super.onViewStateRestored(savedInstanceState)
+        if (savedInstanceState != null) {
+            listState = savedInstanceState.getParcelable(KEY_RECYCLER_STATE)
+            countries_recycler.layoutManager?.onRestoreInstanceState(listState)
+        }
+    }
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+
+        outState.putParcelable(KEY_RECYCLER_STATE, countries_recycler.layoutManager?.onSaveInstanceState())
+    }
 
 }
