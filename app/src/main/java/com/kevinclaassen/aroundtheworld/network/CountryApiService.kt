@@ -8,6 +8,7 @@ import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 import retrofit2.converter.scalars.ScalarsConverterFactory
 import retrofit2.http.GET
+import retrofit2.http.Query
 
 private val moshi = Moshi.Builder()
     .add(KotlinJsonAdapterFactory())
@@ -21,7 +22,7 @@ val retrofitRESTClient = Retrofit.Builder()
 
 interface CountryApiService {
 
-    @GET("all?fields=name;capital;currencies;languages;flag;subregion")
+    @GET("all?fields=name,capital,currencies,languages,flag,subregion")
     suspend fun getCountries():List<Country>
 
 }

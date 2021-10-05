@@ -1,5 +1,6 @@
 package com.kevinclaassen.aroundtheworld.countries
 
+import android.icu.text.Transliterator
 import android.os.Bundle
 import android.os.Parcelable
 import android.view.LayoutInflater
@@ -11,6 +12,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.kevinclaassen.aroundtheworld.R
 import com.kevinclaassen.aroundtheworld.adapter.CountryAdapter
 import com.kevinclaassen.aroundtheworld.databinding.FragmentCountriesListBinding
@@ -18,15 +20,13 @@ import com.kevinclaassen.aroundtheworld.models.Country
 import com.kevinclaassen.aroundtheworld.models.Trip
 import kotlinx.android.synthetic.main.fragment_countries_list.*
 
-
-const val KEY_RECYCLER_STATE = "recycler_state"
-
 class CountriesListFragment : Fragment(), CountryAdapter.CountryListener {
 
     private lateinit var binding: FragmentCountriesListBinding
-    private lateinit var country: Country
+    //private lateinit var country: List<Country>
     private var listState: Parcelable? = null
     private var bundleRecyclerViewState: Bundle? = null
+    private lateinit var layoutManager: RecyclerView.LayoutManager
 
     /**
      * Lazily initialize our [CountriesListViewModel].
@@ -64,7 +64,16 @@ class CountriesListFragment : Fragment(), CountryAdapter.CountryListener {
             }
         })
 
+//        if (savedInstanceState != null) {
+//            var savedInstanceState = savedInstanceState.getParcelable<Parcelable>(KEY_RECYCLER_STATE)
+//            layoutManager.onRestoreInstanceState(savedInstanceState)
+//        }
+
         return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
     }
 
     private fun fetchCountries(){
@@ -86,19 +95,4 @@ class CountriesListFragment : Fragment(), CountryAdapter.CountryListener {
     override fun onChecked(country: Country) {
         viewModel.updateCountry(country)
     }
-
-    override fun onViewStateRestored(savedInstanceState: Bundle?) {
-        super.onViewStateRestored(savedInstanceState)
-        if (savedInstanceState != null) {
-            listState = savedInstanceState.getParcelable(KEY_RECYCLER_STATE)
-            countries_recycler.layoutManager?.onRestoreInstanceState(listState)
-        }
-    }
-
-    override fun onSaveInstanceState(outState: Bundle) {
-        super.onSaveInstanceState(outState)
-
-        outState.putParcelable(KEY_RECYCLER_STATE, countries_recycler.layoutManager?.onSaveInstanceState())
-    }
-
 }
