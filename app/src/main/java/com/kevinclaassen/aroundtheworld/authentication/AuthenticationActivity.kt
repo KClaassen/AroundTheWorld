@@ -5,12 +5,14 @@ import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.Window
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.kevinclaassen.aroundtheworld.MainActivity
 import com.kevinclaassen.aroundtheworld.R
 import com.firebase.ui.auth.AuthMethodPickerLayout
 import com.firebase.ui.auth.AuthUI
 import com.firebase.ui.auth.IdpResponse
+import com.google.android.gms.tasks.OnCompleteListener
 import com.google.firebase.auth.FirebaseAuth
 import kotlinx.android.synthetic.main.activity_authentication.*
 
@@ -23,16 +25,9 @@ class AuthenticationActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        requestWindowFeature(Window.FEATURE_NO_TITLE); //will hide the title
-        getSupportActionBar()?.hide(); // hide the title bar
+        requestWindowFeature(Window.FEATURE_NO_TITLE) //will hide the title
+        getSupportActionBar()?.hide() // hide the title bar
         setContentView(R.layout.activity_authentication)
-//         TODO: Implement the create account and sign in using FirebaseUI, use sign in using email and sign in using Google
-
-        val firebaseAuth = FirebaseAuth.getInstance()
-        if (firebaseAuth.currentUser != null) {
-            navigateToMainActivity()
-            return
-        }
 
         getstarted_button.setOnClickListener {
             motion_layout.transitionToStart()
@@ -55,18 +50,26 @@ class AuthenticationActivity : AppCompatActivity() {
         if (requestCode == SIGN_IN_RESULT_CODE) {
             val response = IdpResponse.fromResultIntent(data)
             if (resultCode == Activity.RESULT_OK) {
-                // Successfully signed in user.
-                Log.i(
-                        TAG,
-                        "Successfully signed in user " +
-                                "${FirebaseAuth.getInstance().currentUser?.displayName}!"
-                )
-                navigateToMainActivity()
+                val currentUser = FirebaseAuth.getInstance().currentUser
+
+                if (currentUser!!.isEmailVerified) {
+                    // Redirect to user profile
+                    // Successfully signed in user.
+                    Log.i(TAG, "Successfully signed in user " +
+                            "${FirebaseAuth.getInstance().currentUser?.displayName}!"
+                    )
+                    navigateToMainActivity()
+                } else {
+                    currentUser.sendEmailVerification()
+                    Toast.makeText(this, "Check your email to verify your account", Toast.LENGTH_SHORT).show()
+                }
+
             } else {
                 // Sign in failed. If response is null the user canceled the sign-in flow using
                 // the back button. Otherwise check response.getError().getErrorCode() and handle
                 // the error.
-                Log.i(TAG, "Sign in unsuccessful ${response?.error?.errorCode}")
+                Toast.makeText(this, "Failed to login, please check your credentials", Toast.LENGTH_SHORT).show()
+                Log.i(TAG, "Failed to login ${response?.error?.errorCode}")
                 return
             }
         }
